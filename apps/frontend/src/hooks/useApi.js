@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api-production-a672.up.railway.app";
+const BASE_URL = "https://api.jevxo.com";
 
 const getFullUrl = (url) => {
   if (url.startsWith("/")) {

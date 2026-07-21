@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 // Base API configuration
 const baseQuery = fetchBaseQuery({
-  baseUrl: '/api',
+  baseUrl: 'https://api.jevxo.com',
   // ttps://squadlog-backend.up.railway.app
   // /...
   prepareHeaders: (headers, { getState }) => {
