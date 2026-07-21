@@ -40,7 +40,7 @@ export class GoogleCalendarService {
     return this.scheduleRequest(async () => {
       const requestId = randomUUID();
 
-      const res = await this.executeWithBackoff(() =>
+      const res: any = await this.executeWithBackoff(() =>
         this.calendar.events.insert({
           calendarId: this.calendarId,
           conferenceDataVersion: 1,
