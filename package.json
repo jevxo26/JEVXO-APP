@@ -1,0 +1,13 @@
+{
+  "name": "squadlog-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "if [ -n \"$WORK_SPACE\" ]; then npm run dev -w $WORK_SPACE; else npm run dev --workspaces --if-present; fi",
+    "build": "if [ -n \"$WORK_SPACE\" ]; then npm run build -w $WORK_SPACE; else npm run build --workspaces --if-present; fi",
+    "start": "if [ -n \"$WORK_SPACE\" ]; then npm run start -w $WORK_SPACE; else npm run start --workspaces --if-present; fi",
+    "lint": "if [ -n \"$WORK_SPACE\" ]; then npm run lint -w $WORK_SPACE; else npm run lint --workspaces --if-present; fi"
+  }
+}
