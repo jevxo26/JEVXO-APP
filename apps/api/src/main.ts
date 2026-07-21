@@ -10,14 +10,12 @@ async function bootstrap() {
       'http://localhost:3000',
       'http://localhost:3001',
       'http://localhost:5173',
-      'https://squadlog.up.railway.app',
-      'https://squadlog-console.up.railway.app',
-      'https://console.squadlog.studio',
-      'https://squadlog.studio',
-      'https://squadlog-backend.up.railway.app',
-      'https://api-production-a672.up.railway.app',
-      'https://frontend-production-98d5.up.railway.app',
-      'https://console-production-60bc.up.railway.app',
+      'https://hq.jevxo.com',
+      'https://www.jevxo.com',
+      'https://jevxo.com'
+
+
+
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
