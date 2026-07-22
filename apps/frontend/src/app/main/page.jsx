@@ -164,27 +164,19 @@ const TestPages = () => {
               </div>
             </div>
 
-            {/* Right Column: 10 Sticky Stacked Cards Scroll Effect */}
-            <div className="lg:col-span-6 flex flex-col gap-8 py-4 relative">
+            {/* Right Column: 10 Cards Stacking Cleanly On Top Of Each Other */}
+            <div className="lg:col-span-6 relative flex flex-col">
               {expertiseCards.map((card, idx) => {
                 const IconComponent = card.icon;
-                const topOffset = 96 + idx * 14; // Staggered top offset for smooth card deck stacking
                 return (
                   <div
                     key={card.id}
-                    className="sticky w-full transition-all duration-300"
+                    className="sticky top-28 w-full min-h-[460px] pb-16"
                     style={{
-                      top: `${topOffset}px`,
                       zIndex: idx + 1,
                     }}
                   >
-                    <motion.div
-                      initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                      viewport={{ once: false, margin: "-50px" }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                      className="group relative w-full rounded-[36px] overflow-hidden border border-white/15 hover:border-[#EFFC76]/60 shadow-[0_-12px_40px_rgba(0,0,0,0.85)] bg-[#081208] transition-all duration-500 cursor-pointer hover:shadow-[0_0_50px_rgba(239,252,118,0.45)]"
-                    >
+                    <div className="group relative w-full rounded-[36px] overflow-hidden border border-white/15 hover:border-[#EFFC76]/60 shadow-[0_-15px_50px_rgba(0,0,0,0.95)] bg-[#081208] transition-all duration-500 cursor-pointer hover:shadow-[0_0_50px_rgba(239,252,118,0.45)]">
                       {/* Circular Badge Icon overlapping top-left corner */}
                       <div className="absolute top-4 left-4 z-30 w-16 h-16 rounded-full bg-[#EFFC76] text-black flex items-center justify-center shadow-[0_0_30px_rgba(239,252,118,0.5)] border-2 border-black/20 group-hover:scale-110 transition-transform duration-500">
                         <div className="w-12 h-12 rounded-full bg-[#EFFC76] border border-black/10 flex items-center justify-center">
@@ -220,7 +212,7 @@ const TestPages = () => {
                         </p>
                       </div>
 
-                    </motion.div>
+                    </div>
                   </div>
                 );
               })}
