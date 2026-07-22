@@ -55,16 +55,16 @@ const Faq = () => {
                             viewport={{ once: true }}
                             transition={{ duration: 0.5 }}
                         >
-                            <span className="inline-block px-4 py-1.5 rounded-full bg-[#EFFC76] text-black text-sm font-medium mb-4 shadow-[#EFFC76]">
-                                FAQ
-                            </span>
-                            <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-4">
-                                Frequently <br />
-                                <span className="text-gray-400">Asked Questions</span>
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6">
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+                                Got Questions?
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-medium tracking-tight leading-tight mb-4">
+                                Frequently Asked{" "}
+                                <span className="font-serif italic text-[#EFFC76]">Questions</span>
                             </h2>
-                            <p className="text-gray-400 text-lg leading-relaxed">
-                                Have questions? Our FAQ section has you covered with quick
-                                answers to the most common inquiries.
+                            <p className="text-gray-400 text-base leading-relaxed font-light">
+                                Have questions? Our FAQ section has you covered with quick answers to the most common inquiries.
                             </p>
                         </motion.div>
                     </div>

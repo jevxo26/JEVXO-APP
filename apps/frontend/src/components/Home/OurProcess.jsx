@@ -59,48 +59,39 @@ const OurProcess = () => {
   return (
     <section className="relative py-24 -mt-30 md:-mt-22 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-        {/* Header Section */}
-        <div className="text-center md:mb-20">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-24 relative z-20">
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-[#EFFC76]/20 backdrop-blur-sm mb-6"
-          >
-            <div className="p-1 bg-[#EFFC76] rounded-full">
-              <FileText className="w-3 h-3 text-black" />
-            </div>
-            <span className="text-sm font-medium text-gray-300">
-              Our Process
-            </span>
-          </motion.div>
-
-          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            Our Proven Process <br />
-            for Digital Success
-          </motion.h2>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Engineering Lifecycle
+          </motion.div>
 
-          <motion.div
+          <motion.h2
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="inline-block"
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
           >
-            <div className=" md:block hidden px-6 py-3 rounded-lg backdrop-blur-sm max-w-2xl mx-auto">
-              <p className="text-gray-400 text-sm md:text-base">
-                With a focus on innovation and efficiency, we help you stay
-                ahead in an ever-evolving digital landscape.
-              </p>
-            </div>
-          </motion.div>
+            Our Proven Process For{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              Digital Success
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
+          >
+            From discovery to cloud deployment, we execute every phase with technical precision.
+          </motion.p>
         </div>
 
         {/* Desktop Cards Grid */}

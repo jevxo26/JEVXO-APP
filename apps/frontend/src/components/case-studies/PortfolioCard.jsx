@@ -20,21 +20,39 @@ const PortfolioCard = () => {
       id="portfolio-section"
     >
       <div className="max-w-[1400px] mx-auto  mt-18 px-4 md:px-8 relative z-10">
-        {/* Header Section */}
-        <div className="flex justify-center items-center  mb-10">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20 relative z-20">
           <motion.div
-            className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-md border border-white/10 px-1.5 py-1.5 pr-4 rounded-full mb-10"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <span className="bg-[#EFFC76] text-black text-xs font-bold px-3 py-1 rounded-full">
-              2025
-            </span>
-            <span className="text-gray-300 text-sm font-medium">
-              Featured Case Studies
-            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Featured Case Studies
           </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
+          >
+            Selected Client Work &{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              Case Studies
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
+          >
+            Explore real-world software engineering solutions built for high-growth global enterprises.
+          </motion.p>
         </div>
 
         {/* Portfolio Grid */}

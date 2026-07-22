@@ -39,46 +39,40 @@ const Integration = () => {
   return (
     <section className="-mt-30 md:-mt-17  py-24 px-4 overflow-hidden relative">
       <div className="max-w-4xl mx-auto text-center relative z-10">
-        {/* Pill Label */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="flex justify-center mb-6"
-        >
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-[#EFFC76]/20 rounded-full px-4 py-1.5 backdrop-blur-sm">
-            <Puzzle className="w-4 h-4 text-[#EFFC76]" />
-            <span className="text-sm font-medium text-gray-300">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20 relative z-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
+          >
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Integrations & Workflows
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
+          >
+            Seamless Ecosystem{" "}
+            <span className="font-serif italic text-[#EFFC76]">
               Integrations
             </span>
-          </div>
-        </motion.div>
+          </motion.h2>
 
-        {/* Main Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
-        >
-          Technology Stack for
-          <br />
-          <span className="text-gray-400">Maximum Efficiency.</span>
-        </motion.h2>
-
-        {/* Subtext */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-gray-400 text-base md:text-lg mb-10 max-w-xl mx-auto"
-        >
-          JEVXO leverages leading technologies and platforms, ensuring robust
-          and scalable solutions.
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
+          >
+            Connect JEVXO platforms seamlessly with your existing enterprise toolchains, APIs, and cloud services.
+          </motion.p>
+        </div>
 
         {/* CTA Button */}
         <motion.div

@@ -163,28 +163,35 @@ const IndustriesPage = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 space-y-20 md:space-y-28">
         {/* ================= HERO SECTION ================= */}
-        <section className="text-center max-w-4xl mx-auto pt-6">
+        <section className="text-center max-w-4xl mx-auto pt-6 relative z-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <Building2 className="w-4 h-4 text-[#EFFC76]" />
-            <span className="text-[#EFFC76] text-xs font-bold uppercase tracking-wider">
-              Industry Vertical Architectures
-            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Industry Vertical Architectures
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 leading-tight">
-            Tailored Enterprise Solutions for <br />
-            <span className="bg-gradient-to-r from-white via-gray-200 to-[#EFFC76] bg-clip-text text-transparent">
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
+          >
+            Enterprise Software For{" "}
+            <span className="font-serif italic text-[#EFFC76]">
               Global Industry Leaders
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-gray-400 text-lg font-light leading-relaxed max-w-2xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
+          >
             From PCI-DSS FinTech platforms to HIPAA MedTech clouds, JEVXO engineers battle-tested software systems compliance-ready for your sector.
-          </p>
+          </motion.p>
         </section>
 
         {/* ================= INTERACTIVE INDUSTRY NAVIGATOR ================= */}

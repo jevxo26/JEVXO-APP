@@ -41,27 +41,28 @@ const TechStack = () => {
     <section className="py-24 px-4 md:px-8 relative overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Header */}
-        <div className="text-center mb-16">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-24 relative z-20">
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 font-medium mb-6"
-          >
-            <Cpu size={14} className="text-[#EFFC76]" />
-            <span>Modern Tech Ecosystem</span>
-          </motion.div>
-
-          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            Built With Modern & Scalable <br />
-            <span className="text-gray-400">Technologies</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Modern Tech Stack
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
+          >
+            Built With Modern &{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              Scalable Tech Stack
+            </span>
           </motion.h2>
 
           <motion.p
@@ -69,7 +70,7 @@ const TechStack = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 max-w-2xl mx-auto text-base md:text-lg font-light"
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
           >
             We leverage industry-standard frameworks, cloud infrastructure, and modern tooling to build high-performance software applications.
           </motion.p>

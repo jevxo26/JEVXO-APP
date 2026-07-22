@@ -17,27 +17,25 @@ const AboutSquadLog = () => {
           {/* Left Column: Content */}
           <div>
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8"
-            >
-              <Bot size={14} className="text-[#EFFC76]" />
-              <span className="text-gray-300 text-xs font-medium uppercase tracking-wider">
-                About JEVXO
-              </span>
-            </motion.div>
-
-            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-5xl font-sans text-white mb-6 leading-tight font-medium"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
             >
-              AI Meets Design,
-              <br />
-              <span className="text-gray-400">Purpose Into Ideas!</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+              About JEVXO
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl lg:text-6xl font-medium text-white tracking-tight mb-6"
+            >
+              AI Meets Design,{" "}
+              <span className="font-serif italic text-[#EFFC76]">
+                Purpose Into Ideas!
+              </span>
             </motion.h2>
 
             <div className="space-y-6">

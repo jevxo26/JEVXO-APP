@@ -92,44 +92,38 @@ const Pricing = () => {
       {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[#EFFC76]/10 blur-[100px] rounded-full pointer-events-none" /> */}
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className="mb-16">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-24 relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-2 mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <div className="h-px w-8 bg-[#EFFC76]" />
-            <span className="text-[#EFFC76] font-medium tracking-wide uppercase text-sm">
-              Engagement Models
-            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Engagement Models
           </motion.div>
 
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
           >
-            Flexible Plans for Every Need— <br />
-            <span className="text-gray-400">
-              Perfect for Startups and Enterprises.
+            Transparent Pricing &{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              Flexible Plans
             </span>
           </motion.h2>
 
           <motion.p
-            className="text-gray-400 text-lg max-w-2xl leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ delay: 0.2 }}
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
           >
-            Our pricing plans are designed to make getting started as effortless
-            as possible. With flexible options tailored to suit a variety of
-            needs and budgets.
+            Tailored engagement models designed for startups, growing teams, and global enterprises.
           </motion.p>
         </div>
 

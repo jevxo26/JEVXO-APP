@@ -179,28 +179,35 @@ const CareersPage = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 space-y-20 md:space-y-28">
         {/* ================= HERO SECTION ================= */}
-        <section className="text-center max-w-4xl mx-auto pt-6">
+        <section className="text-center max-w-4xl mx-auto pt-6 relative z-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <Sparkles className="w-4 h-4 text-[#EFFC76]" />
-            <span className="text-[#EFFC76] text-xs font-bold uppercase tracking-wider">
-              Careers at JEVXO
-            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Careers At JEVXO
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 leading-tight">
-            Build Next-Gen Software & <br />
-            <span className="bg-gradient-to-r from-white via-gray-200 to-[#EFFC76] bg-clip-text text-transparent">
-              Shape global AI infrastructure
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
+          >
+            Build Software & Shape{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              Global AI Tech
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-gray-400 text-lg font-light leading-relaxed max-w-2xl mx-auto">
-            Join an elite engineering team building enterprise ERPs, cloud platforms, and sovereign AI engines for high-growth global companies.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
+          >
+            Join an elite engineering team building enterprise software, cloud platforms, and AI engines for high-growth global companies.
+          </motion.p>
         </section>
 
         {/* ================= PERKS & CULTURE ================= */}

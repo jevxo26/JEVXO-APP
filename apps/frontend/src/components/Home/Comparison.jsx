@@ -8,64 +8,38 @@ const Comparison = () => {
   return (
     <section className="bg-transparent py-20 md:-mt-22 -mt-25 px-4 md:px-8 overflow-hidden">
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-20">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20 relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center justify-center px-4 py-1.5 rounded-full border border-[#EFFC76]/30 bg-[#EFFC76]/10 mb-8"
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <div className="w-5 h-5 rounded-full bg-[#EFFC76] flex items-center justify-center mr-2">
-              <span className="flex items-center justify-center w-full h-full">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-white"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
-                </svg>
-              </span>
-            </div>
-            <span className="text-gray-300 text-sm font-medium">
-              Comparison
-            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Comparison Matrix
           </motion.div>
 
-          <div className="relative block mx-auto mb-6">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl md:text-6xl font-medium text-white mb-4 relative z-10 tracking-tight"
-            >
-              JEVXO Advantage
-            </motion.h2>
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-4xl md:text-6xl font-medium text-white/40 relative z-10 tracking-tight"
-            >
-              Let's See the Difference
-            </motion.h3>
-          </div>
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
+          >
+            JEVXO Advantage,{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              See The Difference
+            </span>
+          </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-gray-400 max-w-xl mx-auto text-lg leading-relaxed"
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
           >
-            JEVXO is designed to set your business apart with premium
-            solutions that drive growth and engagement.
+            Compare traditional agencies vs JEVXO's agile, AI-powered enterprise software execution.
           </motion.p>
         </div>
 

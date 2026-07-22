@@ -30,7 +30,7 @@ import {
 } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import CosmicBackground from "@/components/Home/CosmicBackground";
 
 const Navbar = () => {
@@ -39,6 +39,19 @@ const Navbar = () => {
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const solutionsTimeoutRef = useRef(null);
   const productsTimeoutRef = useRef(null);
@@ -134,13 +147,22 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop Navigation Bar */}
-      <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 w-full bg-[#050505]/80 backdrop-blur-2xl border-b border-white/10 px-6 lg:px-12 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden">
+      <nav
+        className={`hidden md:flex fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 relative overflow-hidden ${
+          scrolled
+            ? "bg-[#050508]/95 backdrop-blur-3xl border-b border-[#EFFC76]/25 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
+            : "bg-[#050505]/80 backdrop-blur-2xl border-b border-white/10 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.7)]"
+        }`}
+      >
+        {/* Glowing Top-Line Accent */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#EFFC76] to-transparent opacity-80 pointer-events-none" />
+
         {/* Custom Cosmic Background */}
-        <div className="absolute inset-0 pointer-events-none opacity-60 z-0 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none opacity-50 z-0 overflow-hidden">
           <CosmicBackground />
         </div>
 
-        <div className="w-full max-w-7xl mx-auto flex items-center justify-between relative z-10">
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-12 relative z-10">
           
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
@@ -397,10 +419,35 @@ const Navbar = () => {
             </div>
 
             <Link
-              href="/country-sales-partner"
-              className="text-[#EFFC76] hover:text-white transition-all text-sm font-semibold flex items-center gap-1.5 bg-white/5 hover:bg-[#EFFC76]/10 border border-[#EFFC76]/30 px-3.5 py-1 rounded-full whitespace-nowrap shadow-sm"
+              href="/industries"
+              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
             >
-              <Globe size={14} className="text-[#EFFC76]" />
+              <Building2 size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <span>Industries</span>
+            </Link>
+
+            <Link
+              href="/careers"
+              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+            >
+              <Users size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <span>Careers</span>
+            </Link>
+
+            <Link
+              href="/security"
+              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+            >
+              <ShieldCheck size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <span>Security</span>
+            </Link>
+
+            <Link
+              href="/country-sales-partner"
+              className="text-[#EFFC76] hover:text-black hover:bg-[#EFFC76] transition-all text-xs font-bold uppercase tracking-wider flex items-center gap-2 bg-white/5 border border-[#EFFC76]/30 hover:border-[#EFFC76] px-4 py-1.5 rounded-full whitespace-nowrap shadow-[0_0_20px_rgba(239,252,118,0.15)] group"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#EFFC76] group-hover:bg-black animate-pulse shrink-0" />
+              <Globe size={13} className="text-[#EFFC76] group-hover:text-black transition-colors" />
               <span>Partner Roster</span>
             </Link>
 

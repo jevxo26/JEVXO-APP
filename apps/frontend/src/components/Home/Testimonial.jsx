@@ -81,60 +81,43 @@ const Testimonial = () => {
   return (
     <section className=" -mt-22 py-20 px-4 md:px-8 relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-24 relative z-20">
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center justify-center px-4 py-1.5 rounded-full border border-[#EFFC76]/30 bg-[#EFFC76]/10 mb-6"
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <div className="w-5 h-5 rounded-full bg-[#EFFC76] flex items-center justify-center mr-2">
-              <MessageSquare
-                size={12}
-                className="text-black"
-                fill="currentColor"
-              />
-            </div>
-            <span className="text-gray-300 text-sm font-medium">
-              Testimonial
-            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Client Testimonials
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-medium text-white mb-4 tracking-tight"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
           >
-            What Our Clients Say
+            What Our Clients Say About{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              JEVXO's Excellence
+            </span>
           </motion.h2>
-          <motion.h3
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-3xl md:text-5xl font-medium text-gray-500 mb-6 tracking-tight"
-          >
-            About JEVXO's Excellence
-          </motion.h3>
 
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-gray-400 md:block hidden max-w-2xl mx-auto text-lg md:text-base leading-relaxed"
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
           >
-            Discover how we've empowered businesses to achieve their digital
-            goals.
+            Real feedback from enterprise partners, CTOs, and founders scaling with JEVXO.
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-8"
-          >
+
+          <div className="mt-8">
             <SmoothButton>Book An Appointment </SmoothButton>
-          </motion.div>
+          </div>
         </div>
 
         <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

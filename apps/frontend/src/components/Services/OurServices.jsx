@@ -28,28 +28,28 @@ const OurServices = () => {
   return (
     <section className="bg-transparent py-24 px-4 md:px-8 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-20">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-24 relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <div className="w-5 h-5 flex items-center justify-center">
-               <Sparkles className="w-4 h-4 text-[#EFFC76] fill-[#EFFC76]" />
-            </div>
-            <span className="text-gray-300 text-sm font-medium">Our process</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Services Process
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-medium text-white mb-6 tracking-tight"
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
           >
-            Simple steps, powerful results
+            Simple Steps,{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              Powerful Results
+            </span>
           </motion.h2>
 
           <motion.p
@@ -57,9 +57,9 @@ const OurServices = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 text-lg max-w-2xl leading-relaxed"
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
           >
-            We've simplified AI transformation into three clear steps that take you from concept to real-world results.
+            Our streamlined engineering execution ensures rapid time-to-market without compromising security or code quality.
           </motion.p>
         </div>
 

@@ -118,40 +118,34 @@ const AboutPage = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 space-y-20 md:space-y-28">
         
         {/* ================= 1. HERO SECTION ================= */}
-        <section className="text-center pt-6">
+        <section className="text-center pt-6 relative z-20">
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <span className="bg-[#EFFC76] text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-              ABOUT JEVXO
-            </span>
-            <span className="text-gray-300 text-sm font-medium">
-              Enterprise Software Engineering & Agency
-            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            About JEVXO Company
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white max-w-5xl mx-auto leading-[1.1]"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight max-w-5xl mx-auto"
           >
-            Empowering Global Enterprises Through <br />
-            <span className="bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
-              Next-Gen Software Solutions
+            Empowering Enterprises With{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              Next-Gen Software
             </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-gray-400 text-lg sm:text-xl font-light max-w-3xl mx-auto mt-6 leading-relaxed"
+            transition={{ delay: 0.2 }}
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
           >
-            <strong className="text-white font-semibold">JEVXO</strong> is a premier software engineering company delivering custom web applications, mobile platforms, cloud computing, and AI-driven automation designed for modern scale.
+            JEVXO is a premier software engineering company delivering custom web applications, mobile platforms, cloud computing, and AI automation built for global scale.
           </motion.p>
         </section>
 

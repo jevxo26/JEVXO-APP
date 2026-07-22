@@ -30,26 +30,22 @@ const LaunchYourSite = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <div className="p-1 bg-[#EFFC76] rounded-full">
-              <Rocket className="w-3 h-3 text-black" />
-            </div>
-            <span className="text-sm font-medium text-gray-300">
-              Launch Your Site
-            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Fast Track Deployment
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight mb-6"
           >
-            Launch Your Project with JEVXO <br />
-            <span className="text-gray-500">
-              Efficient, Scalable, and Premium.
+            Launch Your Project With JEVXO{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              Efficient & Scalable
             </span>
           </motion.h2>
 

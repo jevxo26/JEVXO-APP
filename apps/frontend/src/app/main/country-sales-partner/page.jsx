@@ -230,28 +230,35 @@ const CountrySalesPartnerPage = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 space-y-20 md:space-y-28">
         
         {/* ================= HERO INTRO ================= */}
-        <section className="text-center max-w-4xl mx-auto pt-6">
+        <section className="text-center max-w-4xl mx-auto pt-6 relative z-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <Handshake className="w-4 h-4 text-[#EFFC76]" />
-            <span className="text-[#EFFC76] text-xs font-bold uppercase tracking-wider">
-              JEVXO Sales Franchise
-            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Global Sales Franchise
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 leading-tight">
-            How to Become a JEVXO <br />
-            <span className="bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
+          >
+            Become A JEVXO{" "}
+            <span className="font-serif italic text-[#EFFC76]">
               Country Sales Partner
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-gray-400 text-lg font-light leading-relaxed max-w-2xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
+          >
             Review our onboarding milestones, unlock exclusive regional benefits, and apply today to join our global enterprise sales roster.
-          </p>
+          </motion.p>
         </section>
 
         {/* ================= SECTION 1: HOW TO JOIN & BENEFITS ================= */}

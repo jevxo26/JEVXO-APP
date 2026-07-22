@@ -98,44 +98,43 @@ const OurTeam = () => {
   return (
     <section className="py-24 -mt-16 md:-mt-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col items-center justify-center text-center mb-16">
-          {/* Badge */}
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-24 relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
           >
-            <Users className="w-4 h-4 text-[#EFFC76]" />
-            <span className="text-gray-300 text-sm">Our Engineering Team</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
+            Leadership & Engineers
           </motion.div>
 
-          {/* Heading */}
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6 leading-tight max-w-4xl tracking-tight"
+            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
           >
-            Meet the Minds Behind <br />
-            <span className="text-gray-400">Your Success</span>
+            Meet The Minds Behind{" "}
+            <span className="font-serif italic text-[#EFFC76]">
+              Your Success
+            </span>
           </motion.h2>
 
-          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 text-lg max-w-2xl mb-8 font-light"
+            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
           >
-            Expert developers, cloud architects, and product designers dedicated to
-            delivering engineering excellence at JEVXO.
+            Our seasoned architects, software engineers, and product designers are dedicated to delivering world-class digital platforms.
           </motion.p>
-
-          {/* Button */}
-          <SmoothButton>View About JEVXO</SmoothButton>
+          
+          <div className="mt-8">
+            <SmoothButton>View About JEVXO</SmoothButton>
+          </div>
         </div>
 
         {/* Desktop Team Grid */}
