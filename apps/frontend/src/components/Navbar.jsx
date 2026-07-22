@@ -15,6 +15,9 @@ import {
   Truck,
   Bot,
   Sparkles,
+  Info,
+  Globe,
+  Mail,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -129,11 +132,11 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop Navigation Bar */}
-      <nav className="hidden md:flex fixed top-6 left-0 right-0 z-50 justify-center px-4">
-        <div className="bg-[#0a0a0d]/85 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 flex items-center justify-between w-full max-w-7xl shadow-[0_15px_40px_rgba(0,0,0,0.6)] relative">
+      <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 w-full bg-[#0a0a0d]/90 backdrop-blur-2xl border-b border-white/10 px-6 lg:px-12 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between relative">
           
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 pl-2">
+          <Link href="/" className="flex-shrink-0">
             <Image
               src="/fxiedLogo.png"
               alt="JEVXO Logo"
@@ -143,20 +146,22 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* Desktop Links */}
-          <div className="flex items-center space-x-8 absolute left-1/2 -translate-x-1/2">
+          {/* Desktop Links with Icons */}
+          <div className="flex items-center space-x-6 lg:space-x-8 whitespace-nowrap">
             <Link
               href="/"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
             >
-              Home
+              <Home size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <span>Home</span>
             </Link>
 
             <Link
               href="/about"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
             >
-              About
+              <Info size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <span>About</span>
             </Link>
 
             {/* SOLUTIONS MEGA DROPDOWN WITH PREMIUM ANIMATIONS & CUSTOM OBSIDIAN GLASS BG */}
@@ -169,6 +174,7 @@ const Navbar = () => {
                 href="/solutions"
                 className="flex items-center gap-1.5 text-gray-300 hover:text-[#EFFC76] transition-colors text-sm font-medium group"
               >
+                <Layers size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
                 <span>Solutions</span>
                 <ChevronDown
                   size={14}
@@ -266,9 +272,10 @@ const Navbar = () => {
 
             <Link
               href="/services"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
             >
-              Services
+              <Zap size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <span>Services</span>
             </Link>
 
             {/* PRODUCTS MEGA DROPDOWN WITH ANIMATION & CUSTOM BG */}
@@ -281,6 +288,7 @@ const Navbar = () => {
                 href="/products"
                 className="flex items-center gap-1.5 text-gray-300 hover:text-[#EFFC76] transition-colors text-sm font-medium group"
               >
+                <Briefcase size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
                 <span>Products</span>
                 <ChevronDown
                   size={14}
@@ -359,21 +367,23 @@ const Navbar = () => {
 
             <Link
               href="/country-sales-partner"
-              className="text-[#EFFC76] hover:text-white transition-colors text-sm font-semibold flex items-center gap-1 bg-white/5 border border-[#EFFC76]/20 px-3 py-1 rounded-full"
+              className="text-[#EFFC76] hover:text-white transition-all text-sm font-semibold flex items-center gap-1.5 bg-white/5 hover:bg-[#EFFC76]/10 border border-[#EFFC76]/30 px-3.5 py-1 rounded-full whitespace-nowrap shadow-sm"
             >
+              <Globe size={14} className="text-[#EFFC76]" />
               <span>Partner Roster</span>
             </Link>
 
             <Link
               href="/contact"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
             >
-              Contact
+              <Mail size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <span>Contact</span>
             </Link>
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3 shrink-0">
             <Link href="/contact">
               <SmoothButton>Get In Touch</SmoothButton>
             </Link>
