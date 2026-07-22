@@ -18,6 +18,7 @@ import {
   Info,
   Globe,
   Mail,
+  ShieldCheck,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -30,6 +31,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useRef } from "react";
+import CosmicBackground from "@/components/Home/CosmicBackground";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -132,8 +134,13 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop Navigation Bar */}
-      <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 w-full bg-[#0a0a0d]/90 backdrop-blur-2xl border-b border-white/10 px-6 lg:px-12 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
-        <div className="w-full max-w-7xl mx-auto flex items-center justify-between relative">
+      <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 w-full bg-[#050505]/80 backdrop-blur-2xl border-b border-white/10 px-6 lg:px-12 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden">
+        {/* Custom Cosmic Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-60 z-0 overflow-hidden">
+          <CosmicBackground />
+        </div>
+
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between relative z-10">
           
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
@@ -276,6 +283,30 @@ const Navbar = () => {
             >
               <Zap size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
               <span>Services</span>
+            </Link>
+
+            <Link
+              href="/industries"
+              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+            >
+              <Building2 size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <span>Industries</span>
+            </Link>
+
+            <Link
+              href="/careers"
+              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+            >
+              <Users size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <span>Careers</span>
+            </Link>
+
+            <Link
+              href="/security"
+              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+            >
+              <ShieldCheck size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <span>Security</span>
             </Link>
 
             {/* PRODUCTS MEGA DROPDOWN WITH ANIMATION & CUSTOM BG */}

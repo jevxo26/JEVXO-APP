@@ -96,9 +96,10 @@ const Footer = () => {
               <h4 className="text-white font-medium mb-6 text-base tracking-wide">Company</h4>
               <div className="flex flex-col gap-2.5">
                 {[
-                  { name: "About", href: "/about" },
-                  { name: "Work", href: "/works" },
-                  { name: "Agency", href: "/about" },
+                  { name: "About Us", href: "/about" },
+                  { name: "Careers (Hiring)", href: "/careers" },
+                  { name: "Industries", href: "/industries" },
+                  { name: "Partner Roster", href: "/country-sales-partner" },
                   { name: "Contact", href: "/contact" },
                 ].map((item) => (
                   <FooterLink key={item.name} href={item.href}>
@@ -108,15 +109,15 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Services Column */}
+            {/* Services & Architectures Column */}
             <div>
               <h4 className="text-white font-medium mb-6 text-base tracking-wide">Services</h4>
               <div className="flex flex-col gap-2.5">
                 {[
-                  { name: "Web Dev", href: "/services/custom-website" },
-                  { name: "Mobile", href: "/services/mobile-app" },
-                  { name: "SaaS", href: "/services" },
-                  { name: "Design", href: "/services/ui-ux" },
+                  { name: "Solutions", href: "/solutions" },
+                  { name: "Products & SaaS", href: "/products" },
+                  { name: "Custom Software", href: "/services/custom-website" },
+                  { name: "Mobile Apps", href: "/services/mobile-app" },
                 ].map((item) => (
                   <FooterLink key={item.name} href={item.href}>
                     {item.name}
@@ -125,11 +126,12 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Legal Column */}
+            {/* Trust & Legal Column */}
             <div>
-              <h4 className="text-white font-medium mb-6 text-base tracking-wide">Legal</h4>
+              <h4 className="text-white font-medium mb-6 text-base tracking-wide">Trust & Legal</h4>
               <div className="flex flex-col gap-2.5">
                 {[
+                  { name: "Security & Trust", href: "/security" },
                   { name: "Privacy Policy", href: "/privacy-policy" },
                   { name: "Terms & Conditions", href: "/terms-and-conditions" },
                   { name: "Refund Policy", href: "/refund-policy" },
