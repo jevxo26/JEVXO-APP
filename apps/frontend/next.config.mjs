@@ -14,6 +14,9 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'example.com' },
       { protocol: 'https', hostname: 'i.ibb.co' },
+      { protocol: 'https', hostname: 'i.ibb.co.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'api.dicebear.com' },
       { protocol: 'https', hostname: 'squadlog-cdn.up.railway.app' },
     ],
   },
@@ -78,8 +81,11 @@ const nextConfig = {
       { source: "/contact", destination: "/main/contact" },
       { source: "/services", destination: "/main/services" },
       { source: "/products", destination: "/main/products" },
-      {
-        source: "/terms-and-conditions",
+      { source: "/solutions", destination: "/main/solutions" },
+      { source: "/solutions/:slug", destination: "/main/solutions/:slug" },
+      { source: "/country-sales-partner", destination: "/main/country-sales-partner" },
+      { source: "/partners", destination: "/main/country-sales-partner" },
+      { source: "/terms-and-conditions",
         destination: "/main/terms-and-conditions",
       },
       { source: "/privacy-policy", destination: "/main/privacy-policy" },

@@ -15,37 +15,37 @@ const teamMembers = [
     name: "Alexander West",
     role: "Founder & CEO",
     bio: "Pioneering enterprise software architecture and leading strategic growth for global digital transformations.",
-    image: "/about/member-1.jpg",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop",
   },
   {
     name: "Sophia Chen",
     role: "CTO & Lead Architect",
     bio: "Expert in distributed cloud systems, high-availability backends, and AI-driven automation pipelines.",
-    image: "/about/member-2.jpg",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop",
   },
   {
     name: "Marcus Johnson",
     role: "Senior Full-Stack Lead",
     bio: "Crafting robust Web & Mobile applications using React, Next.js, Node.js, and modern cloud infrastructure.",
-    image: "/about/member-3.jpg",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop",
   },
   {
     name: "Elena Rodriguez",
     role: "Head of Product Design",
     bio: "Designing world-class user interfaces and intuitive product experiences with a passion for micro-animations.",
-    image: "/about/member-4.jpg",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop",
   },
   {
     name: "David Kim",
     role: "Cloud & DevOps Lead",
     bio: "Managing multi-cloud Kubernetes clusters, automated CI/CD pipelines, and enterprise security compliance.",
-    image: "/about/member-5.jpg",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop",
   },
   {
     name: "Olivia Martinez",
     role: "Digital Strategy Lead",
     bio: "Accelerating brand growth through data analytics, SEO performance engineering, and conversion optimization.",
-    image: "/about/member-6.jpg",
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop",
   },
 ];
 

@@ -8,7 +8,13 @@ import {
   Home,
   Layers,
   Zap,
-  MessageCircle,
+  Building2,
+  Users,
+  Briefcase,
+  ShoppingCart,
+  Truck,
+  Bot,
+  Sparkles,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -20,12 +26,39 @@ import {
 } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
+
+  const solutionsTimeoutRef = useRef(null);
+  const productsTimeoutRef = useRef(null);
+
+  const handleSolutionsMouseEnter = () => {
+    if (solutionsTimeoutRef.current) clearTimeout(solutionsTimeoutRef.current);
+    setIsSolutionsOpen(true);
+  };
+
+  const handleSolutionsMouseLeave = () => {
+    solutionsTimeoutRef.current = setTimeout(() => {
+      setIsSolutionsOpen(false);
+    }, 150);
+  };
+
+  const handleProductsMouseEnter = () => {
+    if (productsTimeoutRef.current) clearTimeout(productsTimeoutRef.current);
+    setIsProductsOpen(true);
+  };
+
+  const handleProductsMouseLeave = () => {
+    productsTimeoutRef.current = setTimeout(() => {
+      setIsProductsOpen(false);
+    }, 150);
+  };
 
   const products = [
     {
@@ -42,23 +75,75 @@ const Navbar = () => {
     },
   ];
 
+  const solutionsList = [
+    {
+      title: "Business Management & ERP",
+      description: "All-in-one ERP, finance & workflow control.",
+      href: "/solutions/business-management",
+      icon: Building2,
+      badge: "Enterprise",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&auto=format&fit=crop",
+    },
+    {
+      title: "Smart CRM & Sales Automation",
+      description: "Automated sales pipelines & AI lead scoring.",
+      href: "/solutions/smart-crm",
+      icon: Users,
+      badge: "Popular",
+      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=300&auto=format&fit=crop",
+    },
+    {
+      title: "HRMS & Automated Payroll",
+      description: "Employee onboarding, attendance & salary.",
+      href: "/solutions/hrms-payroll",
+      icon: Briefcase,
+      badge: "Core",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&auto=format&fit=crop",
+    },
+    {
+      title: "E-Commerce Engine & SquadCart",
+      description: "Headless storefronts & inventory sync.",
+      href: "/solutions/ecommerce-engine",
+      icon: ShoppingCart,
+      badge: "Featured",
+      image: "https://images.unsplash.com/photo-1556742049-0a670fc80028?w=300&auto=format&fit=crop",
+    },
+    {
+      title: "AI Automation & Smart Chatbots",
+      description: "Custom RAG LLMs & 24/7 support bots.",
+      href: "/solutions/ai-automation-chatbots",
+      icon: Bot,
+      badge: "AI Next-Gen",
+      image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?w=300&auto=format&fit=crop",
+    },
+    {
+      title: "Supply Chain & Logistics Hub",
+      description: "Real-time fleet tracking & inventory.",
+      href: "/solutions/supply-chain-logistics",
+      icon: Truck,
+      badge: "Scalable",
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=300&auto=format&fit=crop",
+    },
+  ];
+
   return (
     <>
-      {/* Desktop Navigation */}
+      {/* Desktop Navigation Bar */}
       <nav className="hidden md:flex fixed top-6 left-0 right-0 z-50 justify-center px-4">
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl px-4 py-2 md:px-6 md:py-3 flex items-center justify-between w-full max-w-7xl shadow-2xl relative">
+        <div className="bg-[#0a0a0d]/85 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 flex items-center justify-between w-full max-w-7xl shadow-[0_15px_40px_rgba(0,0,0,0.6)] relative">
+          
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 pl-2">
             <Image
               src="/fxiedLogo.png"
-              alt="Squadlog Logo"
+              alt="JEVXO Logo"
               width={120}
               height={40}
-              className="rounded-md object-contain h-8 md:h-10 w-auto"
+              className="rounded-md object-contain h-9 w-auto"
             />
           </Link>
 
-          {/* Desktop Menu */}
+          {/* Desktop Links */}
           <div className="flex items-center space-x-8 absolute left-1/2 -translate-x-1/2">
             <Link
               href="/"
@@ -66,24 +151,119 @@ const Navbar = () => {
             >
               Home
             </Link>
+
             <Link
               href="/about"
               className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
             >
               About
             </Link>
-            <Link
-              href="/case-studies"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+
+            {/* SOLUTIONS MEGA DROPDOWN WITH PREMIUM ANIMATIONS & CUSTOM OBSIDIAN GLASS BG */}
+            <div
+              className="relative py-2"
+              onMouseEnter={handleSolutionsMouseEnter}
+              onMouseLeave={handleSolutionsMouseLeave}
             >
-              Case Studies
-            </Link>
-            <Link
-              href="/contact"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
-            >
-              Contact
-            </Link>
+              <Link
+                href="/solutions"
+                className="flex items-center gap-1.5 text-gray-300 hover:text-[#EFFC76] transition-colors text-sm font-medium group"
+              >
+                <span>Solutions</span>
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform duration-300 ${
+                    isSolutionsOpen ? "rotate-180 text-[#EFFC76]" : "group-hover:text-white"
+                  }`}
+                />
+              </Link>
+
+              <AnimatePresence>
+                {isSolutionsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.97 }}
+                    transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50"
+                  >
+                    <div className="w-[840px] bg-[#0b0b0e]/95 backdrop-blur-2xl border border-white/15 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden relative group/menu">
+                      
+                      {/* Ambient Glowing Top Line & Aura */}
+                      <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-[#EFFC76] to-transparent opacity-80" />
+                      <div className="absolute top-0 right-0 w-80 h-40 bg-[#EFFC76]/5 rounded-full blur-[80px] pointer-events-none" />
+
+                      {/* Header Bar */}
+                      <div className="px-7 pt-5 pb-4 flex items-center justify-between border-b border-white/10 relative z-10">
+                        <div>
+                          <div className="text-white font-bold text-base tracking-tight flex items-center gap-2">
+                            <span>Enterprise Software Solutions</span>
+                            <span className="bg-[#EFFC76] text-black text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
+                              6 Core Architectures
+                            </span>
+                          </div>
+                          <p className="text-gray-400 text-xs mt-0.5 font-light">
+                            Production-grade software systems designed for enterprise scalability & high security.
+                          </p>
+                        </div>
+
+                        <Link
+                          href="/solutions"
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#EFFC76] hover:text-white transition-colors bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full"
+                        >
+                          <span>Explore All</span>
+                          <ArrowRight size={13} />
+                        </Link>
+                      </div>
+
+                      {/* 2-Column Grid for 6 Solutions with Hover Animations */}
+                      <div className="p-6 relative z-10">
+                        <div className="grid grid-cols-2 gap-4">
+                          {solutionsList.map((sol) => (
+                            <motion.div
+                              key={sol.title}
+                              whileHover={{ y: -3, scale: 1.01 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <Link
+                                href={sol.href}
+                                onClick={() => setIsSolutionsOpen(false)}
+                                className="group flex items-start gap-3.5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#EFFC76]/40 transition-all duration-300 p-3.5 backdrop-blur-md relative overflow-hidden"
+                              >
+                                {/* Thumbnail Image */}
+                                <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-gray-900 border border-white/10 group-hover:border-[#EFFC76]/50 transition-colors">
+                                  <img
+                                    src={sol.image}
+                                    alt={sol.title}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                  />
+                                </div>
+
+                                {/* Details */}
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center justify-between gap-1 mb-1">
+                                    <h4 className="text-white font-bold text-xs truncate group-hover:text-[#EFFC76] transition-colors">
+                                      {sol.title}
+                                    </h4>
+                                    <span className="text-[9px] font-bold uppercase bg-white/10 text-gray-300 group-hover:bg-[#EFFC76] group-hover:text-black px-1.5 py-0.5 rounded shrink-0 transition-colors">
+                                      {sol.badge}
+                                    </span>
+                                  </div>
+                                  <p className="text-gray-400 text-[11px] leading-relaxed line-clamp-1 font-light">
+                                    {sol.description}
+                                  </p>
+                                </div>
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             <Link
               href="/services"
               className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
@@ -91,105 +271,131 @@ const Navbar = () => {
               Services
             </Link>
 
+            {/* PRODUCTS MEGA DROPDOWN WITH ANIMATION & CUSTOM BG */}
             <div
-              className="relative"
-              onMouseEnter={() => setIsProductsOpen(true)}
-              onMouseLeave={() => setIsProductsOpen(false)}
+              className="relative py-2"
+              onMouseEnter={handleProductsMouseEnter}
+              onMouseLeave={handleProductsMouseLeave}
             >
               <Link
                 href="/products"
-                className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors text-sm font-medium"
-                onFocus={() => setIsProductsOpen(true)}
+                className="flex items-center gap-1.5 text-gray-300 hover:text-[#EFFC76] transition-colors text-sm font-medium group"
               >
-                Products
+                <span>Products</span>
                 <ChevronDown
                   size={14}
-                  className={`transition-transform duration-200 ${
-                    isProductsOpen ? "rotate-180" : ""
+                  className={`transition-transform duration-300 ${
+                    isProductsOpen ? "rotate-180 text-[#EFFC76]" : "group-hover:text-white"
                   }`}
                 />
               </Link>
 
-              {isProductsOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-8">
-                  <div className="w-[720px] bg-[#0A0A0A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
-                    <div className="px-6 pt-6 pb-4 flex items-start justify-between gap-6 border-b border-white/10">
-                      <div>
-                        <div className="text-white font-semibold tracking-tight">
-                          Products
-                        </div>
-                        <div className="text-gray-400 text-sm mt-1">
-                          Browse all our SaaS products in one place.
-                        </div>
-                      </div>
-                      <Link
-                        href="/products"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
-                      >
-                        View all
-                        <ArrowRight size={14} />
-                      </Link>
-                    </div>
+              <AnimatePresence>
+                {isProductsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.97 }}
+                    transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50"
+                  >
+                    <div className="w-[620px] bg-[#0b0b0e]/95 backdrop-blur-2xl border border-white/15 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden relative">
+                      <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-[#EFFC76] to-transparent opacity-80" />
 
-                    <div className="p-6">
-                      <div className="grid grid-cols-2 gap-4">
-                        {products.map((item) => (
-                          <Link
-                            key={item.title}
-                            href={item.href}
-                            className="group rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors p-5"
-                          >
-                            <div className="flex items-start justify-between gap-4">
-                              <div>
-                                <div className="text-white font-semibold tracking-tight">
-                                  {item.title}
+                      <div className="px-6 pt-5 pb-3 flex items-start justify-between gap-6 border-b border-white/10">
+                        <div>
+                          <div className="text-white font-bold tracking-tight">
+                            JEVXO SaaS Products
+                          </div>
+                          <div className="text-gray-400 text-xs mt-0.5 font-light">
+                            Turnkey platforms ready for instant enterprise deployment.
+                          </div>
+                        </div>
+                        <Link
+                          href="/products"
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#EFFC76] hover:text-white transition-colors"
+                        >
+                          <span>View All</span>
+                          <ArrowRight size={13} />
+                        </Link>
+                      </div>
+
+                      <div className="p-5">
+                        <div className="grid grid-cols-2 gap-4">
+                          {products.map((item) => (
+                            <motion.div
+                              key={item.title}
+                              whileHover={{ y: -2, scale: 1.01 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <Link
+                                href={item.href}
+                                onClick={() => setIsProductsOpen(false)}
+                                className="group block rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#EFFC76]/40 transition-colors p-4 relative"
+                              >
+                                <div className="flex items-start justify-between gap-3">
+                                  <div>
+                                    <div className="text-white font-bold text-sm group-hover:text-[#EFFC76] transition-colors">
+                                      {item.title}
+                                    </div>
+                                    <div className="text-gray-400 text-xs mt-1 leading-relaxed font-light">
+                                      {item.description}
+                                    </div>
+                                  </div>
+                                  <span className="text-[10px] font-extrabold uppercase bg-[#EFFC76] text-black px-2 py-0.5 rounded-full shrink-0">
+                                    {item.badge}
+                                  </span>
                                 </div>
-                                <div className="text-gray-400 text-sm mt-2 leading-relaxed">
-                                  {item.description}
-                                </div>
-                              </div>
-                              <div className="flex flex-col items-end gap-3">
-                                <span className="text-[10px] font-semibold tracking-wider uppercase bg-[#EFFC76] text-black px-2 py-1 rounded-full">
-                                  {item.badge}
-                                </span>
-                                <ArrowRight
-                                  size={16}
-                                  className="text-[#EFFC76] opacity-0 group-hover:opacity-100 transition-opacity"
-                                />
-                              </div>
-                            </div>
-                          </Link>
-                        ))}
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
+
+            <Link
+              href="/country-sales-partner"
+              className="text-[#EFFC76] hover:text-white transition-colors text-sm font-semibold flex items-center gap-1 bg-white/5 border border-[#EFFC76]/20 px-3 py-1 rounded-full"
+            >
+              <span>Partner Roster</span>
+            </Link>
+
+            <Link
+              href="/contact"
+              className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+            >
+              Contact
+            </Link>
           </div>
 
-          <div className="hidden md:block">
+          {/* CTA Button */}
+          <div className="hidden md:flex items-center gap-3">
             <Link href="/contact">
               <SmoothButton>Get In Touch</SmoothButton>
             </Link>
           </div>
         </div>
       </nav>
+
       {/* Mobile Top Bar */}
       <div className="md:hidden absolute top-0 left-0 right-0 p-6 flex justify-center z-20 pointer-events-none bg-gradient-to-b from-black/80 to-transparent">
         <Link href="/" className="pointer-events-auto">
           <Image
             src="/fxiedLogo.png"
-            alt="SquadLogo"
+            alt="JEVXO Logo"
             width={120}
             height={40}
-            className="h-15 w-auto "
+            className="h-15 w-auto"
           />
         </Link>
       </div>
 
       {/* Mobile Bottom Dock */}
-      <div className="md:hidden fixed  border  bottom-8 left-4 right-4 z-50">
+      <div className="md:hidden fixed border bottom-8 left-4 right-4 z-50">
         <div className="bg-[#0A0A0A]/90 backdrop-blur-xl border border-[#272725] rounded-2xl grid grid-cols-5 items-end px-2 py-3 shadow-2xl relative">
           <div className="flex justify-center w-full">
             <Link
@@ -205,17 +411,18 @@ const Navbar = () => {
               </span>
             </Link>
           </div>
+
           <div className="flex justify-center w-full">
             <Link
-              href="/products"
+              href="/solutions"
               className="text-gray-400 hover:text-[#EFFC76] transition-colors flex flex-col items-center gap-1 group"
             >
-              <Layers
+              <Building2
                 size={20}
                 className="group-hover:-translate-y-0.5 transition-transform"
               />
               <span className="text-[10px] font-medium tracking-wide">
-                Products
+                Solutions
               </span>
             </Link>
           </div>
@@ -249,6 +456,7 @@ const Navbar = () => {
               </span>
             </Link>
           </div>
+
           <div className="flex justify-center w-full">
             <button
               onClick={() => setIsMenuOpen(true)}
@@ -268,7 +476,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Full Screen Menu Overlay */}
+      {/* Full Screen Mobile Menu Overlay */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -283,7 +491,7 @@ const Navbar = () => {
               <Link href="/" onClick={() => setIsMenuOpen(false)}>
                 <Image
                   src="/fxiedLogo.png"
-                  alt="Squadlogo"
+                  alt="JEVXO Logo"
                   width={100}
                   height={32}
                   className="h-12 w-auto -ml-5 object-contain"
@@ -292,93 +500,133 @@ const Navbar = () => {
               <button
                 onClick={() => setIsMenuOpen(false)}
                 className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
-                style={{ marginTop: "0" }}
               >
                 <X size={24} />
               </button>
             </div>
 
             <div className="flex flex-col space-y-5 mt-3 pb-32 flex-grow">
-              {[
-                { name: "Home", href: "/" },
-                { name: "About", href: "/about" },
-                { name: "Case Studies", href: "/case-studies" },
-                { name: "Contact", href: "/contact" },
-                {
-                  name: "Products",
-                  href: "#",
-                  children: [
-                    { name: "SquadCart", href: "/products/squadcart" },
-                    { name: "CleverERP", href: "/products" },
-                  ],
-                },
-                { name: "FAQ", href: "/faq" },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + i * 0.05 }}
-                >
-                  {item.children ? (
-                    <div className="flex flex-col">
-                      <div
-                        className="flex items-center justify-between cursor-pointer group"
-                        onClick={() =>
-                          setMobileProductsOpen(!mobileProductsOpen)
-                        }
-                      >
-                        <span className="text-xl md:text-3xl font-medium text-white hover:text-[#EFFC76] tracking-tight">
-                          {item.name}
-                        </span>
-                        <ChevronDown
-                          className={`text-white transition-transform duration-300 ${
-                            mobileProductsOpen ? "rotate-180" : ""
-                          }`}
-                          size={24}
-                        />
-                      </div>
-                      <AnimatePresence>
-                        {mobileProductsOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden flex flex-col space-y-3 mt-3 pl-6"
-                          >
-                            {item.children.map((child) => (
-                              <Link
-                                key={child.name}
-                                href={child.href}
-                                onClick={() => setIsMenuOpen(false)}
-                                className="text-lg text-gray-500 font-medium hover:text-[#EFFC76] block"
-                              >
-                                {child.name}
-                              </Link>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block transition-all duration-300 text-xl md:text-3xl font-medium text-white hover:text-[#EFFC76] tracking-tight"
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-                </motion.div>
-              ))}
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="pt-4"
+              <Link
+                href="/"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-xl font-medium text-white hover:text-[#EFFC76]"
               >
+                Home
+              </Link>
+
+              <Link
+                href="/about"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-xl font-medium text-white hover:text-[#EFFC76]"
+              >
+                About
+              </Link>
+
+              {/* Mobile Solutions Accordion */}
+              <div className="flex flex-col">
+                <div
+                  className="flex items-center justify-between cursor-pointer group py-1"
+                  onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
+                >
+                  <span className="text-xl font-medium text-white hover:text-[#EFFC76]">
+                    Solutions
+                  </span>
+                  <ChevronDown
+                    className={`text-white transition-transform duration-300 ${
+                      mobileSolutionsOpen ? "rotate-180 text-[#EFFC76]" : ""
+                    }`}
+                    size={22}
+                  />
+                </div>
+                <AnimatePresence>
+                  {mobileSolutionsOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden flex flex-col space-y-2 mt-2 pl-4 border-l border-white/10"
+                    >
+                      {solutionsList.map((sol) => (
+                        <Link
+                          key={sol.title}
+                          href={sol.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="text-sm text-gray-400 font-medium hover:text-[#EFFC76] py-1 block"
+                        >
+                          {sol.title}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <Link
+                href="/services"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-xl font-medium text-white hover:text-[#EFFC76]"
+              >
+                Services
+              </Link>
+
+              {/* Mobile Products Accordion */}
+              <div className="flex flex-col">
+                <div
+                  className="flex items-center justify-between cursor-pointer group py-1"
+                  onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                >
+                  <span className="text-xl font-medium text-white hover:text-[#EFFC76]">
+                    Products
+                  </span>
+                  <ChevronDown
+                    className={`text-white transition-transform duration-300 ${
+                      mobileProductsOpen ? "rotate-180 text-[#EFFC76]" : ""
+                    }`}
+                    size={22}
+                  />
+                </div>
+                <AnimatePresence>
+                  {mobileProductsOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden flex flex-col space-y-2 mt-2 pl-4 border-l border-white/10"
+                    >
+                      {products.map((p) => (
+                        <Link
+                          key={p.title}
+                          href={p.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="text-sm text-gray-400 font-medium hover:text-[#EFFC76] py-1 block"
+                        >
+                          {p.title}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <Link
+                href="/country-sales-partner"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-xl font-medium text-[#EFFC76]"
+              >
+                Partner Roster
+              </Link>
+
+              <Link
+                href="/contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-xl font-medium text-white hover:text-[#EFFC76]"
+              >
+                Contact
+              </Link>
+
+              <div className="pt-4">
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
@@ -391,15 +639,10 @@ const Navbar = () => {
                     <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                   </button>
                 </Link>
-              </motion.div>
+              </div>
 
               {/* Social Icons */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
-                className="flex items-center gap-6 mt-auto pt-8 pb-8"
-              >
+              <div className="flex items-center gap-6 mt-auto pt-6 pb-8">
                 {[
                   FaFacebookF,
                   FaInstagram,
@@ -415,7 +658,7 @@ const Navbar = () => {
                     <Icon size={22} />
                   </a>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         )}
