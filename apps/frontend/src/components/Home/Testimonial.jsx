@@ -16,7 +16,7 @@ const fallbackTestimonials = [
     role: "CTO",
     company: "FinTech Innovations",
     image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael",
-    text: "SquadLog transformed our legacy infrastructure into a scalable cloud-native system. Their expertise in AWS and DevOps is unmatched.",
+    text: "JEVXO transformed our legacy infrastructure into a scalable cloud-native system. Their expertise in AWS and DevOps is unmatched.",
     rating: 5,
   },
   {
@@ -32,7 +32,7 @@ const fallbackTestimonials = [
     role: "Product Manager",
     company: "HealthPlus App",
     image: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
-    text: "We needed a complex mobile app for patient monitoring. SquadLog delivered a secure, HIPAA-compliant app ahead of schedule.",
+    text: "We needed a complex mobile app for patient monitoring. JEVXO delivered a secure, HIPAA-compliant app ahead of schedule.",
     rating: 5,
   },
   {
@@ -48,7 +48,7 @@ const fallbackTestimonials = [
     role: "CEO",
     company: "LogisticsPro",
     image: "https://api.dicebear.com/7.x/avataaars/svg?seed=James",
-    text: "The custom ERP software SquadLog developed has streamlined our entire supply chain. Their understanding of business logic is impressive.",
+    text: "The custom ERP software JEVXO developed has streamlined our entire supply chain. Their understanding of business logic is impressive.",
     rating: 5,
   },
   {
@@ -56,7 +56,7 @@ const fallbackTestimonials = [
     role: "Creative Director",
     company: "Artistry Studios",
     image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa",
-    text: "As a design agency, we have high standards. SquadLog's frontend development brought our designs to life with pixel-perfect precision.",
+    text: "As a design agency, we have high standards. JEVXO's frontend development brought our designs to life with pixel-perfect precision.",
     rating: 5,
   },
 ];
@@ -115,7 +115,7 @@ const Testimonial = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-3xl md:text-5xl font-medium text-gray-500 mb-6 tracking-tight"
           >
-            About SquadLog's Excellence
+            About JEVXO's Excellence
           </motion.h3>
 
           <motion.p

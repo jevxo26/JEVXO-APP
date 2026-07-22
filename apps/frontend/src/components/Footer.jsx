@@ -12,13 +12,13 @@ import {
   ArrowUpRight,
   MapPin,
   Mail,
+  Sparkles,
 } from "lucide-react";
-import { useQuery } from "@/hooks/useApi";
 
 const FooterLink = ({ href, children }) => (
   <Link
     href={href}
-    className="group flex items-center gap-2 text-gray-500 hover:text-white transition-colors py-1"
+    className="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors py-1 font-normal text-sm"
   >
     <span className="relative overflow-hidden">
       <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
@@ -34,158 +34,158 @@ const FooterLink = ({ href, children }) => (
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const containerRef = useRef(null);
-  // const isInView = useInView(containerRef, { once: true, amount: 0.1 }); // Unused in this version
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end end"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [-50, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [-40, 0]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
-  const { data } = useQuery("/footer");
-  console.log(data?.data);
 
   return (
     <footer
       ref={containerRef}
-      className="relative bg-[#050505] pt-32 pb-12 overflow-hidden"
+      className="relative z-20 bg-[#050505] pt-24 pb-12 overflow-hidden border-t border-white/5 text-white"
     >
+      {/* Subtle Ambient Glow */}
+      <div className="absolute top-0 right-1/3 w-[500px] h-[300px] bg-indigo-600/10 blur-[140px] pointer-events-none rounded-full" />
 
-      <div className="relative z-20 max-w-7xl mx-auto px-6">
-        {/* 2. Massive Organic CTA */}
-        <div className="flex flex-col items-center text-center mb-32 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative group cursor-pointer"
-          >
-            <h2 className="text-[12vw] md:text-[8vw] font-medium tracking-tight text-white/90 leading-[0.9] group-hover:text-white transition-colors duration-500">
-              Have an idea?
-            </h2>
-            <div className="h-4 md:h-8" /> {/* Spacer */}
-            <h2 className="text-[12vw] md:text-[8vw] font-medium tracking-tight text-gray-500 leading-[0.9] group-hover:text-[#EFFC76] transition-colors duration-500">
-              Let&apos;s build it.
-            </h2>
-            {/* Floating Magnetic Button */}
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              whileTap={{ scale: 0.9 }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-48 md:h-48 bg-[#EFFC76] rounded-full flex items-center justify-center mix-blend-difference opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-            >
-              <ArrowRight size={48} className="text-black" />
-            </motion.div>
-          </motion.div>
-        </div>
+      <div className="relative z-20 max-w-7xl mx-auto px-6 sm:px-8">
 
-        {/* 3. Floating Navigation (No Grid Lines) */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-16 md:gap-8 mb-24">
-          {/* Brand - Minimal */}
+
+        {/* 2. Main Navigation Grid */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-16 md:gap-8 mb-24 relative z-10">
+          
+          {/* Brand Column */}
           <div className="max-w-xs">
             <Link
               href="/"
-              className="text-2xl font-bold text-white tracking-tight mb-6 inline-block"
+              className="text-3xl font-bold text-white tracking-tight mb-6 inline-flex items-center gap-2 group"
             >
-              SquadLog.
+              <span>Jevxo</span>
+              <span className="w-2 h-2 rounded-full bg-[#EFFC76] group-hover:scale-125 transition-transform" />
             </Link>
-            <p className="text-gray-500 leading-relaxed mb-8">
+            <p className="text-gray-400 text-sm leading-relaxed mb-8 font-light">
               Crafting digital experiences with precision and passion. Based
               remotely, working globally.
             </p>
             <div className="flex gap-4">
-              {[Twitter, Instagram, Linkedin, Youtube].map((Icon, i) => (
+              {[
+                { icon: Twitter, href: "#", name: "Twitter" },
+                { icon: Instagram, href: "#", name: "Instagram" },
+                { icon: Linkedin, href: "#", name: "LinkedIn" },
+                { icon: Youtube, href: "#", name: "YouTube" },
+              ].map(({ icon: Icon, href, name }, i) => (
                 <a
                   key={i}
-                  href="#"
-                  className="text-gray-500 hover:text-[#EFFC76] transition-colors"
+                  href={href}
+                  aria-label={name}
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#EFFC76] hover:bg-white/10 hover:border-white/20 transition-all transform hover:scale-105"
                 >
-                  <Icon size={20} />
+                  <Icon size={18} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Links - Floating Columns */}
-          <div className="flex flex-wrap gap-12 md:gap-24">
-            {/* Company & Services Grouped */}
-            <div className="flex gap-12 md:gap-24">
-              <div>
-                <h4 className="text-white font-medium mb-6">Company</h4>
-                <div className="flex flex-col gap-3">
-                  {["About", "Work", "Agency", "Contact"].map((item) => (
-                    <FooterLink key={item} href="#">
-                      {item}
-                    </FooterLink>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h4 className="text-white font-medium mb-6">Services</h4>
-                <div className="flex flex-col gap-3">
-                  {["Web Dev", "Mobile", "SaaS", "Design"].map((item) => (
-                    <FooterLink key={item} href="#">
-                      {item}
-                    </FooterLink>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h4 className="text-white font-medium mb-6">Legal</h4>
-                <div className="flex flex-col gap-3">
-                  {[
-                    { name: "Privacy Policy", href: "/privacy-policy" },
-                    { name: "Terms & Conditions", href: "/terms-conditions" },
-                    { name: "Refund Policy", href: "/refund-policy" },
-                  ].map((item) => (
-                    <FooterLink key={item.name} href={item.href}>
-                      {item.name}
-                    </FooterLink>
-                  ))}
-                </div>
+          {/* Links Group */}
+          <div className="flex flex-wrap gap-12 sm:gap-16 md:gap-20 lg:gap-24">
+            {/* Company Column */}
+            <div>
+              <h4 className="text-white font-medium mb-6 text-base tracking-wide">Company</h4>
+              <div className="flex flex-col gap-2.5">
+                {[
+                  { name: "About", href: "/about" },
+                  { name: "Work", href: "/works" },
+                  { name: "Agency", href: "/about" },
+                  { name: "Contact", href: "/contact" },
+                ].map((item) => (
+                  <FooterLink key={item.name} href={item.href}>
+                    {item.name}
+                  </FooterLink>
+                ))}
               </div>
             </div>
 
-            {/* Newsletter - Minimalist */}
-            <div className="max-w-xs">
-              <h4 className="text-white font-medium mb-6">Stay Updated</h4>
+            {/* Services Column */}
+            <div>
+              <h4 className="text-white font-medium mb-6 text-base tracking-wide">Services</h4>
+              <div className="flex flex-col gap-2.5">
+                {[
+                  { name: "Web Dev", href: "/services/custom-website" },
+                  { name: "Mobile", href: "/services/mobile-app" },
+                  { name: "SaaS", href: "/services" },
+                  { name: "Design", href: "/services/ui-ux" },
+                ].map((item) => (
+                  <FooterLink key={item.name} href={item.href}>
+                    {item.name}
+                  </FooterLink>
+                ))}
+              </div>
+            </div>
+
+            {/* Legal Column */}
+            <div>
+              <h4 className="text-white font-medium mb-6 text-base tracking-wide">Legal</h4>
+              <div className="flex flex-col gap-2.5">
+                {[
+                  { name: "Privacy Policy", href: "/privacy-policy" },
+                  { name: "Terms & Conditions", href: "/terms-and-conditions" },
+                  { name: "Refund Policy", href: "/refund-policy" },
+                ].map((item) => (
+                  <FooterLink key={item.name} href={item.href}>
+                    {item.name}
+                  </FooterLink>
+                ))}
+              </div>
+            </div>
+
+            {/* Newsletter Column */}
+            <div className="max-w-xs min-w-[200px]">
+              <h4 className="text-white font-medium mb-6 text-base tracking-wide">Stay Updated</h4>
               <div className="relative group">
                 <input
                   type="email"
                   placeholder="Email address"
-                  className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#EFFC76] transition-colors rounded-none"
+                  className="w-full bg-transparent border-b border-white/20 py-3 pr-8 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-[#EFFC76] transition-colors rounded-none font-light"
                 />
-                <button className="absolute right-0 top-3 text-gray-500 group-focus-within:text-[#EFFC76] transition-colors">
-                  <ArrowUpRight size={20} />
+                <button
+                  type="button"
+                  aria-label="Subscribe"
+                  className="absolute right-0 top-3 text-gray-400 group-focus-within:text-[#EFFC76] hover:text-[#EFFC76] transition-colors"
+                >
+                  <ArrowUpRight size={18} />
                 </button>
               </div>
             </div>
           </div>
+
         </div>
 
-        {/* 4. Bottom Anchor - Barely There */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-6 relative">
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
-              <MapPin size={14} /> New York, NY
+        {/* 3. Bottom Anchor Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pt-10 border-t border-white/10 relative z-10">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-gray-400 text-xs sm:text-sm font-light">
+            <div className="flex items-center gap-2">
+              <MapPin size={14} className="text-gray-500" /> New York, NY & Dhaka, BD
             </div>
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
-              <Mail size={14} /> hello@squadlog.com
+            <div className="flex items-center gap-2">
+              <Mail size={14} className="text-gray-500" /> hello@jevxo.com
             </div>
           </div>
 
-          <div className="flex gap-6 text-sm text-gray-600">
-            <span>&copy; {currentYear} SquadLog</span>
-          </div>
-
-          {/* Giant Faded Anchor Text behind everything */}
-          <div className="absolute -bottom-20 right-0 pointer-events-none select-none mix-blend-overlay opacity-20">
-            <h1 className="text-[15vw] font-bold text-white/5 leading-none">
-              LOG
-            </h1>
+          <div className="text-xs sm:text-sm text-gray-500 font-light">
+            &copy; {currentYear} <span className="text-gray-300 font-medium">Jevxo</span>. All rights reserved.
           </div>
         </div>
+
+        {/* Giant Faded Background Watermark Text */}
+        <div className="absolute -bottom-10 right-0 pointer-events-none select-none mix-blend-overlay opacity-15 overflow-hidden">
+          <h1 className="text-[18vw] font-black text-white/10 leading-none tracking-tighter">
+            JEVXO
+          </h1>
+        </div>
+
       </div>
     </footer>
   );

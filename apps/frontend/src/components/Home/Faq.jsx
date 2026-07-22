@@ -5,7 +5,7 @@ import { Plus, X } from "lucide-react";
 
 const faqs = [
     {
-        question: "What core services does SquadLog provide?",
+        question: "What core services does JEVXO provide?",
         answer:
             "We offer a comprehensive suite of digital services including Custom Web Development, Cloud Computing Solutions, Mobile App Development (iOS & Android), UI/UX Design, and Digital Marketing strategies.",
     },

@@ -76,7 +76,7 @@ const Integration = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-gray-400 text-base md:text-lg mb-10 max-w-xl mx-auto"
         >
-          SquadLog leverages leading technologies and platforms, ensuring robust
+          JEVXO leverages leading technologies and platforms, ensuring robust
           and scalable solutions.
         </motion.p>
 
@@ -88,7 +88,7 @@ const Integration = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-20"
         >
-          <SmoothButton> View About SquadLog </SmoothButton>
+          <SmoothButton> View About JEVXO </SmoothButton>
         </motion.div>
 
         {/* Icons Row */}

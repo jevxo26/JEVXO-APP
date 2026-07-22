@@ -13,7 +13,7 @@ const Innovation = () => {
     {
       title: "Custom Software Solutions",
       description:
-        "SquadLog builds robust, scalable applications tailored to your business needs.",
+        "JEVXO builds robust, scalable applications tailored to your business needs.",
       type: "integrations",
       delay: 0,
     },

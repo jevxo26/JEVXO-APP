@@ -24,7 +24,7 @@ const AboutSquadLog = () => {
             >
               <Bot size={14} className="text-[#EFFC76]" />
               <span className="text-gray-300 text-xs font-medium uppercase tracking-wider">
-                About SquadLog
+                About JEVXO
               </span>
             </motion.div>
 
@@ -45,7 +45,7 @@ const AboutSquadLog = () => {
                 delay={0.3}
                 icon={Bot}
                 title="Advanced AI, Streamlined Design"
-                description="SquadLog blends technical expertise with creative innovation. We build solutions that showcase sophistication and drive results."
+                description="JEVXO blends technical expertise with creative innovation. We build solutions that showcase sophistication and drive results."
                 tags={["AI Design", "Tech Innovation"]}
               />
               <AboutSquadLogCard
@@ -96,7 +96,7 @@ const AboutSquadLog = () => {
           >
             <Bot size={14} className="text-[#EFFC76]" />
             <span className="text-gray-300 text-xs font-medium uppercase tracking-wider">
-              About SquadLog
+              About JEVXO
             </span>
           </motion.div>
 
@@ -123,7 +123,7 @@ const AboutSquadLog = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent z-10" />
               <img
                 src="https://i.ibb.co.com/q38fff6X/image.png"
-                alt="About SquadLog"
+                alt="About JEVXO"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -135,7 +135,7 @@ const AboutSquadLog = () => {
                     Advanced AI, Streamlined Design
                   </h3>
                   <p className="text-gray-400 text-[11px] leading-relaxed">
-                    SquadLog blends technical expertise with creative
+                    JEVXO blends technical expertise with creative
                     innovation.
                   </p>
                 </div>

@@ -85,7 +85,7 @@ const Banner = () => {
               Connect With Us
             </button>
             <button className=" px-3 md:px-8  py-2.5 md:py-3 bg-[#EFFC76] text-black rounded-full text-[14px] md:text-lg  font-medium border border-[#EFFC76] hover:bg-[#EFFC76]/90 transition-all duration-300 hover:scale-105 ">
-              What is SquadLog?
+              What is JEVXO?
             </button>
           </motion.div>
 

@@ -47,7 +47,7 @@ const LaunchYourSite = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
           >
-            Launch Your Project with SquadLog <br />
+            Launch Your Project with JEVXO <br />
             <span className="text-gray-500">
               Efficient, Scalable, and Premium.
             </span>

@@ -10,8 +10,8 @@ const baiJamjuree = Bai_Jamjuree({
 });
 
 export const metadata = {
-  title: "Squadlog",
-  description: "squadlog",
+  title: "JEVXO - Premium Software Solutions",
+  description: "JEVXO - Next-Gen Software Solutions, Cloud Infrastructure & AI Systems",
 };
 
 export default function RootLayout({ children }) {

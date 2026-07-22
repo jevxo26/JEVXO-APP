@@ -46,7 +46,7 @@ const Comparison = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl md:text-6xl font-medium text-white mb-4 relative z-10 tracking-tight"
             >
-              SquadLog Advantage
+              JEVXO Advantage
             </motion.h2>
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ const Comparison = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="text-gray-400 max-w-xl mx-auto text-lg leading-relaxed"
           >
-            SquadLog is designed to set your business apart with premium
+            JEVXO is designed to set your business apart with premium
             solutions that drive growth and engagement.
           </motion.p>
         </div>
@@ -113,7 +113,7 @@ const Comparison = () => {
                 icon={X}
                 color="text-red-500"
                 bg="bg-red-500/10"
-                text="Hidden Costs Squadlog"
+                text="Hidden Costs"
               />
               <ComparisonItem
                 icon={X}
@@ -124,7 +124,7 @@ const Comparison = () => {
             </motion.div>
           </div>
 
-          {/* SquadLog - Elevated Card */}
+          {/* JEVXO - Elevated Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

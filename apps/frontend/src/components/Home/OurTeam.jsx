@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Search, Percent } from "lucide-react";
+import { Users, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import SmoothButton from "@/Share/SmoothButton";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,63 +14,81 @@ const teamMembers = [
   {
     name: "Alexander West",
     role: "Founder & CEO",
+    bio: "Pioneering enterprise software architecture and leading strategic growth for global digital transformations.",
     image: "/about/member-1.jpg",
   },
   {
     name: "Sophia Chen",
     role: "CTO & Lead Architect",
+    bio: "Expert in distributed cloud systems, high-availability backends, and AI-driven automation pipelines.",
     image: "/about/member-2.jpg",
   },
   {
     name: "Marcus Johnson",
-    role: "Senior Full-Stack Developer",
+    role: "Senior Full-Stack Lead",
+    bio: "Crafting robust Web & Mobile applications using React, Next.js, Node.js, and modern cloud infrastructure.",
     image: "/about/member-3.jpg",
   },
   {
     name: "Elena Rodriguez",
     role: "Head of Product Design",
+    bio: "Designing world-class user interfaces and intuitive product experiences with a passion for micro-animations.",
     image: "/about/member-4.jpg",
   },
   {
     name: "David Kim",
-    role: "Cloud Infrastructure Lead",
+    role: "Cloud & DevOps Lead",
+    bio: "Managing multi-cloud Kubernetes clusters, automated CI/CD pipelines, and enterprise security compliance.",
     image: "/about/member-5.jpg",
   },
   {
     name: "Olivia Martinez",
-    role: "Digital Marketing Strategist",
+    role: "Digital Strategy Lead",
+    bio: "Accelerating brand growth through data analytics, SEO performance engineering, and conversion optimization.",
     image: "/about/member-6.jpg",
   },
 ];
 
 const TeamCard = ({ member }) => {
   return (
-    <div className="group relative bg-[#0A0A0A] border border-white/5 rounded-3xl p-3 flex items-center gap-4 hover:border-[#EFFC76]/50 transition-colors duration-300 h-full">
-      {/* Image */}
-      <div className="relative w-20 h-20 rounded-2xl overflow-hidden bg-gray-800 shrink-0">
-        <div className="absolute inset-0 bg-gray-700 animate-pulse" />
-        <Image
-          src={member.image}
-          alt={member.name}
-          fill
-          className="object-cover"
-          onError={(e) => {
-            e.target.style.display = "none";
-          }}
-        />
+    <div className="group relative bg-[#0d0d10]/90 border border-white/10 rounded-3xl p-5 flex flex-col justify-between hover:border-[#EFFC76]/50 transition-all duration-300 backdrop-blur-md h-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <div>
+        {/* Header: Image & Role Badge */}
+        <div className="flex items-center gap-4 mb-4">
+          <div className="relative w-16 h-16 rounded-2xl overflow-hidden bg-gray-800 shrink-0 border border-white/10 group-hover:border-[#EFFC76]/40 transition-colors">
+            <Image
+              src={member.image}
+              alt={member.name}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              onError={(e) => {
+                e.target.style.display = "none";
+              }}
+            />
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold text-lg leading-tight group-hover:text-[#EFFC76] transition-colors">
+              {member.name}
+            </h3>
+            <p className="text-[#EFFC76] text-xs font-medium tracking-wide mt-1">
+              {member.role}
+            </p>
+          </div>
+        </div>
+
+        {/* Short 2-3 Line Description / Bio */}
+        <p className="text-gray-400 text-xs sm:text-sm leading-relaxed font-light line-clamp-3 mb-4">
+          {member.bio}
+        </p>
       </div>
 
-      {/* Info */}
-      <div className="flex-grow">
-        <h3 className="text-white font-medium text-lg leading-tight mb-1 group-hover:text-[#EFFC76] transition-colors">
-          {member.name}
-        </h3>
-        <p className="text-gray-400 text-sm">{member.role}</p>
-      </div>
-
-      {/* Button */}
-      <div className="rounded-xl bg-[#EFFC76] p-2.5 flex items-center justify-center shrink-0 group-hover:bg-[#EFFC76] transition-colors cursor-pointer">
-        <Percent className="w-5 h-5 text-black" />
+      {/* Footer / Connect Action */}
+      <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-gray-400 group-hover:text-white transition-colors">
+        <span className="font-medium text-[11px] text-gray-500 group-hover:text-gray-300">JEVXO Team Expert</span>
+        <div className="w-6 h-6 rounded-full bg-white/5 group-hover:bg-[#EFFC76] group-hover:text-black flex items-center justify-center transition-all">
+          <ArrowUpRight size={13} />
+        </div>
       </div>
     </div>
   );
@@ -78,7 +96,7 @@ const TeamCard = ({ member }) => {
 
 const OurTeam = () => {
   return (
-    <section className="py-24 -mt-30 md:-mt-22 relative overflow-hidden">
+    <section className="py-24 -mt-16 md:-mt-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center justify-center text-center mb-16">
           {/* Badge */}
@@ -88,8 +106,8 @@ const OurTeam = () => {
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8"
           >
-            <Search className="w-4 h-4 text-[#EFFC76]" />
-            <span className="text-gray-300 text-sm">Our Team</span>
+            <Users className="w-4 h-4 text-[#EFFC76]" />
+            <span className="text-gray-300 text-sm">Our Engineering Team</span>
           </motion.div>
 
           {/* Heading */}
@@ -98,7 +116,7 @@ const OurTeam = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6 leading-tight max-w-4xl"
+            className="text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6 leading-tight max-w-4xl tracking-tight"
           >
             Meet the Minds Behind <br />
             <span className="text-gray-400">Your Success</span>
@@ -110,14 +128,14 @@ const OurTeam = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 text-lg max-w-2xl mb-8"
+            className="text-gray-400 text-lg max-w-2xl mb-8 font-light"
           >
-            Expert developers, designers, and strategists dedicated to
-            delivering excellence.
+            Expert developers, cloud architects, and product designers dedicated to
+            delivering engineering excellence at JEVXO.
           </motion.p>
 
           {/* Button */}
-          <SmoothButton> View About SquadLog</SmoothButton>
+          <SmoothButton>View About JEVXO</SmoothButton>
         </div>
 
         {/* Desktop Team Grid */}
@@ -142,9 +160,9 @@ const OurTeam = () => {
             spaceBetween={20}
             slidesPerView={1}
             autoplay={{
-              delay: 2000,
+              delay: 2500,
               disableOnInteraction: false,
-              pauseOnMouseEnter: true
+              pauseOnMouseEnter: true,
             }}
             pagination={{
               clickable: true,
@@ -159,7 +177,7 @@ const OurTeam = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          
+
           {/* Custom Styles for Swiper Pagination */}
           <style jsx global>{`
             .swiper-pagination-bullet {
@@ -170,7 +188,7 @@ const OurTeam = () => {
               transition: all 0.3s ease;
             }
             .swiper-pagination-bullet-active {
-              background: #EFFC76 !important;
+              background: #effc76 !important;
               width: 24px !important;
               border-radius: 5px !important;
             }
