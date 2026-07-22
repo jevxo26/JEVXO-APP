@@ -86,7 +86,6 @@ const nextConfig = {
       { source: "/country-sales-partner", destination: "/main/country-sales-partner" },
       { source: "/partners", destination: "/main/country-sales-partner" },
       { source: "/industries", destination: "/main/industries" },
-      { source: "/careers", destination: "/main/careers" },
       { source: "/security", destination: "/main/security" },
       { source: "/terms-and-conditions",
         destination: "/main/terms-and-conditions",

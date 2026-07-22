@@ -31,15 +31,23 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import CosmicBackground from "@/components/Home/CosmicBackground";
 
 const Navbar = () => {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isBottomMenuOpen, setIsBottomMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const isActive = (path) => {
+    if (path === "/") return pathname === "/";
+    return pathname?.startsWith(path);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +66,8 @@ const Navbar = () => {
 
   const handleSolutionsMouseEnter = () => {
     if (solutionsTimeoutRef.current) clearTimeout(solutionsTimeoutRef.current);
+    if (productsTimeoutRef.current) clearTimeout(productsTimeoutRef.current);
+    setIsProductsOpen(false);
     setIsSolutionsOpen(true);
   };
 
@@ -69,6 +79,8 @@ const Navbar = () => {
 
   const handleProductsMouseEnter = () => {
     if (productsTimeoutRef.current) clearTimeout(productsTimeoutRef.current);
+    if (solutionsTimeoutRef.current) clearTimeout(solutionsTimeoutRef.current);
+    setIsSolutionsOpen(false);
     setIsProductsOpen(true);
   };
 
@@ -148,7 +160,7 @@ const Navbar = () => {
     <>
       {/* Desktop Navigation Bar */}
       <nav
-        className={`hidden md:flex fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 relative overflow-hidden ${
+        className={`hidden md:flex fixed top-0 left-0 right-0 z-[9999] w-full transition-all duration-300 ${
           scrolled
             ? "bg-[#050508]/95 backdrop-blur-3xl border-b border-[#EFFC76]/25 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
             : "bg-[#050505]/80 backdrop-blur-2xl border-b border-white/10 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.7)]"
@@ -156,6 +168,9 @@ const Navbar = () => {
       >
         {/* Glowing Top-Line Accent */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#EFFC76] to-transparent opacity-80 pointer-events-none" />
+        {/* Glowing Bottom-Line Accent */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#EFFC76]/60 to-transparent opacity-60 pointer-events-none" />
+
 
         {/* Custom Cosmic Background */}
         <div className="absolute inset-0 pointer-events-none opacity-50 z-0 overflow-hidden">
@@ -167,33 +182,41 @@ const Navbar = () => {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/fxiedLogo.png"
+              src="/jevxo.png"
               alt="JEVXO Logo"
-              width={120}
-              height={40}
+              width={220}
+              height={70}
               className="rounded-md object-contain h-9 w-auto"
             />
           </Link>
 
-          {/* Desktop Links with Icons */}
-          <div className="flex items-center space-x-6 lg:space-x-8 whitespace-nowrap">
+          {/* Desktop Links with Active Tab Highlight */}
+          <div className="flex items-center space-x-2 lg:space-x-3 whitespace-nowrap">
             <Link
               href="/"
-              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className={`group flex items-center gap-1.5 transition-all text-sm ${
+                isActive("/")
+                  ? "text-[#EFFC76] bg-[#EFFC76]/10 border border-[#EFFC76]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,252,118,0.2)] font-semibold"
+                  : "text-gray-300 hover:text-white px-3 py-1 rounded-full hover:bg-white/5 font-medium"
+              }`}
             >
-              <Home size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <Home size={14} className={isActive("/") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-[#EFFC76] transition-colors"} />
               <span>Home</span>
             </Link>
 
             <Link
               href="/about"
-              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className={`group flex items-center gap-1.5 transition-all text-sm ${
+                isActive("/about")
+                  ? "text-[#EFFC76] bg-[#EFFC76]/10 border border-[#EFFC76]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,252,118,0.2)] font-semibold"
+                  : "text-gray-300 hover:text-white px-3 py-1 rounded-full hover:bg-white/5 font-medium"
+              }`}
             >
-              <Info size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <Info size={14} className={isActive("/about") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-[#EFFC76] transition-colors"} />
               <span>About</span>
             </Link>
 
-            {/* SOLUTIONS MEGA DROPDOWN WITH PREMIUM ANIMATIONS & CUSTOM OBSIDIAN GLASS BG */}
+            {/* SOLUTIONS MEGA DROPDOWN WITH PREMIUM ANIMATIONS */}
             <div
               className="relative py-2"
               onMouseEnter={handleSolutionsMouseEnter}
@@ -201,14 +224,18 @@ const Navbar = () => {
             >
               <Link
                 href="/solutions"
-                className="flex items-center gap-1.5 text-gray-300 hover:text-[#EFFC76] transition-colors text-sm font-medium group"
+                className={`group flex items-center gap-1.5 transition-all text-sm ${
+                  isActive("/solutions")
+                    ? "text-[#EFFC76] bg-[#EFFC76]/10 border border-[#EFFC76]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,252,118,0.2)] font-semibold"
+                    : "text-gray-300 hover:text-white px-3 py-1 rounded-full hover:bg-white/5 font-medium"
+                }`}
               >
-                <Layers size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+                <Layers size={14} className={isActive("/solutions") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-[#EFFC76] transition-colors"} />
                 <span>Solutions</span>
                 <ChevronDown
                   size={14}
                   className={`transition-transform duration-300 ${
-                    isSolutionsOpen ? "rotate-180 text-[#EFFC76]" : "group-hover:text-white"
+                    isSolutionsOpen || isActive("/solutions") ? "rotate-180 text-[#EFFC76]" : "group-hover:text-white"
                   }`}
                 />
               </Link>
@@ -301,34 +328,14 @@ const Navbar = () => {
 
             <Link
               href="/services"
-              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className={`group flex items-center gap-1.5 transition-all text-sm ${
+                isActive("/services")
+                  ? "text-[#EFFC76] bg-[#EFFC76]/10 border border-[#EFFC76]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,252,118,0.2)] font-semibold"
+                  : "text-gray-300 hover:text-white px-3 py-1 rounded-full hover:bg-white/5 font-medium"
+              }`}
             >
-              <Zap size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <Zap size={14} className={isActive("/services") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-[#EFFC76] transition-colors"} />
               <span>Services</span>
-            </Link>
-
-            <Link
-              href="/industries"
-              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
-            >
-              <Building2 size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
-              <span>Industries</span>
-            </Link>
-
-            <Link
-              href="/careers"
-              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
-            >
-              <Users size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
-              <span>Careers</span>
-            </Link>
-
-            <Link
-              href="/security"
-              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
-            >
-              <ShieldCheck size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
-              <span>Security</span>
             </Link>
 
             {/* PRODUCTS MEGA DROPDOWN WITH ANIMATION & CUSTOM BG */}
@@ -339,14 +346,18 @@ const Navbar = () => {
             >
               <Link
                 href="/products"
-                className="flex items-center gap-1.5 text-gray-300 hover:text-[#EFFC76] transition-colors text-sm font-medium group"
+                className={`group flex items-center gap-1.5 transition-all text-sm ${
+                  isActive("/products")
+                    ? "text-[#EFFC76] bg-[#EFFC76]/10 border border-[#EFFC76]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,252,118,0.2)] font-semibold"
+                    : "text-gray-300 hover:text-white px-3 py-1 rounded-full hover:bg-white/5 font-medium"
+                }`}
               >
-                <Briefcase size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+                <Briefcase size={14} className={isActive("/products") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-[#EFFC76] transition-colors"} />
                 <span>Products</span>
                 <ChevronDown
                   size={14}
                   className={`transition-transform duration-300 ${
-                    isProductsOpen ? "rotate-180 text-[#EFFC76]" : "group-hover:text-white"
+                    isProductsOpen || isActive("/products") ? "rotate-180 text-[#EFFC76]" : "group-hover:text-white"
                   }`}
                 />
               </Link>
@@ -420,42 +431,50 @@ const Navbar = () => {
 
             <Link
               href="/industries"
-              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className={`group flex items-center gap-1.5 transition-all text-sm ${
+                isActive("/industries")
+                  ? "text-[#EFFC76] bg-[#EFFC76]/10 border border-[#EFFC76]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,252,118,0.2)] font-semibold"
+                  : "text-gray-300 hover:text-white px-3 py-1 rounded-full hover:bg-white/5 font-medium"
+              }`}
             >
-              <Building2 size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <Building2 size={14} className={isActive("/industries") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-[#EFFC76] transition-colors"} />
               <span>Industries</span>
             </Link>
 
             <Link
-              href="/careers"
-              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
-            >
-              <Users size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
-              <span>Careers</span>
-            </Link>
-
-            <Link
               href="/security"
-              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className={`group flex items-center gap-1.5 transition-all text-sm ${
+                isActive("/security")
+                  ? "text-[#EFFC76] bg-[#EFFC76]/10 border border-[#EFFC76]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,252,118,0.2)] font-semibold"
+                  : "text-gray-300 hover:text-white px-3 py-1 rounded-full hover:bg-white/5 font-medium"
+              }`}
             >
-              <ShieldCheck size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <ShieldCheck size={14} className={isActive("/security") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-[#EFFC76] transition-colors"} />
               <span>Security</span>
             </Link>
 
             <Link
               href="/country-sales-partner"
-              className="text-[#EFFC76] hover:text-black hover:bg-[#EFFC76] transition-all text-xs font-bold uppercase tracking-wider flex items-center gap-2 bg-white/5 border border-[#EFFC76]/30 hover:border-[#EFFC76] px-4 py-1.5 rounded-full whitespace-nowrap shadow-[0_0_20px_rgba(239,252,118,0.15)] group"
+              className={`text-[#EFFC76] transition-all text-xs font-bold uppercase tracking-wider flex items-center gap-2 px-4 py-1.5 rounded-full whitespace-nowrap group ${
+                isActive("/country-sales-partner")
+                  ? "bg-[#EFFC76] text-black border border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.4)]"
+                  : "bg-white/5 border border-[#EFFC76]/30 hover:border-[#EFFC76] hover:bg-[#EFFC76]/10 hover:text-white shadow-[0_0_20px_rgba(239,252,118,0.15)]"
+              }`}
             >
-              <span className="w-2 h-2 rounded-full bg-[#EFFC76] group-hover:bg-black animate-pulse shrink-0" />
-              <Globe size={13} className="text-[#EFFC76] group-hover:text-black transition-colors" />
+              <span className={`w-2 h-2 rounded-full animate-pulse shrink-0 ${isActive("/country-sales-partner") ? "bg-black" : "bg-[#EFFC76]"}`} />
+              <Globe size={13} className={isActive("/country-sales-partner") ? "text-black" : "text-[#EFFC76]"} />
               <span>Partner Roster</span>
             </Link>
 
             <Link
               href="/contact"
-              className="group flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className={`group flex items-center gap-1.5 transition-all text-sm ${
+                isActive("/contact")
+                  ? "text-[#EFFC76] bg-[#EFFC76]/10 border border-[#EFFC76]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,252,118,0.2)] font-semibold"
+                  : "text-gray-300 hover:text-white px-3 py-1 rounded-full hover:bg-white/5 font-medium"
+              }`}
             >
-              <Mail size={14} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+              <Mail size={14} className={isActive("/contact") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-[#EFFC76] transition-colors"} />
               <span>Contact</span>
             </Link>
           </div>
@@ -470,99 +489,201 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Top Bar */}
-      <div className="md:hidden absolute top-0 left-0 right-0 p-6 flex justify-center z-20 pointer-events-none bg-gradient-to-b from-black/80 to-transparent">
-        <Link href="/" className="pointer-events-auto">
+      <div className="md:hidden fixed top-0 left-0 right-0 z-[9998] flex items-center justify-between px-5 py-3 bg-[#07070a]/95 backdrop-blur-2xl border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
+        {/* Top glow line */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#EFFC76] to-transparent opacity-70 pointer-events-none" />
+        {/* Bottom glow line */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#EFFC76]/50 to-transparent opacity-50 pointer-events-none" />
+
+        <Link href="/">
           <Image
-            src="/fxiedLogo.png"
+            src="/jevxo.png"
             alt="JEVXO Logo"
-            width={120}
-            height={40}
-            className="h-15 w-auto"
+            width={130}
+            height={42}
+            className="h-9 w-auto object-contain"
           />
         </Link>
+
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className={`p-2 rounded-xl border transition-all duration-200 ${
+            isMenuOpen
+              ? "bg-[#EFFC76]/10 border-[#EFFC76]/40 text-[#EFFC76]"
+              : "bg-white/5 border-white/10 text-gray-300 hover:text-[#EFFC76] hover:border-[#EFFC76]/30"
+          }`}
+        >
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
 
-      {/* Mobile Bottom Dock */}
-      <div className="md:hidden fixed border bottom-8 left-4 right-4 z-50">
-        <div className="bg-[#0A0A0A]/90 backdrop-blur-xl border border-[#272725] rounded-2xl grid grid-cols-5 items-end px-2 py-3 shadow-2xl relative">
-          <div className="flex justify-center w-full">
-            <Link
-              href="/"
-              className="text-gray-400 hover:text-[#EFFC76] transition-colors flex flex-col items-center gap-1 group"
-            >
-              <Home
-                size={20}
-                className="group-hover:-translate-y-0.5 transition-transform"
-              />
-              <span className="text-[10px] font-medium tracking-wide">
-                Home
-              </span>
-            </Link>
-          </div>
+      {/* Mobile Bottom Dock - iOS Style */}
+      <div className="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-10/12 max-w-sm z-50">
+        <div className="bg-[#0A0A0A]/95 backdrop-blur-2xl border border-[#272725] rounded-2xl shadow-2xl px-3 py-2.5">
+          <div className="grid grid-cols-5 gap-1 items-end">
 
-          <div className="flex justify-center w-full">
-            <Link
-              href="/solutions"
-              className="text-gray-400 hover:text-[#EFFC76] transition-colors flex flex-col items-center gap-1 group"
-            >
-              <Building2
-                size={20}
-                className="group-hover:-translate-y-0.5 transition-transform"
-              />
-              <span className="text-[10px] font-medium tracking-wide">
-                Solutions
-              </span>
-            </Link>
-          </div>
-
-          {/* Floating Central Button */}
-          <div className="relative -top-6 flex flex-col items-center justify-end w-full">
-            <Link href="/contact">
-              <div className="bg-white/10 backdrop-blur-lg p-3 rounded-xl border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)] transform transition-transform hover:scale-110 flex items-center justify-center">
-                <Image
-                  src="/customIcon.png"
-                  alt="Center Icon"
-                  width={28}
-                  height={28}
-                  className="object-contain"
-                />
+            {/* Home */}
+            <Link href="/" className="flex flex-col items-center gap-1 group">
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-200 ${
+                isActive("/") ? "bg-[#EFFC76]/20 border border-[#EFFC76]/50" : "bg-white/5 border border-white/10 group-hover:bg-white/10"
+              }`}>
+                <Home size={20} className={isActive("/") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-white"} />
               </div>
+              <span className={`text-[9px] font-medium tracking-wide ${isActive("/") ? "text-[#EFFC76]" : "text-gray-500"}`}>Home</span>
             </Link>
-          </div>
 
-          <div className="flex justify-center w-full">
-            <Link
-              href="/services"
-              className="text-gray-400 hover:text-[#EFFC76] transition-colors flex flex-col items-center gap-1 group"
-            >
-              <Zap
-                size={20}
-                className="group-hover:-translate-y-0.5 transition-transform"
-              />
-              <span className="text-[10px] font-medium tracking-wide">
-                Services
-              </span>
+            {/* Solutions */}
+            <Link href="/solutions" className="flex flex-col items-center gap-1 group">
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-200 ${
+                isActive("/solutions") ? "bg-[#EFFC76]/20 border border-[#EFFC76]/50" : "bg-white/5 border border-white/10 group-hover:bg-white/10"
+              }`}>
+                <Building2 size={20} className={isActive("/solutions") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-white"} />
+              </div>
+              <span className={`text-[9px] font-medium tracking-wide ${isActive("/solutions") ? "text-[#EFFC76]" : "text-gray-500"}`}>Solutions</span>
             </Link>
-          </div>
 
-          <div className="flex justify-center w-full">
+            {/* Center Logo Button */}
+            <div className="flex flex-col items-center -mt-4">
+              <Link href="/">
+                <div className="w-14 h-14 rounded-2xl bg-[#0d0d10] border border-[#EFFC76]/40 shadow-[0_0_20px_rgba(239,252,118,0.25)] flex items-center justify-center hover:scale-105 transition-transform p-1.5">
+                  <Image
+                    src="/jevxo.png"
+                    alt="JEVXO Logo"
+                    width={52}
+                    height={26}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+              </Link>
+            </div>
+
+            {/* Services */}
+            <Link href="/services" className="flex flex-col items-center gap-1 group">
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-200 ${
+                isActive("/services") ? "bg-[#EFFC76]/20 border border-[#EFFC76]/50" : "bg-white/5 border border-white/10 group-hover:bg-white/10"
+              }`}>
+                <Zap size={20} className={isActive("/services") ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-white"} />
+              </div>
+              <span className={`text-[9px] font-medium tracking-wide ${isActive("/services") ? "text-[#EFFC76]" : "text-gray-500"}`}>Services</span>
+            </Link>
+
+            {/* More */}
             <button
-              onClick={() => setIsMenuOpen(true)}
-              className={`text-gray-400 hover:text-[#EFFC76] transition-colors flex flex-col items-center gap-1 group ${
-                isMenuOpen ? "text-[#EFFC76]" : ""
-              }`}
+              onClick={() => setIsBottomMenuOpen(!isBottomMenuOpen)}
+              className="flex flex-col items-center gap-1 group"
             >
-              <Menu
-                size={20}
-                className="group-hover:-translate-y-0.5 transition-transform"
-              />
-              <span className="text-[10px] font-medium tracking-wide">
-                More
-              </span>
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-200 ${
+                isBottomMenuOpen ? "bg-[#EFFC76]/20 border border-[#EFFC76]/50" : "bg-white/5 border border-white/10 group-hover:bg-white/10"
+              }`}>
+                {isBottomMenuOpen
+                  ? <X size={20} className="text-[#EFFC76]" />
+                  : <Menu size={20} className="text-gray-400 group-hover:text-white" />
+                }
+              </div>
+              <span className={`text-[9px] font-medium tracking-wide ${isBottomMenuOpen ? "text-[#EFFC76]" : "text-gray-500"}`}>More</span>
             </button>
+
           </div>
         </div>
       </div>
+
+      {/* Bottom Floating Menu - NeonCode scattered style */}
+      <AnimatePresence>
+        {isBottomMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsBottomMenuOpen(false)}
+              className="fixed inset-0 z-[47] md:hidden bg-black/40 backdrop-blur-[2px]"
+            />
+
+            {/* Individually scattered floating cards */}
+            {[
+              { href: "/",                       icon: Home,       label: "Home",       col: 0 },
+              { href: "/about",                  icon: Users,      label: "About",      col: 1 },
+              { href: "/solutions",              icon: Building2,  label: "Solutions",  col: 2 },
+              { href: "/services",               icon: Zap,        label: "Services",   col: 3 },
+              { href: "/products",               icon: Layers,     label: "Products",   col: 0 },
+              { href: "/industries",             icon: Briefcase,  label: "Industries", col: 1 },
+              { href: "/security",               icon: ShieldCheck,label: "Security",   col: 2 },
+              { href: "/country-sales-partner",  icon: Globe,      label: "Partners",   col: 3 },
+              { href: "/contact",                icon: ArrowRight, label: "Contact",    col: 0 },
+            ].map(({ href, icon: Icon, label, col }, i) => {
+              const row = Math.floor(i / 4);
+              const cardW = 66; // px
+              const gap = 10;   // px
+              const leftBase = 12;
+              const bottomBase = 110; // above dock
+              const left = leftBase + col * (cardW + gap);
+              const bottom = bottomBase + row * (cardW + gap + 18);
+              return (
+                <motion.div
+                  key={href}
+                  initial={{ opacity: 0, scale: 0.4, y: 30 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.4, y: 30 }}
+                  transition={{ type: "spring", damping: 18, stiffness: 280, delay: i * 0.04 }}
+                  className="fixed z-[48] md:hidden"
+                  style={{ left, bottom, width: cardW }}
+                >
+                  <Link
+                    href={href}
+                    onClick={() => setIsBottomMenuOpen(false)}
+                    className="flex flex-col items-center gap-1 group"
+                  >
+                    <div
+                      className={`rounded-[18px] flex items-center justify-center transition-all duration-200 shadow-xl ${
+                        isActive(href)
+                          ? "bg-[#EFFC76]/25 border border-[#EFFC76]/60 shadow-[0_0_16px_rgba(239,252,118,0.3)]"
+                          : "bg-[#111114]/95 border border-white/10 group-hover:border-white/25 group-hover:bg-white/10"
+                      }`}
+                      style={{ width: cardW, height: cardW }}
+                    >
+                      <Icon
+                        size={24}
+                        className={isActive(href) ? "text-[#EFFC76]" : "text-gray-400 group-hover:text-white"}
+                      />
+                    </div>
+                    <span
+                      className={`text-[9px] font-medium text-center leading-tight w-full ${
+                        isActive(href) ? "text-[#EFFC76]" : "text-gray-400"
+                      }`}
+                    >
+                      {label}
+                    </span>
+                  </Link>
+                </motion.div>
+              );
+            })}
+
+            {/* Close card - bottom right corner above dock */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.4, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.4, y: 30 }}
+              transition={{ type: "spring", damping: 18, stiffness: 280, delay: 9 * 0.04 }}
+              className="fixed z-[48] md:hidden"
+              style={{ right: 12, bottom: 110, width: 66 }}
+            >
+              <button
+                onClick={() => setIsBottomMenuOpen(false)}
+                className="flex flex-col items-center gap-1 group w-full"
+              >
+                <div
+                  className="rounded-[18px] flex items-center justify-center bg-[#EFFC76]/15 border border-[#EFFC76]/40 shadow-[0_0_14px_rgba(239,252,118,0.2)] group-hover:bg-[#EFFC76]/25 transition-all"
+                  style={{ width: 66, height: 66 }}
+                >
+                  <X size={22} className="text-[#EFFC76]" />
+                </div>
+                <span className="text-[9px] font-medium text-[#EFFC76]">Close</span>
+              </button>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Full Screen Mobile Menu Overlay */}
       <AnimatePresence>
@@ -578,7 +699,7 @@ const Navbar = () => {
             <div className="flex items-center justify-between py-6">
               <Link href="/" onClick={() => setIsMenuOpen(false)}>
                 <Image
-                  src="/fxiedLogo.png"
+                  src="/jevxo.png"
                   alt="JEVXO Logo"
                   width={100}
                   height={32}
@@ -697,6 +818,22 @@ const Navbar = () => {
                   )}
                 </AnimatePresence>
               </div>
+
+              <Link
+                href="/industries"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-xl font-medium text-white hover:text-[#EFFC76]"
+              >
+                Industries
+              </Link>
+
+              <Link
+                href="/security"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-xl font-medium text-white hover:text-[#EFFC76]"
+              >
+                Security
+              </Link>
 
               <Link
                 href="/country-sales-partner"

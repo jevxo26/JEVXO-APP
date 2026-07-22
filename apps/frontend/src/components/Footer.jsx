@@ -97,7 +97,6 @@ const Footer = () => {
               <div className="flex flex-col gap-2.5">
                 {[
                   { name: "About Us", href: "/about" },
-                  { name: "Careers (Hiring)", href: "/careers" },
                   { name: "Industries", href: "/industries" },
                   { name: "Partner Roster", href: "/country-sales-partner" },
                   { name: "Contact", href: "/contact" },
