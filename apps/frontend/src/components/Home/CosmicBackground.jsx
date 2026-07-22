@@ -66,17 +66,7 @@ const CosmicBackground = () => {
           style={{ background: "rgba(20,100,40,0.10)" }} />
       </motion.div>
 
-      {/* ── Subtle grid pattern ── */}
-      <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(239,252,118,0.6) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(239,252,118,0.6) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-      />
+
 
       {/* ── Stars / particles ── */}
       <div className="absolute inset-0 opacity-50">

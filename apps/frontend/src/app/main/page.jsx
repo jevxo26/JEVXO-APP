@@ -1,4 +1,4 @@
-import AboutSquadLog from "@/components/Home/AboutSquadLog";
+import WhoWeAre from "@/components/Home/WhoWeAre";
 import Banner from "@/components/Home/Banner";
 import Comparison from "@/components/Home/Comparison";
 import Faq from "@/components/Home/Faq";
@@ -13,7 +13,6 @@ import CosmicBackground from "@/components/Home/CosmicBackground";
 import DevOpsWorkflow from "@/components/Home/DevOpsWorkflow";
 import PortfolioCard from "@/components/case-studies/PortfolioCard";
 import TechStack from "@/components/Home/TechStack";
-import Stats from "@/components/Home/Stats";
 import OurTeam from "@/components/Home/OurTeam";
 
 const TestPages = () => {
@@ -30,14 +29,9 @@ const TestPages = () => {
           <Banner />
         </section>
 
-        {/* 2. Key Metrics & Social Proof Stats */}
+        {/* 2. Who We Are Section */}
         <section className="-mt-8 md:-mt-12">
-          <Stats />
-        </section>
-
-        {/* 3. About JEVXO */}
-        <section className="-mt-8 md:-mt-12">
-          <AboutSquadLog />
+          <WhoWeAre />
         </section>
 
         {/* 4. Core Software & Engineering Services */}
