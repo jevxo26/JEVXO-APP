@@ -44,14 +44,14 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative z-20 bg-[#040904] pt-20 pb-36 sm:pb-40 overflow-hidden border-t border-white/10 text-white select-none">
+    <footer className="relative z-20 bg-[#040904] pt-20 pb-44 sm:pb-52 overflow-hidden border-t border-white/10 text-white select-none">
       {/* Vivid Background Radial Green Glow */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.2 }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-[#EFFC76]/8 rounded-full blur-[180px] pointer-events-none"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[950px] h-[450px] bg-[#EFFC76]/10 rounded-full blur-[190px] pointer-events-none"
       />
 
       {/* 10/12 Container Width */}
@@ -70,7 +70,7 @@ const Footer = () => {
           <motion.div variants={itemVariants} className="lg:col-span-4">
             <Link href="/main" className="inline-block text-2xl sm:text-3xl font-extrabold tracking-tight mb-4 group">
               <span className="text-white group-hover:text-gray-200 transition-colors">JEV</span>
-              <span className="text-[#EFFC76] group-hover:drop-shadow-[0_0_12px_#EFFC76] transition-all">XO</span>
+              <span className="text-[#EFFC76] drop-shadow-[0_0_12px_rgba(239,252,118,0.6)] group-hover:drop-shadow-[0_0_20px_#EFFC76] transition-all">XO</span>
             </Link>
 
             <p className="text-gray-400 text-xs sm:text-sm font-light leading-relaxed mb-6 max-w-sm">
@@ -189,7 +189,7 @@ const Footer = () => {
 
         </motion.div>
 
-        {/* Bottom Bar Container with Overlaid Giant Lowercase Watermark */}
+        {/* Bottom Bar Container */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -221,14 +221,14 @@ const Footer = () => {
 
       </div>
 
-      {/* Giant Lowercase Watermark Text Backdrop */}
-      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 pointer-events-none select-none w-full text-center z-0 overflow-hidden">
+      {/* Giant Lowercase Watermark Text Backdrop with High Contrast Glow */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none select-none w-full text-center z-0 overflow-hidden">
         <motion.h1
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[18vw] sm:text-[22vw] lg:text-[280px] font-black text-white/[0.035] leading-none tracking-tighter lowercase"
+          className="text-[18vw] sm:text-[20vw] lg:text-[250px] font-black leading-none tracking-tighter lowercase text-transparent bg-clip-text bg-gradient-to-b from-[#EFFC76]/20 via-white/10 to-transparent drop-shadow-[0_0_35px_rgba(239,252,118,0.15)]"
         >
           jevxo.
         </motion.h1>
