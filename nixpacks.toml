@@ -1,2 +1,8 @@
+[providers]
+node = "20"
+
+[build]
+cmds = ["npm run build:api"]
+
 [start]
-cmd = "npm run start"
+cmd = "npm run start:api"
