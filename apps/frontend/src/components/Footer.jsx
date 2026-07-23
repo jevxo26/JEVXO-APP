@@ -112,6 +112,7 @@ const Footer = () => {
                 { name: "Solutions Suite", href: "/main/solutions" },
                 { name: "SaaS Products", href: "/main/products" },
                 { name: "Industries", href: "/main/industries" },
+                { name: "Country Partner", href: "/main/country-sales-partner" },
                 { name: "Contact Us", href: "/main/contact" },
               ].map((link, idx) => (
                 <li key={idx}>

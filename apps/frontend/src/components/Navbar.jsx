@@ -33,9 +33,8 @@ const exploreCards = [
   { name: "Solutions", href: "/main/solutions", icon: Layers },
   { name: "Products", href: "/main/products", icon: Package },
   { name: "Industries", href: "/main/industries", icon: Building },
-  { name: "Partners", href: "/main/country-sales-partner", icon: Globe2 },
+  { name: "Country Partner", href: "/main/country-sales-partner", icon: Globe2 },
   { name: "Security", href: "/main/security", icon: ShieldCheck },
-  { name: "FAQ", href: "/main/faq", icon: HelpCircle },
   { name: "Contact", href: "/main/contact", icon: Mail },
 ];
 
