@@ -62,7 +62,7 @@ const infiniteTop = [...topRowTestimonials, ...topRowTestimonials, ...topRowTest
 const infiniteBottom = [...bottomRowTestimonials, ...bottomRowTestimonials, ...bottomRowTestimonials, ...bottomRowTestimonials];
 
 const TestimonialCardItem = ({ item }) => (
-  <div className="group relative flex-shrink-0 w-[300px] sm:w-[350px] rounded-2xl border border-[#EFFC76]/20 bg-[#071307] p-6 hover:border-[#EFFC76]/70 shadow-[0_10px_30px_rgba(0,0,0,0.8)] hover:shadow-[0_0_30px_rgba(239,252,118,0.25)] transition-all duration-300 flex flex-col justify-between cursor-pointer">
+  <div className="group relative flex-shrink-0 w-[300px] sm:w-[350px] rounded-2xl border border-[#EFFC76]/20 bg-[#071307] p-6 hover:border-[#EFFC76]/60 transition-colors duration-300 flex flex-col justify-between">
     <div>
       {/* 5 Stars Rating */}
       <div className="flex items-center gap-1 mb-4 text-[#EFFC76]">
@@ -92,7 +92,7 @@ const TestimonialCardItem = ({ item }) => (
 const Testimonial = () => {
   return (
     <section className="py-20 relative overflow-hidden text-white select-none">
-      {/* CSS Keyframes for GPU Hardware-Accelerated Continuous Marquee */}
+      {/* CSS Keyframes for GPU Hardware-Accelerated Continuous Non-Stop Marquee */}
       <style jsx global>{`
         @keyframes marqueeRightToLeft {
           0% {
@@ -111,21 +111,15 @@ const Testimonial = () => {
           }
         }
         .animate-marquee-rtl {
-          animation: marqueeRightToLeft 28s linear infinite;
+          animation: marqueeRightToLeft 48s linear infinite;
           will-change: transform;
         }
         .animate-marquee-ltr {
-          animation: marqueeLeftToRight 28s linear infinite;
+          animation: marqueeLeftToRight 48s linear infinite;
           will-change: transform;
-        }
-        .animate-marquee-rtl:hover,
-        .animate-marquee-ltr:hover {
-          animation-play-state: paused;
         }
       `}</style>
 
-      {/* Ambient background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#EFFC76]/5 rounded-full blur-[180px] pointer-events-none" />
 
       {/* Section Header */}
       <div className="w-10/12 mx-auto text-center mb-12 relative z-10">
@@ -146,8 +140,12 @@ const Testimonial = () => {
           transition={{ duration: 0.7 }}
           className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"
         >
-          What Our Clients Say
+          What Our{" "}
+          <span className="italic font-serif text-[#EFFC76] font-normal">
+            Clients Say
+          </span>
         </motion.h2>
+
 
         <motion.p
           initial={{ opacity: 0 }}
