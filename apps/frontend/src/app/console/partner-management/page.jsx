@@ -40,6 +40,7 @@ export default function PartnerManagementPage() {
   const [newPartner, setNewPartner] = useState({
     name: "",
     email: "",
+    password: "",
     country: "Bangladesh",
     commissionRate: "20",
     initialBalance: "0",
@@ -351,13 +352,24 @@ export default function PartnerManagementPage() {
                     </div>
 
                     <div>
-                      <label className="block text-gray-300 font-semibold mb-1.5">Email Address</label>
+                      <label className="block text-gray-300 font-semibold mb-1.5">Email Address (Login ID)</label>
                       <input
                         type="email"
                         placeholder="partner@company.com"
                         value={newPartner.email}
                         onChange={(e) => setNewPartner({ ...newPartner, email: e.target.value })}
                         className="w-full px-4 py-3 bg-[#020b02] border border-white/15 focus:border-[#EFFC76] rounded-xl text-sm text-white focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-300 font-semibold mb-1.5">Initial Password (for Partner Login)</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. PartnerPass123!"
+                        value={newPartner.password || ""}
+                        onChange={(e) => setNewPartner({ ...newPartner, password: e.target.value })}
+                        className="w-full px-4 py-3 bg-[#020b02] border border-white/15 focus:border-[#EFFC76] rounded-xl text-sm text-[#EFFC76] font-bold focus:outline-none"
                       />
                     </div>
 

@@ -189,10 +189,11 @@ export class PartnerService {
 
     const newPartner = {
       id: this.partners.length + 1,
-      name: dto.name || 'New Enterprise Partner',
-      email: dto.email || 'partner@jevxo.com',
-      country: dto.country || 'Bangladesh',
-      flag: flagsMap[dto.country] || '🌐',
+      name: dto.name ,
+      email: dto.email ,
+      password: dto.password ,
+      country: dto.country ,
+      flag: flagsMap[dto.country] ,
       commissionRate: dto.commissionRate ? `${dto.commissionRate}%` : '20%',
       status: 'active',
       totalSales: 0,

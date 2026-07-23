@@ -30,6 +30,7 @@ import {
   Wallet,
   TrendingDown,
   Trash2,
+  ShieldCheck,
 } from "lucide-react";
 
 export const mainNavItems = [

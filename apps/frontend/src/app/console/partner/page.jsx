@@ -244,6 +244,7 @@ export default function PartnerPanelPage() {
   const [addClientMutation, { isLoading: isAddClientLoading }] = useAddPartnerClientMutation();
   const [createWithdrawalMutation, { isLoading: isWithdrawLoading }] = useCreateWithdrawalRequestMutation();
 
+  const summary = summaryResp?.data || { availableBalance: "$4,250.00", activeClientsCount: 2, countryGrowthRate: "+34.5%" };
   const clientsList = (clientsResp?.data && clientsResp.data.length > 0) ? clientsResp.data : DEFAULT_CLIENTS;
   const withdrawalsList = (withdrawalsResp?.data && withdrawalsResp.data.length > 0) ? withdrawalsResp.data : DEFAULT_WITHDRAWALS;
   const marketingAssets = (assetsResp?.data && assetsResp.data.length > 0) ? assetsResp.data : DEFAULT_ASSETS;

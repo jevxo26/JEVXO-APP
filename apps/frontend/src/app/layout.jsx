@@ -124,20 +124,20 @@ export default function RootLayout({ children }) {
     ],
     sameAs: [
       "https://facebook.com/jevxo",
-      "https://instagram.com/jevxo26",
+      "https://instagram.com/jevxo",
       "https://linkedin.com/company/jevxo",
     ],
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${baiJamjuree.variable} antialiased`}>
+      <body className={`${baiJamjuree.variable} antialiased`} suppressHydrationWarning>
         <StoreProvider>
           <AuthProvider>
             {children}
