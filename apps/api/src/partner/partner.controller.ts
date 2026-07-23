@@ -1,20 +1,39 @@
-import { Controller, Get, Post, Patch, Delete, Body, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Body,
+  Param,
+  Query,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { PartnerService } from './partner.service';
 
 @Controller('partner')
 export class PartnerController {
   constructor(private readonly partnerService: PartnerService) {}
 
+  // --- PARTNER REGISTRATION ENDPOINT (TRANSACTIONAL POSTGRESQL) ---
+
+  @Post('register')
+  registerPartner(@Body() dto: any) {
+    return this.partnerService.createPartnerRegistration(dto);
+  }
+
+  @Post('create-partner')
+  createPartner(@Body() dto: any) {
+    return this.partnerService.createPartnerRegistration(dto);
+  }
+
   // --- ADMIN PARTNER MANAGEMENT ENDPOINTS ---
 
   @Get('all-partners')
   getAllPartners() {
     return this.partnerService.getAllPartners();
-  }
-
-  @Post('create-partner')
-  createPartner(@Body() dto: any) {
-    return this.partnerService.createPartner(dto);
   }
 
   @Patch(':id/status')
@@ -35,33 +54,39 @@ export class PartnerController {
   // --- PARTNER DASHBOARD ENDPOINTS ---
 
   @Get('dashboard')
-  getDashboardSummary() {
-    return this.partnerService.getDashboardSummary();
+  getDashboardSummary(@Request() req: any) {
+    const userId = req.user?.id;
+    return this.partnerService.getDashboardSummary(userId);
   }
 
   @Get('clients')
-  getClients() {
-    return this.partnerService.getClients();
+  getClients(@Request() req: any) {
+    const userId = req.user?.id;
+    return this.partnerService.getClients(userId);
   }
 
   @Post('clients')
-  addClient(@Body() dto: any) {
-    return this.partnerService.addClient(dto);
+  addClient(@Request() req: any, @Body() dto: any) {
+    const userId = req.user?.id || 1;
+    return this.partnerService.addClient(userId, dto);
   }
 
   @Get('commissions')
-  getCommissions() {
-    return this.partnerService.getCommissions();
+  getCommissions(@Request() req: any) {
+    const userId = req.user?.id;
+    return this.partnerService.getCommissions(userId);
   }
 
   @Post('withdraw')
-  createWithdrawal(@Body() dto: any) {
-    return this.partnerService.createWithdrawal(dto);
+  createWithdrawal(@Request() req: any, @Body() dto: any) {
+    const userId = req.user?.id || 1;
+    return this.partnerService.createWithdrawal(userId, dto);
   }
 
   @Get('withdrawals')
-  getWithdrawals() {
-    return this.partnerService.getWithdrawals();
+  getWithdrawals(@Request() req: any) {
+    const userId = req.user?.id;
+    return this.partnerService.getWithdrawals(userId);
   }
 
   @Get('marketing-assets')

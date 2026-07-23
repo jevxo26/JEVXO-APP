@@ -10,7 +10,7 @@ const getAuthToken = () => {
 export const partnerApi = createApi({
   reducerPath: 'partnerApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api',
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'https://api.jevxo.com/api',
     prepareHeaders: (headers) => {
       const token = getAuthToken();
       if (token) {
