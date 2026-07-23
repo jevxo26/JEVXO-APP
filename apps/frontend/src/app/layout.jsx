@@ -14,14 +14,22 @@ export const metadata = {
   description: "JEVXO - Next-Gen Software Solutions, Cloud Infrastructure & AI Systems",
 };
 
+import StoreProvider from "@/lib/StoreProvider";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { Toaster } from "sonner";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
         className={`${baiJamjuree.variable} antialiased`}
       >
-        {children}
-
+        <StoreProvider>
+          <AuthProvider>
+            {children}
+            <Toaster position="top-right" theme="dark" />
+          </AuthProvider>
+        </StoreProvider>
       </body>
     </html>
   );

@@ -7,7 +7,7 @@ export default function MainLayout({ children }) {
       <nav>
         <Navbar />
       </nav>
-      <main className="w-full px-4 md:px-8 lg:px-12 mx-auto">
+      <main className="w-full mx-auto">
         {children}
       </main>
       <footer>

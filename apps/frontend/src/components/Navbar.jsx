@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronUp,
+  ChevronDown,
   Plus,
   Home,
   Info,
@@ -22,8 +23,13 @@ import {
   Globe2,
   Building,
   Package,
+  User,
+  LogOut,
+  LayoutDashboard,
+  Settings,
 } from "lucide-react";
 import AppointmentModal from "@/components/Home/AppointmentModal";
+import { useAuth } from "@/contexts/AuthContext";
 
 const exploreCards = [
   { name: "Home", href: "/main", icon: Home },
@@ -38,11 +44,44 @@ const exploreCards = [
   { name: "Contact", href: "/main/contact", icon: Mail },
 ];
 
+const UserAvatar = ({ user, size = "w-8 h-8", iconSize = 15 }) => {
+  const [imgError, setImgError] = useState(false);
+  const initials = [user?.firstName?.[0], user?.lastName?.[0]].filter(Boolean).join("").toUpperCase() || user?.name?.[0]?.toUpperCase() || "U";
+  const isDummyUrl = user?.profileImage?.includes("example.com");
+  const showImage = user?.profileImage && !imgError && !isDummyUrl;
+
+  return (
+    <div className={`relative ${size} rounded-full shrink-0 flex items-center justify-center`}>
+      {showImage ? (
+        <img
+          src={user.profileImage}
+          alt={user?.firstName || "Profile"}
+          className={`${size} rounded-full object-cover border border-[#EFFC76]/70 shadow-sm`}
+          onError={() => setImgError(true)}
+        />
+      ) : (
+        <div className={`${size} rounded-full bg-gradient-to-tr from-[#0d1e0d] via-[#1a3a1a] to-[#2e522e] border border-[#EFFC76]/70 flex items-center justify-center shadow-inner`}>
+          {initials ? (
+            <span className="text-[11px] font-mono font-black text-[#EFFC76] tracking-wider leading-none">
+              {initials}
+            </span>
+          ) : (
+            <User size={iconSize} className="text-[#EFFC76]" />
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Navbar = () => {
   const pathname = usePathname();
+  const { user, isAuthenticated, logout } = useAuth();
   const [isExploreOpen, setIsExploreOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const exploreRef = useRef(null);
+  const profileRef = useRef(null);
   const hoverTimeoutRef = useRef(null);
 
   const handleMouseEnter = () => {
@@ -56,11 +95,14 @@ const Navbar = () => {
     }, 250);
   };
 
-  // Close explore popup on click outside
+  // Close explore and profile popups on click outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (exploreRef.current && !exploreRef.current.contains(e.target)) {
         setIsExploreOpen(false);
+      }
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setIsProfileOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -271,23 +313,110 @@ const Navbar = () => {
             <motion.div whileHover={{ scale: 1.06 }} className="hidden sm:flex items-center justify-center px-4 py-2.5 rounded-full bg-[#0d1e0d] border border-[#EFFC76]/30 text-xs font-mono font-bold text-[#EFFC76] hover:border-[#EFFC76]/60 hover:text-white hover:bg-[#EFFC76]/20 transition-all cursor-default">
               EN
             </motion.div>
+
+            {/* User Profile Pill & Professional Menu */}
+            {isAuthenticated && user ? (
+              <div className="relative" ref={profileRef}>
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => setIsProfileOpen((prev) => !prev)}
+                  className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-[#051405]/90 border border-[#EFFC76]/50 hover:border-[#EFFC76] text-xs font-mono font-bold text-white transition-all cursor-pointer shadow-[0_0_25px_rgba(239,252,118,0.25)] hover:shadow-[0_0_35px_rgba(239,252,118,0.45)] backdrop-blur-md"
+                >
+                  {/* Avatar with Online Status Indicator */}
+                  <div className="relative shrink-0">
+                    <UserAvatar user={user} size="w-8 h-8" iconSize={15} />
+                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-[#051405] rounded-full shadow-[0_0_8px_#34d399] z-10" />
+                  </div>
+
+                  {/* Name & Role Tag */}
+                  <div className="flex flex-col items-start text-left pr-1">
+                    <span className="text-[12px] font-bold text-white tracking-tight leading-tight max-w-[130px] truncate">
+                      {[user.firstName, user.lastName].filter(Boolean).join(" ") || user.name || user.email}
+                    </span>
+                    <span className="text-[9px] font-mono font-semibold text-[#EFFC76]/80 uppercase tracking-wider">
+                      {user.role || user.position || "Member"}
+                    </span>
+                  </div>
+
+                  <ChevronDown
+                    size={14}
+                    className={`text-[#EFFC76] transition-transform duration-300 ${isProfileOpen ? "rotate-180 text-white" : ""}`}
+                  />
+                </motion.div>
+
+                {/* Professional Profile Dropdown Menu (Opens Upward) */}
+                <AnimatePresence>
+                  {isProfileOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 12, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="absolute right-0 bottom-full mb-3 w-72 bg-[#040e04]/95 border border-[#EFFC76]/40 rounded-2xl p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.95),0_0_30px_rgba(239,252,118,0.2)] backdrop-blur-2xl z-50 overflow-hidden"
+                    >
+                      {/* Header Info */}
+                      <div className="flex items-center gap-3 pb-3 mb-3 border-b border-white/10">
+                        <UserAvatar user={user} size="w-11 h-11" iconSize={20} />
+                        <div className="overflow-hidden text-left">
+                          <h4 className="text-sm font-bold text-white truncate">
+                            {[user.firstName, user.lastName].filter(Boolean).join(" ") || user.email}
+                          </h4>
+                          <p className="text-[11px] text-gray-400 font-mono truncate">{user.email}</p>
+                          {user.department?.name && (
+                            <span className="inline-block mt-1 px-2 py-0.5 rounded-full bg-[#EFFC76]/10 border border-[#EFFC76]/30 text-[9px] text-[#EFFC76] font-mono">
+                              {user.department.name}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Quick Actions */}
+                      <div className="space-y-1">
+                        <Link
+                          href="/console"
+                          onClick={() => setIsProfileOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#EFFC76]/15 border border-transparent hover:border-[#EFFC76]/40 text-xs font-mono font-bold text-white transition-all group"
+                        >
+                          <LayoutDashboard size={16} className="text-[#EFFC76] group-hover:scale-110 transition-transform" />
+                          <span>Console Dashboard</span>
+                        </Link>
+
+                        <Link
+                          href="/console/settings"
+                          onClick={() => setIsProfileOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 text-xs font-mono font-medium text-gray-300 hover:text-white transition-all group"
+                        >
+                          <Settings size={16} className="text-gray-400 group-hover:text-[#EFFC76] transition-colors" />
+                          <span>Account Settings</span>
+                        </Link>
+                      </div>
+
+                      {/* Logout Action */}
+                      <div className="pt-3 mt-3 border-t border-white/10">
+                        <button
+                          onClick={() => {
+                            setIsProfileOpen(false);
+                            logout();
+                          }}
+                          className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 hover:border-red-500/60 text-red-400 hover:text-red-300 text-xs font-mono font-bold transition-all shadow-sm group"
+                        >
+                          <LogOut size={15} className="group-hover:-translate-x-0.5 transition-transform" />
+                          <span>Sign Out</span>
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <Link href="/main/login">
+                <motion.div whileHover={{ scale: 1.06 }} className="flex items-center justify-center px-6 py-2.5 rounded-full bg-[#0d1e0d] border border-[#EFFC76]/50 text-xs font-mono font-bold text-[#EFFC76] hover:border-[#EFFC76] hover:text-black hover:bg-[#EFFC76] transition-all cursor-pointer shadow-[0_0_20px_rgba(239,252,118,0.3)]">
+                  Login
+                </motion.div>
+              </Link>
+            )}
           </nav>
-
-          {/* Divider */}
-          <div className="h-6 w-[1px] bg-[#EFFC76]/30" />
-
-          {/* 3. Right Action Button: + Start Project */}
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsModalOpen(true)}
-            className="bg-[#EFFC76] hover:bg-[#f3ff8c] text-black font-black text-xs sm:text-sm px-6 py-2.5 rounded-full flex items-center gap-1.5 transition-all duration-300 shadow-[0_0_30px_rgba(239,252,118,0.75)] hover:shadow-[0_0_45px_rgba(239,252,118,0.95)] shrink-0"
-          >
-            <Plus size={16} className="stroke-[3]" />
-            <span className="hidden sm:inline">Start Project</span>
-            <span className="sm:hidden">Start</span>
-          </motion.button>
-
         </div>
       </motion.div>
 

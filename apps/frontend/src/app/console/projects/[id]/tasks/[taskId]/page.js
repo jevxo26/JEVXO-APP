@@ -1,0 +1,609 @@
+"use client";
+
+import React, { useState, use, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Calendar,
+  CheckCircle2,
+  Clock,
+  MessageSquare,
+  MoreVertical,
+  Plus,
+  Send,
+  Tag,
+  Trash2,
+  User,
+  Users,
+  Briefcase,
+  Layout,
+  Layers,
+  FileText,
+  Activity,
+  CalendarDays,
+  Gavel,
+} from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import {
+  useGetTaskByIdQuery,
+  useUpdateTaskMutation,
+} from "@/api/admin/projects/tasksApi";
+import { useCreateTaskCommentMutation } from "@/api/admin/projects/taskCommentsApi";
+import { useGetOurTeamQuery } from "@/api/admin/our-team/ourTeamApi";
+import { useGetDepartmentsQuery } from "@/api/landing/department/departmentApi";
+import CreateDeductionDialog from "@/components/admin/payroll/CreateDeductionDialog";
+import { toast } from "sonner";
+import AppLayout from "@/components/layout/AppLayout";
+import PrivateRoute from "@/components/auth/PrivateRoute";
+
+const priorities = [
+  { value: "high", label: "High", color: "text-red-400 bg-red-400/10" },
+  {
+    value: "medium",
+    label: "Medium",
+    color: "text-orange-400 bg-orange-400/10",
+  },
+  { value: "low", label: "Low", color: "text-green-400 bg-green-400/10" },
+];
+
+export default function TaskDetailsPage({ params }) {
+  const router = useRouter();
+  const { id: projectId, taskId } = use(params);
+  const {
+    data: taskResponse,
+    isLoading,
+    error,
+  } = useGetTaskByIdQuery(Number(taskId));
+  const [updateTask, { isLoading: isUpdating }] = useUpdateTaskMutation();
+  const [createTaskComment, { isLoading: isCreatingComment }] =
+    useCreateTaskCommentMutation();
+
+  // Fetch team members and departments
+  const { data: teamMembersResponse } = useGetOurTeamQuery();
+  const { data: departmentsResponse } = useGetDepartmentsQuery();
+
+  // Extract data from API responses
+  const task = Array.isArray(taskResponse)
+    ? taskResponse[0]
+    : taskResponse?.data || taskResponse;
+
+  const teamMembers = Array.isArray(teamMembersResponse)
+    ? teamMembersResponse
+    : teamMembersResponse?.data || [];
+
+  const departments = Array.isArray(departmentsResponse)
+    ? departmentsResponse
+    : departmentsResponse?.data || [];
+
+  const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState([]);
+  const [localTitle, setLocalTitle] = useState("");
+  const [localDescription, setLocalDescription] = useState("");
+  const [isDeductionDialogOpen, setIsDeductionDialogOpen] = useState(false);
+
+  // Update local state when task data changes
+  useEffect(() => {
+    if (task) {
+      setLocalTitle(task.title || "");
+      setLocalDescription(task.description || task.desc || "");
+      if (task?.comments && Array.isArray(task.comments)) {
+        setComments(task.comments);
+      }
+    }
+  }, [task]);
+
+  // Create assignees list from team members (format: initials)
+  const availableMembers = React.useMemo(() => {
+    return teamMembers.map((member) => {
+      const initials =
+        (member.firstName?.[0] || "") + (member.lastName?.[0] || "") || "TM";
+      return {
+        id: member.id,
+        initials,
+        name: `${member.firstName} ${member.lastName}`,
+        fullName: `${member.firstName} ${member.lastName}`,
+      };
+    });
+  }, [teamMembers]);
+
+  // Create teams list from departments (department names)
+  const teamsList = React.useMemo(() => {
+    return departments.map((dept) => dept.name);
+  }, [departments]);
+
+  // Get current assignees as initials array
+  const currentAssignees = React.useMemo(() => {
+    if (!task?.assignees || !Array.isArray(task.assignees)) return [];
+    return task.assignees;
+  }, [task]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-black text-white p-4 md:p-8 flex items-center justify-center">
+        <div className="text-white/60">Loading task...</div>
+      </div>
+    );
+  }
+
+  if (error || !task) {
+    return (
+      <div className="min-h-screen bg-black text-white p-4 md:p-8 flex items-center justify-center">
+        <div className="text-red-400">Failed to load task</div>
+      </div>
+    );
+  }
+
+  const handlePriorityChange = async (value) => {
+    try {
+      await updateTask({
+        id: Number(taskId),
+        priority: value,
+        projectId: Number(projectId),
+      }).unwrap();
+      toast.success("Priority updated");
+    } catch (error) {
+      console.error("Failed to update priority:", error);
+      toast.error("Failed to update priority");
+    }
+  };
+
+  const handleStatusChange = async (status) => {
+    try {
+      await updateTask({
+        id: Number(taskId),
+        status,
+        projectId: Number(projectId),
+      }).unwrap();
+      toast.success("Status updated");
+    } catch (error) {
+      console.error("Failed to update status:", error);
+      toast.error("Failed to update status");
+    }
+  };
+
+  const handleAddComment = async () => {
+    if (!newComment.trim()) return;
+
+    try {
+      const result = await createTaskComment({
+        taskId: Number(taskId),
+        author: "You", // TODO: Get from auth context
+        content: newComment.trim(),
+      }).unwrap();
+
+      setComments((prev) => [...prev, result]);
+      setNewComment("");
+      toast.success("Comment added");
+    } catch (error) {
+      console.error("Failed to add comment:", error);
+      toast.error("Failed to add comment");
+    }
+  };
+
+  const handleToggleAssignee = async (initials) => {
+    const isAssigned = currentAssignees.includes(initials);
+    const newAssignees = isAssigned
+      ? currentAssignees.filter((a) => a !== initials)
+      : [...currentAssignees, initials];
+
+    try {
+      await updateTask({
+        id: Number(taskId),
+        assignees: newAssignees,
+        projectId: Number(projectId),
+      }).unwrap();
+      toast.success(isAssigned ? "Assignee removed" : "Assignee added");
+    } catch (error) {
+      console.error("Failed to update assignees:", error);
+      toast.error("Failed to update assignees");
+    }
+  };
+
+  const currentPriority =
+    priorities.find((p) => p.value === task.priority) || priorities[2];
+
+  return (
+    <PrivateRoute>
+      <AppLayout>
+      <div className="min-h-screen text-white p-4 md:p-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="max-w-7xl mx-auto space-y-8"
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between gap-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => router.back()}
+              className="text-white/70 hover:text-[#EFFC76] hover:bg-white/5"
+            >
+              <ArrowLeft className="w-5 h-5 mr-2" />
+              Back to Board
+            </Button>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsDeductionDialogOpen(true)}
+              className="border-rose-500/20 text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors"
+            >
+              <Gavel className="w-4 h-4 mr-2" />
+              Apply Penalty
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-8 space-y-8">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 space-y-8">
+                {/* Title & Description */}
+                <div className="space-y-6">
+                  <Input
+                    value={localTitle}
+                    onChange={(e) => setLocalTitle(e.target.value)}
+                    onBlur={async (e) => {
+                      if (e.target.value !== task.title) {
+                        try {
+                          await updateTask({
+                            id: Number(taskId),
+                            title: e.target.value,
+                            projectId: Number(projectId),
+                          }).unwrap();
+                        } catch (error) {
+                          console.error("Failed to update title:", error);
+                          setLocalTitle(task.title || "");
+                        }
+                      }
+                    }}
+                    className="text-3xl font-bold bg-transparent border-none p-0 h-auto focus-visible:ring-0 placeholder:text-white/20"
+                    placeholder="Task Title"
+                    disabled={isUpdating}
+                  />
+                  <div className="space-y-2">
+                    <label className="text-sm text-white/50 font-medium ml-1">
+                      Description
+                    </label>
+                    <Textarea
+                      value={localDescription}
+                      onChange={(e) => setLocalDescription(e.target.value)}
+                      onBlur={async (e) => {
+                        if (e.target.value !== (task.description || task.desc)) {
+                          try {
+                            await updateTask({
+                              id: Number(taskId),
+                              description: e.target.value,
+                              projectId: Number(projectId),
+                            }).unwrap();
+                          } catch (error) {
+                            console.error("Failed to update description:", error);
+                            setLocalDescription(
+                              task.description || task.desc || "",
+                            );
+                          }
+                        }
+                      }}
+                      className="bg-white/5 border-white/10 min-h-[150px] resize-none focus-visible:ring-[#EFFC76]/50 text-white"
+                      placeholder="Add a more detailed description..."
+                      disabled={isUpdating}
+                    />
+                  </div>
+                </div>
+
+                <Separator className="bg-white/10" />
+
+                {/* Comments */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 text-lg font-semibold pb-2">
+                    <MessageSquare className="w-5 h-5 text-[#EFFC76]" />
+                    <h3>Comments</h3>
+                    <span className="text-sm text-white/50 bg-white/10 px-2 py-0.5 rounded-full">
+                      {comments.length}
+                    </span>
+                  </div>
+
+                  <div className="space-y-4">
+                    {comments.length === 0 ? (
+                      <p className="text-sm text-white/50">
+                        No comments yet. Start the discussion.
+                      </p>
+                    ) : (
+                      comments.map((comment) => {
+                        const authorName = comment.author || "Unknown";
+                        const initials =
+                          authorName
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")
+                            .toUpperCase() || "U";
+                        return (
+                          <div key={comment.id} className="flex gap-4 group">
+                            <Avatar className="w-8 h-8 border border-white/20">
+                              <AvatarFallback className="bg-[#EFFC76]/10 text-[#EFFC76] text-xs">
+                                {initials}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1 space-y-1">
+                              <div className="flex items-center justify-between">
+                                <span className="font-medium text-sm">
+                                  {authorName}
+                                </span>
+                                {comment.createdAt && (
+                                  <span className="text-xs text-white/40">
+                                    {new Date(
+                                      comment.createdAt,
+                                    ).toLocaleDateString()}
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-sm text-white/80 bg-white/5 p-3 rounded-lg rounded-tl-none border border-white/5">
+                                {comment.content || comment.text}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <Avatar className="w-8 h-8">
+                      <AvatarFallback className="bg-white/10 text-white/50">
+                        YO
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 gap-2 flex flex-col">
+                      <Textarea
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                        placeholder="Write a comment..."
+                        className="min-h-[80px] bg-white/5 border-white/10 focus-visible:ring-[#EFFC76]/50 text-white"
+                      />
+                      <div className="flex justify-end">
+                        <Button
+                          onClick={handleAddComment}
+                          className="bg-[#EFFC76] text-black hover:bg-[#dce865]"
+                          size="sm"
+                          disabled={!newComment.trim() || isCreatingComment}
+                        >
+                          <Send className="w-4 h-4 mr-2" />
+                          {isCreatingComment ? "Adding..." : "Comment"}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="lg:col-span-4 space-y-6">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sticky top-6">
+                <div className="grid grid-cols-2 gap-6">
+                  {/* Status */}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-medium text-white/60 mb-1 uppercase tracking-wider">
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span>Status</span>
+                    </div>
+                    <Select
+                      value={task.status || "todo"}
+                      onValueChange={handleStatusChange}
+                      disabled={isUpdating}
+                    >
+                      <SelectTrigger className="bg-white/5 border-white/10 focus:ring-[#EFFC76]/50 h-10">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-[#1a1a1a] border-white/10 text-white">
+                        {[
+                          "To-Do",
+                          "In Progress",
+                          "Review",
+                          "Complete",
+                          "Brief",
+                          "In Design",
+                        ].map((status) => (
+                          <SelectItem key={status} value={status}>
+                            {status}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Priority */}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-medium text-white/60 mb-1 uppercase tracking-wider">
+                      <Tag className="w-3.5 h-3.5" />
+                      <span>Priority</span>
+                    </div>
+                    <Select
+                      value={task.priority || "medium"}
+                      onValueChange={handlePriorityChange}
+                      disabled={isUpdating}
+                    >
+                      <SelectTrigger className="bg-white/5 border-white/10 focus:ring-[#EFFC76]/50 h-10">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-[#1a1a1a] border-white/10 text-white">
+                        {priorities.map((p) => (
+                          <SelectItem key={p.value} value={p.value}>
+                            <div className="flex items-center gap-2">
+                              <div
+                                className={`w-2 h-2 rounded-full ${p.color.split(" ")[0]}`}
+                              />
+                              {p.label}
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Team */}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-medium text-white/60 mb-1 uppercase tracking-wider">
+                      <Briefcase className="w-3.5 h-3.5" />
+                      <span>Team</span>
+                    </div>
+                    <Select
+                      value={task.team}
+                      onValueChange={async (value) => {
+                         try {
+                           await updateTask({
+                             id: Number(taskId),
+                             team: value,
+                             projectId: Number(projectId),
+                           }).unwrap();
+                           toast.success("Team updated");
+                         } catch (error) {
+                           console.error("Failed to update team:", error);
+                           toast.error("Failed to update team");
+                         }
+                      }}
+                      disabled={isUpdating}
+                    >
+                      <SelectTrigger className="bg-white/5 border-white/10 focus:ring-[#EFFC76]/50 h-10">
+                        <SelectValue placeholder="Select Team" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-[#1a1a1a] border-white/10 text-white">
+                        {teamsList.map((team) => (
+                          <SelectItem key={team} value={team}>
+                            {team}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Due Date */}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-medium text-white/60 mb-1 uppercase tracking-wider">
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span>Due Date</span>
+                    </div>
+                    <Input
+                      type="date"
+                      value={
+                        task.dueDate
+                          ? new Date(task.dueDate).toISOString().split("T")[0]
+                          : ""
+                      }
+                      onChange={async (e) => {
+                        try {
+                          await updateTask({
+                            id: Number(taskId),
+                            dueDate: e.target.value,
+                            projectId: Number(projectId),
+                          }).unwrap();
+                          toast.success("Due date updated");
+                        } catch (error) {
+                          console.error("Failed to update due date:", error);
+                          toast.error("Failed to update due date");
+                        }
+                      }}
+                      className="bg-white/5 border-white/10 text-white [color-scheme:dark] h-10"
+                      disabled={isUpdating}
+                    />
+                  </div>
+                </div>
+
+                <Separator className="bg-white/10 my-6" />
+
+                {/* Assignees - Spanning full width */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-xs font-medium text-white/60 mb-1 uppercase tracking-wider">
+                    <div className="flex items-center gap-2">
+                      <Users className="w-3.5 h-3.5" />
+                      <span>Assignees</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {currentAssignees.map((assigneeInitials) => {
+                      const member = availableMembers.find(
+                        (m) => m.initials === assigneeInitials,
+                      );
+                      return (
+                        <div
+                          key={assigneeInitials}
+                          className="flex items-center gap-1.5 bg-white/10 pr-2 pl-1 py-1 rounded-full border border-white/10 group hover:bg-white/20 transition-colors"
+                        >
+                          <Avatar className="w-6 h-6">
+                            <AvatarFallback className="text-[10px] bg-[#EFFC76]/20 text-[#EFFC76]">
+                              {assigneeInitials}
+                            </AvatarFallback>
+                          </Avatar>
+                          <span className="text-xs" title={member?.fullName}>
+                            {assigneeInitials}
+                          </span>
+                          <button
+                            onClick={() =>
+                              handleToggleAssignee(assigneeInitials)
+                            }
+                            className="hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                            disabled={isUpdating}
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </button>
+                        </div>
+                      );
+                    })}
+                    <Select
+                      onValueChange={handleToggleAssignee}
+                      disabled={isUpdating}
+                    >
+                      <SelectTrigger className="w-8 h-8 rounded-full p-0 bg-transparent border-dashed border-white/30 hover:border-[#EFFC76] text-white/50 hover:text-[#EFFC76] flex items-center justify-center transition-colors">
+                        <Plus className="w-4 h-4" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-[#1a1a1a] border-white/10 text-white">
+                        {availableMembers
+                          .filter((m) => !currentAssignees.includes(m.initials))
+                          .map((member) => (
+                            <SelectItem
+                              key={member.id}
+                              value={member.initials}
+                              title={member.fullName}
+                            >
+                              {member.initials} - {member.name}
+                            </SelectItem>
+                          ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                
+                <div className="text-xs text-white/30 text-center pt-4 border-t border-white/10 mt-6">
+                  Task created on {new Date(task.createdAt || Date.now()).toLocaleDateString()}
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      <CreateDeductionDialog
+        open={isDeductionDialogOpen}
+        onOpenChange={setIsDeductionDialogOpen}
+        prefilledProjectId={Number(projectId)}
+        prefilledTaskId={Number(taskId)}
+        prefilledType="PROJECT_PENALTY"
+      />
+    </AppLayout>
+    </PrivateRoute>
+  );
+}
