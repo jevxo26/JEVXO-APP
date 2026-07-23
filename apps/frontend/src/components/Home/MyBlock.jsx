@@ -96,8 +96,9 @@ export function MyBlock({ cards = defaultCards }) {
         return (
           <div
             key={card.id || idx}
-            className="sticky top-28 w-full min-h-[460px] pb-16"
+            className="sticky w-full min-h-[380px] pb-10"
             style={{
+              top: `${100 + Math.min(idx * 8, 40)}px`,
               zIndex: idx + 1,
             }}
           >

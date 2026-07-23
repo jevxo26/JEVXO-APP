@@ -18,10 +18,35 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-bai-jamjuree), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Ultra-Smooth Neon Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050508;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #232b0f;
+  border-radius: 9999px;
+  border: 2px solid #050508;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #EFFC76;
 }
 
 /* Bai Jamjuree: CSS classes */

@@ -124,7 +124,7 @@ const Navbar = () => {
             <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/main/case-studies"
-                className={`px-4 py-2 rounded-full border transition-all duration-300 font-extrabold block ${
+                className={`px-5 py-2.5 rounded-full border transition-all duration-300 font-extrabold block ${
                   isActive("/main/case-studies")
                     ? "text-black bg-[#EFFC76] border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.85)] scale-105"
                     : "text-gray-200 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/20 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
@@ -138,7 +138,7 @@ const Navbar = () => {
             <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/main/services"
-                className={`px-4 py-2 rounded-full border transition-all duration-300 font-extrabold block ${
+                className={`px-5 py-2.5 rounded-full border transition-all duration-300 font-extrabold block ${
                   isActive("/main/services")
                     ? "text-black bg-[#EFFC76] border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.85)] scale-105"
                     : "text-gray-200 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/20 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
@@ -152,7 +152,7 @@ const Navbar = () => {
             <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/main/solutions"
-                className={`px-4 py-2 rounded-full border transition-all duration-300 font-extrabold block ${
+                className={`px-5 py-2.5 rounded-full border transition-all duration-300 font-extrabold block ${
                   isActive("/main/solutions")
                     ? "text-black bg-[#EFFC76] border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.85)] scale-105"
                     : "text-gray-200 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/20 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
@@ -223,18 +223,18 @@ const Navbar = () => {
                           <Link
                             href={card.href}
                             onClick={() => setIsExploreOpen(false)}
-                            className={`group flex flex-col items-center justify-center w-[64px] sm:w-[74px] h-[74px] sm:h-[84px] rounded-2xl p-1.5 border transition-all duration-300 shadow-2xl ${
+                            className={`group flex flex-col items-center justify-center w-[68px] sm:w-[78px] h-[78px] sm:h-[88px] rounded-2xl sm:rounded-3xl p-2 border transition-all duration-300 shadow-2xl ${
                               active
                                 ? "bg-[#EFFC76] text-black border-[#EFFC76] shadow-[0_0_30px_rgba(239,252,118,0.95)] ring-2 ring-[#EFFC76] font-black scale-110"
-                                : "bg-[#040e04]/90 backdrop-blur-2xl text-gray-200 border-[#EFFC76]/35 hover:border-[#EFFC76] hover:bg-[#EFFC76] hover:text-black shadow-[0_10px_25px_rgba(0,0,0,0.85),0_0_15px_rgba(239,252,118,0.2)] hover:shadow-[0_0_30px_rgba(239,252,118,0.7)]"
+                                : "bg-[#040e04]/94 backdrop-blur-2xl text-gray-200 border-[#EFFC76]/35 hover:border-[#EFFC76] hover:bg-[#EFFC76] hover:text-black shadow-[0_10px_25px_rgba(0,0,0,0.85),0_0_15px_rgba(239,252,118,0.2)] hover:shadow-[0_0_30px_rgba(239,252,118,0.7)]"
                             }`}
                           >
-                            <div className={`p-1.5 rounded-xl mb-1 transition-all ${
+                            <div className={`p-2 rounded-xl mb-1 transition-all ${
                               active 
                                 ? "bg-black text-[#EFFC76]" 
                                 : "bg-white/10 border border-[#EFFC76]/30 text-[#EFFC76] group-hover:bg-black group-hover:text-[#EFFC76] group-hover:scale-110"
                             }`}>
-                              <Icon size={16} className="stroke-[2.5]" />
+                              <Icon size={18} className="stroke-[2.5]" />
                             </div>
                             <span className={`text-[8.5px] sm:text-[9.5px] font-mono leading-tight text-center line-clamp-1 ${
                               active ? "font-black text-black" : "font-extrabold text-gray-200 group-hover:text-black"
@@ -253,9 +253,9 @@ const Navbar = () => {
                 whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsExploreOpen((prev) => !prev)}
-                className={`px-4.5 py-2 rounded-full border transition-all duration-300 flex items-center gap-1.5 font-extrabold ${
+                className={`px-5 py-2.5 rounded-full border transition-all duration-300 flex items-center gap-1.5 font-extrabold ${
                   isExploreOpen || isAnyExploreActive
-                    ? "bg-[#EFFC76] text-black border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.75)]"
+                    ? "bg-[#EFFC76] text-black border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.85)]"
                     : "border-[#EFFC76]/40 bg-[#0d1e0d] hover:border-[#EFFC76] hover:bg-[#EFFC76]/20 hover:text-[#EFFC76] text-white shadow-[0_0_15px_rgba(239,252,118,0.15)] hover:shadow-[0_0_20px_rgba(239,252,118,0.3)]"
                 }`}
               >
@@ -268,7 +268,7 @@ const Navbar = () => {
             </div>
 
             {/* Language Badge */}
-            <motion.div whileHover={{ scale: 1.06 }} className="hidden sm:flex items-center justify-center px-3.5 py-1.5 rounded-full bg-[#0d1e0d] border border-[#EFFC76]/30 text-xs font-mono font-bold text-[#EFFC76] hover:border-[#EFFC76]/60 hover:text-white hover:bg-[#EFFC76]/20 transition-all cursor-default">
+            <motion.div whileHover={{ scale: 1.06 }} className="hidden sm:flex items-center justify-center px-4 py-2.5 rounded-full bg-[#0d1e0d] border border-[#EFFC76]/30 text-xs font-mono font-bold text-[#EFFC76] hover:border-[#EFFC76]/60 hover:text-white hover:bg-[#EFFC76]/20 transition-all cursor-default">
               EN
             </motion.div>
           </nav>
@@ -281,7 +281,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsModalOpen(true)}
-            className="bg-[#EFFC76] hover:bg-[#f3ff8c] text-black font-black text-xs sm:text-sm px-6 py-2.5 rounded-full flex items-center gap-1.5 transition-all duration-300 shadow-[0_0_30px_rgba(239,252,118,0.65)] hover:shadow-[0_0_40px_rgba(239,252,118,0.85)] shrink-0"
+            className="bg-[#EFFC76] hover:bg-[#f3ff8c] text-black font-black text-xs sm:text-sm px-6 py-2.5 rounded-full flex items-center gap-1.5 transition-all duration-300 shadow-[0_0_30px_rgba(239,252,118,0.75)] hover:shadow-[0_0_45px_rgba(239,252,118,0.95)] shrink-0"
           >
             <Plus size={16} className="stroke-[3]" />
             <span className="hidden sm:inline">Start Project</span>
