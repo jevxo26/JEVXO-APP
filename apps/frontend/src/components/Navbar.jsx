@@ -16,18 +16,27 @@ import {
   Zap,
   UserCheck,
   UserPlus,
-  LogIn,
+  Layers,
+  Sparkles,
+  HelpCircle,
+  Globe2,
+  Building,
+  Package,
 } from "lucide-react";
 import AppointmentModal from "@/components/Home/AppointmentModal";
 
 const exploreCards = [
-  { name: "Home", href: "/", icon: Home },
-  { name: "About", href: "/about", icon: Info },
-  { name: "Career", href: "/contact", icon: Briefcase },
-  { name: "Contact", href: "/contact", icon: Mail },
-  { name: "Verified Ads Acc", href: "/services", icon: UserCheck },
-  { name: "Security", href: "/security", icon: ShieldCheck },
-  { name: "Sign Up", href: "/contact", icon: UserPlus },
+  { name: "Home", href: "/main", icon: Home },
+  { name: "About", href: "/main/about", icon: Info },
+  { name: "Projects", href: "/main/case-studies", icon: Briefcase },
+  { name: "Services", href: "/main/services", icon: Zap },
+  { name: "Solutions", href: "/main/solutions", icon: Layers },
+  { name: "Products", href: "/main/products", icon: Package },
+  { name: "Industries", href: "/main/industries", icon: Building },
+  { name: "Partners", href: "/main/country-sales-partner", icon: Globe2 },
+  { name: "Security", href: "/main/security", icon: ShieldCheck },
+  { name: "FAQ", href: "/main/faq", icon: HelpCircle },
+  { name: "Contact", href: "/main/contact", icon: Mail },
 ];
 
 const Navbar = () => {
@@ -60,9 +69,15 @@ const Navbar = () => {
   }, []);
 
   const isActive = (path) => {
-    if (path === "/") return pathname === "/";
-    return pathname?.startsWith(path);
+    if (!pathname) return false;
+    if (path === "/main" || path === "/") {
+      return pathname === "/" || pathname === "/main";
+    }
+    // Match exact path or subroutes (e.g. /main/services/web-development matches /main/services)
+    return pathname === path || pathname.startsWith(`${path}/`);
   };
+
+  const isAnyExploreActive = exploreCards.some((card) => isActive(card.href));
 
   return (
     <>
@@ -74,12 +89,12 @@ const Navbar = () => {
         className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[96vw] select-none"
       >
         {/* Main Dock Container Bar (Ultra-Premium Glassmorphism & Neon Aura) */}
-        <div className="bg-[#040c04]/92 backdrop-blur-2xl border border-[#EFFC76]/50 rounded-full px-5 sm:px-8 py-3.5 flex items-center gap-3 sm:gap-5 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_30px_rgba(239,252,118,0.2)] hover:shadow-[0_0_45px_rgba(239,252,118,0.35)] hover:border-[#EFFC76] transition-all duration-500">
+        <div className="bg-[#040c04]/94 backdrop-blur-2xl border border-[#EFFC76]/50 rounded-full px-5 sm:px-8 py-3.5 flex items-center gap-3 sm:gap-5 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_30px_rgba(239,252,118,0.25)] hover:shadow-[0_0_45px_rgba(239,252,118,0.4)] hover:border-[#EFFC76] transition-all duration-500">
           
           {/* 1. Left Logo Badge */}
           <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
             <Link
-              href="/"
+              href="/main"
               className="bg-[#0b1b0b] border border-[#EFFC76]/45 hover:border-[#EFFC76] hover:bg-[#122812] px-4 py-2 rounded-full flex items-center gap-2.5 text-white font-extrabold text-xs sm:text-sm shadow-[0_0_15px_rgba(239,252,118,0.25)] transition-all duration-300 group"
             >
               <div className="relative w-5 h-5 rounded-full overflow-hidden shrink-0 bg-black/50 border border-[#EFFC76]/50 flex items-center justify-center">
@@ -109,11 +124,11 @@ const Navbar = () => {
             {/* Projects Link */}
             <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href="/case-studies"
-                className={`px-4 py-2 rounded-full border transition-all duration-300 font-bold block ${
-                  isActive("/case-studies")
-                    ? "text-[#EFFC76] bg-[#EFFC76]/20 border-[#EFFC76] shadow-[0_0_20px_rgba(239,252,118,0.4)]"
-                    : "text-gray-300 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/15 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
+                href="/main/case-studies"
+                className={`px-4 py-2 rounded-full border transition-all duration-300 font-extrabold block ${
+                  isActive("/main/case-studies")
+                    ? "text-black bg-[#EFFC76] border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.85)] scale-105"
+                    : "text-gray-200 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/20 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
                 }`}
               >
                 Projects
@@ -123,11 +138,11 @@ const Navbar = () => {
             {/* Services Link */}
             <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href="/services"
-                className={`px-4 py-2 rounded-full border transition-all duration-300 font-bold block ${
-                  isActive("/services")
-                    ? "text-[#EFFC76] bg-[#EFFC76]/20 border-[#EFFC76] shadow-[0_0_20px_rgba(239,252,118,0.4)]"
-                    : "text-gray-300 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/15 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
+                href="/main/services"
+                className={`px-4 py-2 rounded-full border transition-all duration-300 font-extrabold block ${
+                  isActive("/main/services")
+                    ? "text-black bg-[#EFFC76] border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.85)] scale-105"
+                    : "text-gray-200 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/20 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
                 }`}
               >
                 Services
@@ -137,11 +152,11 @@ const Navbar = () => {
             {/* Solutions Link */}
             <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href="/solutions"
-                className={`px-4 py-2 rounded-full border transition-all duration-300 font-bold block ${
-                  isActive("/solutions")
-                    ? "text-[#EFFC76] bg-[#EFFC76]/20 border-[#EFFC76] shadow-[0_0_20px_rgba(239,252,118,0.4)]"
-                    : "text-gray-300 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/15 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
+                href="/main/solutions"
+                className={`px-4 py-2 rounded-full border transition-all duration-300 font-extrabold block ${
+                  isActive("/main/solutions")
+                    ? "text-black bg-[#EFFC76] border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.85)] scale-105"
+                    : "text-gray-200 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/20 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
                 }`}
               >
                 Solutions
@@ -163,18 +178,20 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 20, scale: 0.88 }}
                     transition={{ type: "spring", stiffness: 350, damping: 24 }}
-                    className="absolute bottom-16 left-1/2 -translate-x-1/2 mb-4 z-50 pointer-events-auto flex items-center justify-center min-w-[450px] h-[110px]"
+                    className="absolute bottom-16 left-1/2 -translate-x-1/2 mb-4 z-50 pointer-events-auto flex items-center justify-center min-w-[580px] h-[120px]"
                   >
                     {exploreCards.map((card, idx) => {
                       const Icon = card.icon;
                       const active = isActive(card.href);
                       
                       // Compact 3D Arch offsets
-                      const offset = idx - 3;
-                      const xOffset = offset * 44;
-                      const yOffset = Math.pow(Math.abs(offset), 1.5) * 7 - 16;
-                      const rotate = offset * 4.5;
-                      const zIndex = 20 - Math.abs(offset);
+                      const totalCards = exploreCards.length;
+                      const midIndex = (totalCards - 1) / 2;
+                      const offset = idx - midIndex;
+                      const xOffset = offset * 48;
+                      const yOffset = Math.pow(Math.abs(offset), 1.4) * 4.5 - 14;
+                      const rotate = offset * 3.5;
+                      const zIndex = 30 - Math.abs(offset);
 
                       return (
                         <motion.div
@@ -195,10 +212,10 @@ const Navbar = () => {
                             delay: idx * 0.02,
                           }}
                           whileHover={{
-                            scale: 1.22,
-                            y: yOffset - 16,
+                            scale: 1.25,
+                            y: yOffset - 18,
                             rotate: 0,
-                            zIndex: 50,
+                            zIndex: 60,
                             transition: { type: "spring", stiffness: 450, damping: 18 },
                           }}
                           style={{ zIndex }}
@@ -207,20 +224,22 @@ const Navbar = () => {
                           <Link
                             href={card.href}
                             onClick={() => setIsExploreOpen(false)}
-                            className={`group flex flex-col items-center justify-center w-[62px] sm:w-[72px] h-[72px] sm:h-[82px] rounded-2xl p-1.5 sm:p-2 border transition-all duration-300 ${
+                            className={`group flex flex-col items-center justify-center w-[64px] sm:w-[74px] h-[74px] sm:h-[84px] rounded-2xl p-1.5 border transition-all duration-300 shadow-2xl ${
                               active
-                                ? "bg-[#EFFC76] text-black border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.75)]"
-                                : "bg-[#040e04]/75 backdrop-blur-2xl text-gray-200 border-[#EFFC76]/25 hover:border-[#EFFC76] hover:bg-[#EFFC76]/20 hover:text-[#EFFC76] shadow-[0_10px_25px_rgba(0,0,0,0.85),0_0_15px_rgba(239,252,118,0.15)] hover:shadow-[0_0_25px_rgba(239,252,118,0.5)]"
+                                ? "bg-[#EFFC76] text-black border-[#EFFC76] shadow-[0_0_30px_rgba(239,252,118,0.95)] ring-2 ring-[#EFFC76] font-black scale-110"
+                                : "bg-[#040e04]/90 backdrop-blur-2xl text-gray-200 border-[#EFFC76]/35 hover:border-[#EFFC76] hover:bg-[#EFFC76] hover:text-black shadow-[0_10px_25px_rgba(0,0,0,0.85),0_0_15px_rgba(239,252,118,0.2)] hover:shadow-[0_0_30px_rgba(239,252,118,0.7)]"
                             }`}
                           >
                             <div className={`p-1.5 rounded-xl mb-1 transition-all ${
                               active 
-                                ? "bg-black/10 text-black" 
-                                : "bg-white/5 border border-[#EFFC76]/20 text-[#EFFC76] group-hover:bg-[#EFFC76]/25 group-hover:border-[#EFFC76]/50 group-hover:scale-110"
+                                ? "bg-black text-[#EFFC76]" 
+                                : "bg-white/10 border border-[#EFFC76]/30 text-[#EFFC76] group-hover:bg-black group-hover:text-[#EFFC76] group-hover:scale-110"
                             }`}>
-                              <Icon size={16} className="stroke-[2.2]" />
+                              <Icon size={16} className="stroke-[2.5]" />
                             </div>
-                            <span className="text-[8.5px] sm:text-[9.5px] font-mono font-bold text-center leading-tight line-clamp-2">
+                            <span className={`text-[8.5px] sm:text-[9.5px] font-mono leading-tight text-center line-clamp-1 ${
+                              active ? "font-black text-black" : "font-extrabold text-gray-200 group-hover:text-black"
+                            }`}>
                               {card.name}
                             </span>
                           </Link>
@@ -235,22 +254,22 @@ const Navbar = () => {
                 whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsExploreOpen((prev) => !prev)}
-                className={`px-4.5 py-2 rounded-full border transition-all duration-300 flex items-center gap-1.5 font-bold ${
-                  isExploreOpen
-                    ? "bg-[#EFFC76]/25 border-[#EFFC76] text-[#EFFC76] shadow-[0_0_20px_rgba(239,252,118,0.4)]"
+                className={`px-4.5 py-2 rounded-full border transition-all duration-300 flex items-center gap-1.5 font-extrabold ${
+                  isExploreOpen || isAnyExploreActive
+                    ? "bg-[#EFFC76] text-black border-[#EFFC76] shadow-[0_0_25px_rgba(239,252,118,0.75)]"
                     : "border-[#EFFC76]/40 bg-[#0d1e0d] hover:border-[#EFFC76] hover:bg-[#EFFC76]/20 hover:text-[#EFFC76] text-white shadow-[0_0_15px_rgba(239,252,118,0.15)] hover:shadow-[0_0_20px_rgba(239,252,118,0.3)]"
                 }`}
               >
                 <span>Explore</span>
                 <ChevronUp
                   size={16}
-                  className={`transition-transform duration-300 ${isExploreOpen ? "rotate-180 text-[#EFFC76]" : ""}`}
+                  className={`transition-transform duration-300 stroke-[2.5] ${isExploreOpen ? "rotate-180 text-black" : isAnyExploreActive ? "text-black" : "text-[#EFFC76]"}`}
                 />
               </motion.button>
             </div>
 
             {/* Language Badge */}
-            <motion.div whileHover={{ scale: 1.06 }} className="hidden sm:flex items-center justify-center px-3.5 py-1.5 rounded-full bg-[#0d1e0d] border border-[#EFFC76]/30 text-xs font-mono text-gray-300 hover:border-[#EFFC76]/60 hover:text-white hover:bg-[#EFFC76]/15 transition-all">
+            <motion.div whileHover={{ scale: 1.06 }} className="hidden sm:flex items-center justify-center px-3.5 py-1.5 rounded-full bg-[#0d1e0d] border border-[#EFFC76]/30 text-xs font-mono font-bold text-[#EFFC76] hover:border-[#EFFC76]/60 hover:text-white hover:bg-[#EFFC76]/20 transition-all cursor-default">
               EN
             </motion.div>
           </nav>

@@ -13,7 +13,7 @@ import CosmicBackground from "@/components/Home/CosmicBackground";
 
 const DemoPage = () => {
   return (
-    <div className="min-h-screen relative overflow-x-hidden">
+    <div className="min-h-screen pb-36 relative overflow-x-hidden select-none text-white bg-[#050505]">
       <div className="fixed inset-0 z-0 pointer-events-none">
         <CosmicBackground />
       </div>

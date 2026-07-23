@@ -1,63 +1,55 @@
 import React from "react";
+import CosmicBackground from "@/components/Home/CosmicBackground";
 
 const page = () => {
   return (
-    <div className="min-h-screen bg-black overflow-x-hidden pb-30 pt-20">
-      <section className="max-w-4xl mx-auto px-4 md:px-8 py-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-xs font-medium mb-8">
-          <span className="bg-[#EFFC76] text-black px-2 py-0.5 rounded text-[10px] font-bold tracking-wider">
-            READ
+    <div className="min-h-screen bg-[#050505] relative overflow-x-hidden pb-36 pt-28 select-none text-white">
+      {/* Background Particles */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <CosmicBackground />
+      </div>
+
+      <section className="w-10/12 mx-auto relative z-10 py-8">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFFC76]/10 border border-[#EFFC76]/30 text-xs font-mono font-bold text-[#EFFC76] mb-8">
+          <span className="bg-[#EFFC76] text-black px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-extrabold">
+            POLICY
           </span>
-          <span className="text-gray-300">Refund Policy</span>
+          <span>Refund & SLA Terms</span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-normal text-white mb-4 tracking-tight">
-          Refund Policy
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4 tracking-tight uppercase">
+          Refund <span className="font-serif italic font-normal text-[#EFFC76] lowercase">Policy</span>
         </h1>
 
-        <div className="text-gray-500 text-xs mb-12">
-          Last Updated: Jan 9, 2026
+        <div className="text-gray-400 font-mono text-xs mb-12">
+          Last Updated: Jan 2026 | JEVXO Financial Compliance
         </div>
 
-        <div className="space-y-10">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight">
-              Eligibility
+        <div className="space-y-8 max-w-4xl">
+          <div className="bg-[#051105]/92 border border-[#EFFC76]/20 rounded-3xl p-7 sm:p-8 backdrop-blur-2xl">
+            <h2 className="text-2xl font-black text-[#EFFC76] mb-3 tracking-tight">
+              1. Service Refund Eligibility
             </h2>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Refund eligibility depends on the service or product purchased and
-              the specific agreement in place. If you believe you’re eligible
-              for a refund, please contact us with your order details.
+            <p className="text-gray-300 text-sm font-light leading-relaxed">
+              Refund eligibility for software development services and cloud deployments is governed by the specific terms signed in your Enterprise Master Services Agreement (MSA). Milestone deliverables and custom software modules are non-refundable once verified and accepted.
             </p>
           </div>
 
-          <div>
-            <h2 className="text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight">
-              How to Request a Refund
+          <div className="bg-[#051105]/92 border border-[#EFFC76]/20 rounded-3xl p-7 sm:p-8 backdrop-blur-2xl">
+            <h2 className="text-2xl font-black text-[#EFFC76] mb-3 tracking-tight">
+              2. How to Submit a Refund Request
             </h2>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Send an email to support@squadlog.com with your purchase
-              information, reason for the request, and any supporting details.
-              We’ll review and respond as soon as possible.
+            <p className="text-gray-300 text-sm font-light leading-relaxed">
+              To request a review or refund under SLA non-performance, please email <a href="mailto:support@jevxo.com" className="text-[#EFFC76] underline font-semibold">support@jevxo.com</a> with your order ID, project scope code, and detailed justification. Our finance team reviews all requests within 3 business days.
             </p>
           </div>
 
-          <div>
-            <h2 className="text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight">
-              Processing Time
+          <div className="bg-[#051105]/92 border border-[#EFFC76]/20 rounded-3xl p-7 sm:p-8 backdrop-blur-2xl">
+            <h2 className="text-2xl font-black text-[#EFFC76] mb-3 tracking-tight">
+              3. SLA Uptime Credit Processing
             </h2>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              If approved, refunds are processed to the original payment method.
-              Timing may vary depending on your bank or payment provider.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight">
-              Contact
-            </h2>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              For questions about this policy, contact support@squadlog.com.
+            <p className="text-gray-300 text-sm font-light leading-relaxed">
+              If cloud instance availability falls below our guaranteed 99.99% SLA uptime in any billing month, enterprise accounts automatically receive prorated billing credits applied to the next billing cycle.
             </p>
           </div>
         </div>

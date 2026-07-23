@@ -9,21 +9,15 @@ const PolicyConditions = () => {
       content: (
         <div className="space-y-6">
           <div>
-            <h4 className="text-white font-medium mb-2">Personal Information</h4>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              We may collect personal details like your name, email address, phone number, and payment information to process transactions, provide customer support, and offer personalized experiences.
+            <h4 className="text-white font-bold mb-2 text-base">Personal & Enterprise Information</h4>
+            <p className="text-gray-300 text-sm font-light leading-relaxed">
+              We collect corporate contact details such as name, business email address, phone number, and transaction records to provision services, provide 24/7 technical support, and offer personalized software experiences.
             </p>
           </div>
           <div>
-            <h4 className="text-white font-medium mb-2">Device and Usage Data</h4>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              We automatically gather data on how you interact with our services, including your IP address, device type, operating system, browser type, and site navigation.
-            </p>
-          </div>
-          <div>
-            <h4 className="text-white font-medium mb-2">Cookies and tracking technologies</h4>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              We use cookies and similar technologies to enhance your experience, remember preferences, and analyze site traffic. You can manage cookie settings through your browser.
+            <h4 className="text-white font-bold mb-2 text-base">Device & Telemetry Data</h4>
+            <p className="text-gray-300 text-sm font-light leading-relaxed">
+              We gather non-sensitive interaction telemetry, including IP address ranges, device operating system types, browser fingerprints, and API performance benchmarks to maintain zero-downtime cluster performance.
             </p>
           </div>
         </div>
@@ -33,90 +27,31 @@ const PolicyConditions = () => {
       title: "2. How We Use Your Information",
       content: (
         <div className="space-y-4">
-          <p className="text-gray-400 text-sm leading-relaxed">
-            We use your information to enhance your experience and improve our services:
+          <p className="text-gray-300 text-sm font-light leading-relaxed">
+            We process data strictly to fulfill enterprise platform operations:
           </p>
-          <ul className="list-disc list-inside space-y-2 text-gray-400 text-sm ml-2">
-            <li><span className="text-white font-medium">Service Delivery:</span> Your data helps us provide personalized responses, suggestions, and other features of Fluctus.</li>
-            <li><span className="text-white font-medium">Improvement and Development:</span> We analyze usage data to improve Fluctus's features and functionality.</li>
-            <li><span className="text-white font-medium">Customer Support:</span> If you contact us for support, we may use your information to address and resolve your concerns.</li>
-            <li><span className="text-white font-medium">Security:</span> We use information to maintain the safety and security of Fluctus, including monitoring for suspicious activities and preventing fraud detection.</li>
+          <ul className="list-disc list-inside space-y-2 text-gray-300 text-sm ml-2 font-light">
+            <li><span className="text-white font-semibold">Service Delivery:</span> Providing cloud instances, API endpoints, and real-time dashboard analytics.</li>
+            <li><span className="text-white font-semibold">Security & Audit:</span> Monitoring threat telemetry, preventing unauthorized access, and maintaining SOC 2 compliance.</li>
+            <li><span className="text-white font-semibold">Customer Support:</span> Assisting engineering teams with SLA response guarantees.</li>
           </ul>
         </div>
       ),
     },
     {
-      title: "3. Data Sharing and Disclosure",
+      title: "3. Data Protection & Zero-Trust Security",
+      content: (
+        <p className="text-gray-300 text-sm font-light leading-relaxed">
+          We implement AES-256 bit payload encryption at rest and TLS 1.3 encryption in transit. JEVXO never sells, rents, or monetizes client data to third-party advertisers.
+        </p>
+      ),
+    },
+    {
+      title: "4. Your Data Rights & Contact",
       content: (
         <div className="space-y-4">
-          <p className="text-gray-400 text-sm leading-relaxed">
-            We do not sell or rent your personal information to third parties. However, we may share data under the following circumstances:
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-gray-400 text-sm ml-2">
-            <li><span className="text-white font-medium">Service Providers:</span> We may share your data with third-party vendors who assist in operating Fluctus or improving the services, such as hosting, analytics, or customer support.</li>
-            <li><span className="text-white font-medium">Legal Requirements:</span> We may disclose information if required to do so by law or in response to valid legal requests.</li>
-            <li><span className="text-white font-medium">Business Transfers:</span> In the event of a merger, acquisition, or asset sale, your information may be transferred.</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
-      title: "4. Data Security",
-      content: (
-        <p className="text-gray-400 text-sm leading-relaxed">
-          We take reasonable measures to protect your data from unauthorized access, disclosure, or alteration. However, no online service is entirely secure, and we cannot guarantee the absolute security of your information.
-        </p>
-      ),
-    },
-    {
-      title: "5. Your Data Rights",
-      content: (
-        <div className="space-y-4">
-          <p className="text-gray-400 text-sm leading-relaxed">
-            You have rights regarding your personal information, including:
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-gray-400 text-sm ml-2">
-            <li><span className="text-white font-medium">Access:</span> You may request access to the data we hold about you.</li>
-            <li><span className="text-white font-medium">Correction:</span> If your data is inaccurate, you can request corrections.</li>
-            <li><span className="text-white font-medium">Deletion:</span> You can request the deletion of your personal information, subject to legal obligations.</li>
-            <li><span className="text-white font-medium">Opt-Out:</span> You can opt out of data collection for certain uses like personalized marketing.</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
-      title: "6. Third-Party Links",
-      content: (
-        <p className="text-gray-400 text-sm leading-relaxed">
-          SquadLog may contain links to third-party websites or services. We are not responsible for the privacy practices or content of these external sites.
-        </p>
-      ),
-    },
-    {
-      title: "7. Children's Privacy",
-      content: (
-        <p className="text-gray-400 text-sm leading-relaxed">
-          SquadLog is not intended for use by individuals under the age of 13. We do not knowingly collect personal data neither from children. If we learn that we have collected data from a child without parental consent, we will take steps to delete that information.
-        </p>
-      ),
-    },
-    {
-      title: "8. Changes to This Privacy Policy",
-      content: (
-        <p className="text-gray-400 text-sm leading-relaxed">
-          We may update this Privacy Policy from time to time. Any changes will be posted on this page, and the updated date will be reflected at the top. We encourage you to review this policy periodically to stay informed about how we protect your information.
-        </p>
-      ),
-    },
-    {
-      title: "9. Contact Us",
-      content: (
-        <div className="space-y-4">
-          <p className="text-gray-400 text-sm leading-relaxed">
-            If you have any questions or concerns about this Privacy Policy or Fluctus's data practices, please contact us at support@fluctus.com.
-          </p>
-          <p className="text-gray-400 text-sm leading-relaxed">
-            By using Fluctus, you agree to the terms outlined in this Privacy Policy.
+          <p className="text-gray-300 text-sm font-light leading-relaxed">
+            Enterprise clients hold complete rights to request data exports, logical data deletion, or access control audits by contacting <a href="mailto:support@jevxo.com" className="text-[#EFFC76] underline font-semibold">support@jevxo.com</a>.
           </p>
         </div>
       ),
@@ -124,31 +59,32 @@ const PolicyConditions = () => {
   ];
 
   return (
-    <section className="bg-transparent min-h-screen py-24 px-4 md:px-8 relative overflow-hidden">
-      <div className="max-w-4xl mx-auto relative z-10">
+    <section className="bg-transparent min-h-screen py-24 relative overflow-hidden select-none">
+      <div className="w-10/12 mx-auto relative z-10">
+        
         {/* Header Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFFC76] text-black text-xs font-medium mb-12"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFFC76]/10 border border-[#EFFC76]/30 text-xs font-mono font-bold text-[#EFFC76] mb-8"
         >
-          <span className="bg-black text-white px-1.5 py-0.5 rounded text-[10px] uppercase tracking-wider">New</span>
-          <span>Latest Policy</span>
+          <span className="bg-[#EFFC76] text-black px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-extrabold">PRIVACY</span>
+          <span>Privacy Policy</span>
         </motion.div>
 
         {/* Updated Date */}
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-gray-500 text-xs mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-gray-400 font-mono text-xs mb-12"
         >
-            Updated Date: Oct 26, 2024, 09:30 AM
+          Last Updated: Jan 2026 | JEVXO Data Protection Office
         </motion.div>
 
         {/* Content Sections */}
-        <div className="space-y-16">
+        <div className="space-y-12 max-w-4xl">
           {sections.map((section, index) => (
             <motion.div
               key={index}
@@ -156,8 +92,9 @@ const PolicyConditions = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
+              className="bg-[#051105]/92 border border-[#EFFC76]/20 rounded-3xl p-7 sm:p-8 backdrop-blur-2xl"
             >
-              <h2 className="text-2xl md:text-3xl font-medium text-white mb-6 tracking-tight">
+              <h2 className="text-2xl font-black text-[#EFFC76] mb-4 tracking-tight">
                 {section.title}
               </h2>
               {section.content}

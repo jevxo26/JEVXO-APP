@@ -116,13 +116,13 @@ const SecurityPage = () => {
   };
 
   return (
-    <div className="min-h-screen pt-28 pb-24 relative overflow-x-hidden text-white bg-[#050505]">
+    <div className="min-h-screen pt-28 pb-36 relative overflow-x-hidden text-white bg-[#050505] select-none">
       {/* Background Cosmic Grid */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <CosmicBackground />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 space-y-20 md:space-y-28">
+      <div className="relative z-10 w-10/12 mx-auto space-y-20 md:space-y-28">
         {/* ================= HERO SECTION ================= */}
         <section className="text-center max-w-4xl mx-auto pt-6 relative z-20">
           <motion.div
