@@ -74,13 +74,13 @@ const Navbar = () => {
         className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[96vw] select-none"
       >
         {/* Main Dock Container Bar (Ultra-Premium Glassmorphism & Neon Aura) */}
-        <div className="bg-[#040c04]/92 backdrop-blur-2xl border border-[#EFFC76]/50 rounded-full px-5 sm:px-8 py-3.5 flex items-center gap-3 sm:gap-6 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_30px_rgba(239,252,118,0.2)] hover:shadow-[0_0_45px_rgba(239,252,118,0.35)] hover:border-[#EFFC76] transition-all duration-500">
+        <div className="bg-[#040c04]/92 backdrop-blur-2xl border border-[#EFFC76]/50 rounded-full px-5 sm:px-8 py-3.5 flex items-center gap-3 sm:gap-5 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_30px_rgba(239,252,118,0.2)] hover:shadow-[0_0_45px_rgba(239,252,118,0.35)] hover:border-[#EFFC76] transition-all duration-500">
           
           {/* 1. Left Logo Badge */}
           <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
             <Link
               href="/"
-              className="bg-[#0b1b0b] border border-[#EFFC76]/45 hover:border-[#EFFC76] px-4 py-2 rounded-full flex items-center gap-2.5 text-white font-extrabold text-xs sm:text-sm shadow-[0_0_15px_rgba(239,252,118,0.25)] transition-all duration-300 group"
+              className="bg-[#0b1b0b] border border-[#EFFC76]/45 hover:border-[#EFFC76] hover:bg-[#122812] px-4 py-2 rounded-full flex items-center gap-2.5 text-white font-extrabold text-xs sm:text-sm shadow-[0_0_15px_rgba(239,252,118,0.25)] transition-all duration-300 group"
             >
               <div className="relative w-5 h-5 rounded-full overflow-hidden shrink-0 bg-black/50 border border-[#EFFC76]/50 flex items-center justify-center">
                 <Image
@@ -104,40 +104,44 @@ const Navbar = () => {
           <div className="h-6 w-[1px] bg-[#EFFC76]/30 hidden sm:block" />
 
           {/* 2. Middle Links & Explore Trigger */}
-          <nav className="flex items-center gap-2 sm:gap-3.5 text-xs sm:text-sm font-semibold text-gray-200">
-            <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
+          <nav className="flex items-center gap-1.5 sm:gap-3 text-xs sm:text-sm font-semibold text-gray-200">
+            
+            {/* Projects Link */}
+            <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/case-studies"
-                className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                className={`px-4 py-2 rounded-full border transition-all duration-300 font-bold block ${
                   isActive("/case-studies")
-                    ? "text-[#EFFC76] font-bold bg-[#EFFC76]/15 border border-[#EFFC76]/40"
-                    : "hover:text-white hover:bg-white/10"
+                    ? "text-[#EFFC76] bg-[#EFFC76]/20 border-[#EFFC76] shadow-[0_0_20px_rgba(239,252,118,0.4)]"
+                    : "text-gray-300 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/15 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
                 }`}
               >
                 Projects
               </Link>
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
+            {/* Services Link */}
+            <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/services"
-                className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                className={`px-4 py-2 rounded-full border transition-all duration-300 font-bold block ${
                   isActive("/services")
-                    ? "text-[#EFFC76] font-bold bg-[#EFFC76]/15 border border-[#EFFC76]/40"
-                    : "hover:text-white hover:bg-white/10"
+                    ? "text-[#EFFC76] bg-[#EFFC76]/20 border-[#EFFC76] shadow-[0_0_20px_rgba(239,252,118,0.4)]"
+                    : "text-gray-300 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/15 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
                 }`}
               >
                 Services
               </Link>
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
+            {/* Solutions Link */}
+            <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/solutions"
-                className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                className={`px-4 py-2 rounded-full border transition-all duration-300 font-bold block ${
                   isActive("/solutions")
-                    ? "text-[#EFFC76] font-bold bg-[#EFFC76]/15 border border-[#EFFC76]/40"
-                    : "hover:text-white hover:bg-white/10"
+                    ? "text-[#EFFC76] bg-[#EFFC76]/20 border-[#EFFC76] shadow-[0_0_20px_rgba(239,252,118,0.4)]"
+                    : "text-gray-300 border-transparent hover:text-[#EFFC76] hover:bg-[#EFFC76]/15 hover:border-[#EFFC76]/50 hover:shadow-[0_0_15px_rgba(239,252,118,0.3)]"
                 }`}
               >
                 Solutions
@@ -167,8 +171,8 @@ const Navbar = () => {
                       
                       // Compact 3D Arch offsets
                       const offset = idx - 3;
-                      const xOffset = offset * 44; // tight overlapping horizontal shift
-                      const yOffset = Math.pow(Math.abs(offset), 1.5) * 7 - 16; // sleek curved dome
+                      const xOffset = offset * 44;
+                      const yOffset = Math.pow(Math.abs(offset), 1.5) * 7 - 16;
                       const rotate = offset * 4.5;
                       const zIndex = 20 - Math.abs(offset);
 
@@ -228,13 +232,13 @@ const Navbar = () => {
               </AnimatePresence>
 
               <motion.button
-                whileHover={{ scale: 1.08 }}
+                whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsExploreOpen((prev) => !prev)}
                 className={`px-4.5 py-2 rounded-full border transition-all duration-300 flex items-center gap-1.5 font-bold ${
                   isExploreOpen
                     ? "bg-[#EFFC76]/25 border-[#EFFC76] text-[#EFFC76] shadow-[0_0_20px_rgba(239,252,118,0.4)]"
-                    : "border-[#EFFC76]/40 bg-[#0d1e0d] hover:border-[#EFFC76] hover:bg-[#122812] text-white shadow-[0_0_15px_rgba(239,252,118,0.15)]"
+                    : "border-[#EFFC76]/40 bg-[#0d1e0d] hover:border-[#EFFC76] hover:bg-[#EFFC76]/20 hover:text-[#EFFC76] text-white shadow-[0_0_15px_rgba(239,252,118,0.15)] hover:shadow-[0_0_20px_rgba(239,252,118,0.3)]"
                 }`}
               >
                 <span>Explore</span>
@@ -246,9 +250,9 @@ const Navbar = () => {
             </div>
 
             {/* Language Badge */}
-            <div className="hidden sm:flex items-center justify-center px-3.5 py-1.5 rounded-full bg-[#0d1e0d] border border-[#EFFC76]/30 text-xs font-mono text-gray-300">
+            <motion.div whileHover={{ scale: 1.06 }} className="hidden sm:flex items-center justify-center px-3.5 py-1.5 rounded-full bg-[#0d1e0d] border border-[#EFFC76]/30 text-xs font-mono text-gray-300 hover:border-[#EFFC76]/60 hover:text-white hover:bg-[#EFFC76]/15 transition-all">
               EN
-            </div>
+            </motion.div>
           </nav>
 
           {/* Divider */}
