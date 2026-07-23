@@ -45,8 +45,8 @@ const Banner = () => {
                     that's
                   </span>
                   <br />
-                  <span className="text-[#EFFC76] text-[3.8rem] sm:text-[5rem] md:text-[6.2rem] lg:text-[6.8rem] font-black uppercase tracking-tight leading-[0.9]">
-                    JEVXO
+                  <span className="text-[#EFFC76] text-[2.8rem] sm:text-[4rem] md:text-[4.2rem]  font-black uppercase tracking-tight leading-[0.9]">
+                    JEVXO AGENCY
                   </span>
                 </div>
               </motion.div>

@@ -2,197 +2,211 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Users, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import SmoothButton from "@/Share/SmoothButton";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import Link from "next/link";
 
 const teamMembers = [
   {
+    name: "Tareq Hassan",
+    role: "Senior FullStack Developer",
+    badgeTitle: "TAREQ HASSAN",
+    badgeRole: "Senior FullStack Developer",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop",
+  },
+  {
+    name: "Iqbal Hasan",
+    role: "Web Developer",
+    badgeTitle: "IQBAL",
+    badgeRole: "Web Developer",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop",
+  },
+  {
+    name: "MD Mahafuj Hossain",
+    role: "Web Developer",
+    badgeTitle: "MAHAFUJ",
+    badgeRole: "Web Developer",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop",
+  },
+  {
+    name: "Abdullah",
+    role: "Web Developer",
+    badgeTitle: "ABDULLAH",
+    badgeRole: "Web Developer",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&auto=format&fit=crop",
+  },
+  {
+    name: "Arko Debnath Turjo",
+    role: "Senior Creative Designer",
+    badgeTitle: "ARKO",
+    badgeRole: "Graphic Designer",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop",
+  },
+  {
+    name: "Redowan",
+    role: "Graphic & Motion Designer",
+    badgeTitle: "REDOWAN",
+    badgeRole: "Graphic Designer",
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop",
+  },
+  {
     name: "Alexander West",
     role: "Founder & CEO",
-    bio: "Pioneering enterprise software architecture and leading strategic growth for global digital transformations.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop",
-  },
-  {
-    name: "Sophia Chen",
-    role: "CTO & Lead Architect",
-    bio: "Expert in distributed cloud systems, high-availability backends, and AI-driven automation pipelines.",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop",
-  },
-  {
-    name: "Marcus Johnson",
-    role: "Senior Full-Stack Lead",
-    bio: "Crafting robust Web & Mobile applications using React, Next.js, Node.js, and modern cloud infrastructure.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop",
-  },
-  {
-    name: "Elena Rodriguez",
-    role: "Head of Product Design",
-    bio: "Designing world-class user interfaces and intuitive product experiences with a passion for micro-animations.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop",
-  },
-  {
-    name: "David Kim",
-    role: "Cloud & DevOps Lead",
-    bio: "Managing multi-cloud Kubernetes clusters, automated CI/CD pipelines, and enterprise security compliance.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop",
-  },
-  {
-    name: "Olivia Martinez",
-    role: "Digital Strategy Lead",
-    bio: "Accelerating brand growth through data analytics, SEO performance engineering, and conversion optimization.",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop",
+    badgeTitle: "ALEXANDER",
+    badgeRole: "Founder & CEO",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop",
   },
 ];
 
-const TeamCard = ({ member }) => {
-  return (
-    <div className="group relative bg-[#0d0d10]/90 border border-white/10 rounded-3xl p-5 flex flex-col justify-between hover:border-[#EFFC76]/50 transition-all duration-300 backdrop-blur-md h-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-      <div>
-        {/* Header: Image & Role Badge */}
-        <div className="flex items-center gap-4 mb-4">
-          <div className="relative w-16 h-16 rounded-2xl overflow-hidden bg-gray-800 shrink-0 border border-white/10 group-hover:border-[#EFFC76]/40 transition-colors">
-            <Image
-              src={member.image}
-              alt={member.name}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
-              onError={(e) => {
-                e.target.style.display = "none";
-              }}
-            />
-          </div>
-
-          <div>
-            <h3 className="text-white font-semibold text-lg leading-tight group-hover:text-[#EFFC76] transition-colors">
-              {member.name}
-            </h3>
-            <p className="text-[#EFFC76] text-xs font-medium tracking-wide mt-1">
-              {member.role}
-            </p>
-          </div>
-        </div>
-
-        {/* Short 2-3 Line Description / Bio */}
-        <p className="text-gray-400 text-xs sm:text-sm leading-relaxed font-light line-clamp-3 mb-4">
-          {member.bio}
-        </p>
-      </div>
-
-      {/* Footer / Connect Action */}
-      <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-gray-400 group-hover:text-white transition-colors">
-        <span className="font-medium text-[11px] text-gray-500 group-hover:text-gray-300">JEVXO Team Expert</span>
-        <div className="w-6 h-6 rounded-full bg-white/5 group-hover:bg-[#EFFC76] group-hover:text-black flex items-center justify-center transition-all">
-          <ArrowUpRight size={13} />
-        </div>
-      </div>
-    </div>
-  );
-};
+// Quadruple items to make the hardware marquee completely seamless with zero gap
+const infiniteMembers = [...teamMembers, ...teamMembers, ...teamMembers];
 
 const OurTeam = () => {
   return (
-    <section className="py-24 -mt-16 md:-mt-20 relative overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16 md:mb-24 relative z-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
-          >
-            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
-            Leadership & Engineers
-          </motion.div>
+    <section className="py-24 relative overflow-hidden text-white select-none">
+      {/* CSS Keyframe for 60fps/120fps Ultra Smooth Hardware-Accelerated Marquee */}
+      <style jsx global>{`
+        @keyframes smoothTeamMarquee {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(-33.3333%, 0, 0);
+          }
+        }
+        .animate-team-marquee {
+          animation: smoothTeamMarquee 24s linear infinite;
+          will-change: transform;
+        }
+        .animate-team-marquee:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
-          <motion.h2
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
-          >
-            Meet The Minds Behind{" "}
-            <span className="font-serif italic text-[#EFFC76]">
-              Your Success
-            </span>
-          </motion.h2>
+      {/* Ambient background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#EFFC76]/5 rounded-full blur-[160px] pointer-events-none" />
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
-          >
-            Our seasoned architects, software engineers, and product designers are dedicated to delivering world-class digital platforms.
-          </motion.p>
-          
-          <div className="mt-8">
-            <SmoothButton>View About JEVXO</SmoothButton>
-          </div>
-        </div>
+      {/* Header Container */}
+      <div className="w-10/12 mx-auto relative z-10 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <motion.span
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-[#EFFC76] text-xs font-mono font-bold uppercase tracking-[0.25em] block mb-2"
+            >
+              OUR TEAM
+            </motion.span>
 
-        {/* Desktop Team Grid */}
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {teamMembers.map((member, index) => (
-            <motion.div
-              key={index}
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.7 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"
             >
-              <TeamCard member={member} />
-            </motion.div>
-          ))}
-        </div>
+              Meet{" "}
+              <span className="italic font-serif text-[#EFFC76] font-normal">
+                The Minds
+              </span>
+            </motion.h2>
 
-        {/* Mobile Slider */}
-        <div className="md:hidden mt-8">
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            spaceBetween={20}
-            slidesPerView={1}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            loop={true}
-            className="pb-12"
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="text-gray-400 text-sm sm:text-base font-light mt-2 max-w-xl leading-relaxed"
+            >
+              The creative strategists, tech experts, and visionaries making it all happen.
+            </motion.p>
+          </div>
+
+          {/* View Team Button Header */}
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/20 bg-white/5 hover:bg-[#EFFC76] hover:text-black hover:border-[#EFFC76] text-xs font-semibold tracking-wider transition-all duration-300 group shadow-md self-start md:self-auto"
           >
-            {teamMembers.map((member, index) => (
-              <SwiperSlide key={index}>
-                <TeamCard member={member} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          {/* Custom Styles for Swiper Pagination */}
-          <style jsx global>{`
-            .swiper-pagination-bullet {
-              background: rgba(255, 255, 255, 0.2) !important;
-              opacity: 1 !important;
-              width: 10px !important;
-              height: 10px !important;
-              transition: all 0.3s ease;
-            }
-            .swiper-pagination-bullet-active {
-              background: #effc76 !important;
-              width: 24px !important;
-              border-radius: 5px !important;
-            }
-          `}</style>
+            <span>View Team</span>
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
+      </div>
+
+      {/* Full Width Continuous Infinite Left Auto-Scrolling Marquee Track */}
+      <div className="w-full relative z-10 overflow-hidden py-4">
+        
+        {/* Left & Right Smooth Gradient Fade Overlays */}
+        <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-36 bg-gradient-to-r from-[#050b05] via-[#050b05]/80 to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-36 bg-gradient-to-l from-[#050b05] via-[#050b05]/80 to-transparent z-20 pointer-events-none" />
+
+        <div className="flex overflow-hidden">
+          <div className="flex items-center gap-5 w-max animate-team-marquee">
+            {infiniteMembers.map((member, idx) => (
+              <div
+                key={idx}
+                className="group/card relative flex-shrink-0 w-[265px] sm:w-[285px] rounded-2xl overflow-hidden border border-white/10 bg-[#091209] hover:border-[#EFFC76]/60 shadow-[0_20px_45px_rgba(0,0,0,0.85)] hover:shadow-[0_0_35px_rgba(239,252,118,0.25)] transition-all duration-500 cursor-pointer flex flex-col justify-between"
+              >
+                {/* Image Studio Frame - Dark Portrait Background */}
+                <div className="relative w-full h-[330px] sm:h-[350px] overflow-hidden bg-[#060b06]">
+                  
+                  {/* Top-Left Brand Logo Watermark matching reference image */}
+                  <div className="absolute top-3 left-4 z-20 flex items-center gap-1.5 text-[10px] font-mono text-gray-300 tracking-wider">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EFFC76]" />
+                    <span className="font-bold text-white uppercase">JEVXO</span>
+                  </div>
+
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover object-top grayscale contrast-125 brightness-90 group-hover/card:grayscale-0 group-hover/card:contrast-100 group-hover/card:brightness-105 group-hover/card:scale-105 transition-all duration-700 ease-out"
+                  />
+
+                  {/* Dark Studio Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#091209] via-transparent to-black/30 pointer-events-none" />
+
+                  {/* Printed Studio Graphic Overlay over lower body (Reference Image Style) */}
+                  <div className="absolute bottom-6 left-0 right-0 z-20 text-center px-4">
+                    <h4 className="text-white text-sm font-extrabold uppercase tracking-wider drop-shadow-md">
+                      {member.badgeTitle}
+                    </h4>
+                    <div className="mt-1 inline-block border border-white/40 px-3 py-0.5 rounded-md backdrop-blur-sm bg-black/40">
+                      <span className="text-[10px] font-mono text-gray-200 tracking-wide">
+                        {member.badgeRole}
+                      </span>
+                    </div>
+                    <div className="mt-1 text-[8px] font-mono text-gray-400 tracking-widest opacity-80 uppercase">
+                      -- JEVXO CODE --
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Card Info Section */}
+                <div className="p-4 bg-[#070e07] relative z-10 flex flex-col justify-between border-t border-white/10">
+                  <div className="flex items-center gap-2 mb-1">
+                    {/* Speech Bubble / Dot Icon */}
+                    <div className="w-3 h-3 rounded-full bg-[#EFFC76] flex items-center justify-center shrink-0 shadow-[0_0_8px_#EFFC76]">
+                      <div className="w-1 h-1 bg-black rounded-full" />
+                    </div>
+                    <h3 className="text-sm sm:text-base font-bold text-white group-hover/card:text-[#EFFC76] transition-colors duration-300 line-clamp-1">
+                      {member.name}
+                    </h3>
+                  </div>
+
+                  <p className="text-[11px] font-mono text-[#EFFC76] font-medium tracking-wide ml-5">
+                    {member.role}
+                  </p>
+                </div>
+
+                {/* Bottom Hover Glowing Line */}
+                <div className="w-full h-[2px] bg-white/10 group-hover/card:bg-[#EFFC76] transition-colors duration-500 shadow-[0_0_10px_#EFFC76]" />
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );

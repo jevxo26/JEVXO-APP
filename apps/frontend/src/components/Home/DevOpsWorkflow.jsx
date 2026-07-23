@@ -183,8 +183,9 @@ const FeatureCard = ({
 const DevOpsWorkflow = () => {
   return (
     <section className="py-32 relative -mt-35  md:-mt-22 overflow-hidden">
-      <div className="max-w-350 mx-auto px-4 sm:px-6 relative z-10">
+      <div className="w-10/12 mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
+
         <div className="text-center mb-24 relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

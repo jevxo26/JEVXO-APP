@@ -1,7 +1,9 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Layers, Code2, Globe, Cpu, Smartphone, ShieldCheck, Zap, Palette, Rocket, Lock } from "lucide-react";
+import LogoSpinner from "@/components/Home/LogoSpinner";
 
 // 10 Cards Data Array
 const expertiseCards = [
@@ -79,23 +81,47 @@ const expertiseCards = [
 import BeamCircle from "@/components/lightswind/beam-circle";
 import WhoWeAre from "@/components/Home/WhoWeAre";
 import Banner from "@/components/Home/Banner";
-import Comparison from "@/components/Home/Comparison";
-import Faq from "@/components/Home/Faq";
-import Innovation from "@/components/Home/Innovation";
-import Integration from "@/components/Home/Integration";
-import LaunchYourSite from "@/components/Home/LaunchYourSite";
-import OurProcess from "@/components/Home/OurProcess";
-import Pricing from "@/components/Home/Pricing";
-import Testimonial from "@/components/Home/Testimonial";
 import CosmicBackground from "@/components/Home/CosmicBackground";
+
 import DevOpsWorkflow from "@/components/Home/DevOpsWorkflow";
-import PortfolioCard from "@/components/case-studies/PortfolioCard";
-import TechStack from "@/components/Home/TechStack";
+import WhyChooseUs from "@/components/Home/WhyChooseUs";
+import WorkShowcase from "@/components/Home/WorkShowcase";
 import OurTeam from "@/components/Home/OurTeam";
+import MyBlock from "@/components/Home/MyBlock";
+import Testimonial from "@/components/Home/Testimonial";
+
+
+
+
+
+
 
 const TestPages = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 700);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="overflow-x-hidden">
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <motion.div
+            key="page-loader"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-[99999]"
+          >
+            <LogoSpinner fullScreen={true} message="Loading JEVXO..." />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <div className="overflow-x-hidden">
       {/* Background Cosmic Particle Grid */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <CosmicBackground />
@@ -164,129 +190,49 @@ const TestPages = () => {
               </div>
             </div>
 
-            {/* Right Column: 10 Cards Stacking Cleanly On Top Of Each Other */}
+            {/* Right Column: MyBlock Card Component */}
             <div className="lg:col-span-6 relative flex flex-col">
-              {expertiseCards.map((card, idx) => {
-                const IconComponent = card.icon;
-                return (
-                  <div
-                    key={card.id}
-                    className="sticky top-28 w-full min-h-[460px] pb-16"
-                    style={{
-                      zIndex: idx + 1,
-                    }}
-                  >
-                    <div className="group relative w-full rounded-[36px] overflow-hidden border border-white/15 hover:border-[#EFFC76]/60 shadow-[0_-15px_50px_rgba(0,0,0,0.95)] bg-[#081208] transition-all duration-500 cursor-pointer hover:shadow-[0_0_50px_rgba(239,252,118,0.45)]">
-                      {/* Circular Badge Icon overlapping top-left corner */}
-                      <div className="absolute top-4 left-4 z-30 w-16 h-16 rounded-full bg-[#EFFC76] text-black flex items-center justify-center shadow-[0_0_30px_rgba(239,252,118,0.5)] border-2 border-black/20 group-hover:scale-110 transition-transform duration-500">
-                        <div className="w-12 h-12 rounded-full bg-[#EFFC76] border border-black/10 flex items-center justify-center">
-                          <IconComponent size={24} className="text-black stroke-[2.5]" />
-                        </div>
-                      </div>
-
-                      {/* Card Background Image & Bottom Hover Overlay */}
-                      <div className="relative w-full h-[320px] sm:h-[360px]">
-                        <Image
-                          src={card.img}
-                          alt={card.title}
-                          fill
-                          className="object-cover brightness-95 contrast-110 group-hover:scale-105 transition-transform duration-700"
-                        />
-                        {/* Default Dark Gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#060d06] via-[#060d06]/50 to-transparent group-hover:opacity-0 transition-opacity duration-500" />
-                        
-                        {/* Hover Bottom Neon Yellow-Green Gradient Layer */}
-                        <div className="absolute bottom-0 left-0 right-0 h-[55%] bg-gradient-to-t from-[#EFFC76] via-[#EFFC76]/95 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
-                      </div>
-
-                      {/* Card Content Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-                        <p className="text-gray-400 group-hover:text-black/60 text-3xl font-extrabold tracking-widest mb-1 opacity-40 group-hover:opacity-80 transition-all duration-500">
-                          {card.id}
-                        </p>
-                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-black tracking-tight mb-2 transition-colors duration-500">
-                          {card.title}
-                        </h3>
-                        <p className="text-gray-300 group-hover:text-black/85 text-xs sm:text-sm font-light leading-relaxed max-w-sm transition-colors duration-500">
-                          {card.desc}
-                        </p>
-                      </div>
-
-                    </div>
-                  </div>
-                );
-              })}
+              <MyBlock cards={expertiseCards} />
             </div>
+
 
           </div>
         </section>
 
-        {/* 5. Innovation & Feature Highlights */}
+        {/* Why We Are The Best Section */}
         <section className="-mt-10 md:-mt-14">
-          <Innovation />
+          <WhyChooseUs />
         </section>
 
-        {/* 6. Modern Tech Stack & Tools */}
-        <section className="-mt-10 md:-mt-14">
-          <TechStack />
-        </section>
 
-        {/* 7. Selected Work / Case Studies */}
-        <section className="-mt-10 md:-mt-14">
-          <PortfolioCard />
-        </section>
 
-        {/* 8. Our Engineering & Development Process */}
-        <section className="-mt-10 md:-mt-14">
-          <OurProcess />
-        </section>
-
-        {/* 9. CI/CD & DevOps Infrastructure */}
+        {/* CI/CD & DevOps Infrastructure */}
         <section className="-mt-10 md:-mt-14">
           <DevOpsWorkflow />
         </section>
 
-        {/* 10. Ecosystem Integrations */}
+        {/* Work Showcase Section */}
         <section className="-mt-10 md:-mt-14">
-          <Integration />
+          <WorkShowcase />
         </section>
 
-
-
-        {/* 12. Fast Launch Solutions */}
-        <section className="-mt-10 md:-mt-14">
-          <LaunchYourSite />
-        </section>
-
-        {/* 13. Transparent Pricing */}
-        <section className="-mt-10 md:-mt-14">
-          <Pricing />
-        </section>
-
-        {/* 14. Competitive Comparison */}
-        <section className="-mt-10 md:-mt-14">
-          <Comparison />
-        </section>
-
-        {/* 15. Leadership & Engineering Team */}
+        {/* Meet The Team Section */}
         <section className="-mt-10 md:-mt-14">
           <OurTeam />
         </section>
 
-        {/* 16. Client Testimonials */}
+        {/* Testimonials Double Marquee Section */}
         <section className="-mt-10 md:-mt-14">
           <Testimonial />
         </section>
-
-        {/* 17. FAQ */}
-        <section className="-mt-10 md:-mt-14">
-          <Faq />
-        </section>
-
-
       </div>
     </div>
-  );
+  </>
+);
+
+
+
 };
 
 export default TestPages;
+

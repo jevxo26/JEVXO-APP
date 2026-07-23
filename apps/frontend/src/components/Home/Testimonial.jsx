@@ -1,174 +1,190 @@
 "use client";
+
 import React from "react";
 import { motion } from "framer-motion";
-import { MessageSquare } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import TestimonialCard from "./TestimonialCard";
-import SmoothButton from "@/Share/SmoothButton";
-import { useQuery } from "@/hooks/useApi";
 
-const fallbackTestimonials = [
+const topRowTestimonials = [
   {
-    name: "Michael Chen",
-    role: "CTO",
-    company: "FinTech Innovations",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael",
-    text: "JEVXO transformed our legacy infrastructure into a scalable cloud-native system. Their expertise in AWS and DevOps is unmatched.",
+    quote: '"The website they built for us increased our conversion rate by 200%. Highly recommended!"',
+    name: "M-Martly",
+    role: "Founder, StartUp X",
     rating: 5,
   },
   {
-    name: "Sarah Jenkins",
-    role: "Founder",
-    company: "EcoStyle E-commerce",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
-    text: "The custom Shopify solution they built increased our conversion rates by 40%. The UI/UX design is beautiful and highly functional.",
-    rating: 5,
-  },
-  {
-    name: "David Rodriguez",
-    role: "Product Manager",
-    company: "HealthPlus App",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
-    text: "We needed a complex mobile app for patient monitoring. JEVXO delivered a secure, HIPAA-compliant app ahead of schedule.",
-    rating: 5,
-  },
-  {
-    name: "Emma Wilson",
+    quote: '"Their SEO strategies are top-notch. We ranked on the first page of Google within 3 months."',
+    name: "Miah rasel bd",
     role: "Marketing Director",
-    company: "GrowthGuru",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma",
-    text: "Their digital marketing strategy was a game-changer. We saw a significant ROI within the first three months of engagement.",
     rating: 5,
   },
   {
-    name: "James Thompson",
-    role: "CEO",
-    company: "LogisticsPro",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=James",
-    text: "The custom ERP software JEVXO developed has streamlined our entire supply chain. Their understanding of business logic is impressive.",
+    quote: '"Professional, creative, and timely delivery. The best agency I have worked with so far."',
+    name: "Konok Shrabon",
+    role: "Owner, FashionHub",
     rating: 5,
   },
   {
-    name: "Lisa Wong",
-    role: "Creative Director",
-    company: "Artistry Studios",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa",
-    text: "As a design agency, we have high standards. JEVXO's frontend development brought our designs to life with pixel-perfect precision.",
+    quote: '"JEVXO transformed our legacy infrastructure into a scalable cloud system. Highly recommended!"',
+    name: "Sarah Jenkins",
+    role: "CTO, FinTech Lab",
     rating: 5,
   },
 ];
 
+const bottomRowTestimonials = [
+  {
+    quote: '"Amazing UI/UX design skills. They understood our vision perfectly and delivered beyond expectations."',
+    name: "Sk Lincoln",
+    role: "Product Manager",
+    rating: 5,
+  },
+  {
+    quote: '"Professional, creative, and timely delivery. The best agency I have worked with so far."',
+    name: "Konok Shrabon",
+    role: "Owner, FashionHub",
+    rating: 5,
+  },
+  {
+    quote: '"Great code quality and performance. The Next.js implementation was flawless."',
+    name: "Mavoza",
+    role: "CTO, DataCorp",
+    rating: 5,
+  },
+  {
+    quote: '"The custom mobile app developed by JEVXO exceeded all our performance metrics!"',
+    name: "Michael Chen",
+    role: "Founder, AppScale",
+    rating: 5,
+  },
+];
+
+// Quadruple arrays for 100% gapless continuous infinite marquee
+const infiniteTop = [...topRowTestimonials, ...topRowTestimonials, ...topRowTestimonials, ...topRowTestimonials];
+const infiniteBottom = [...bottomRowTestimonials, ...bottomRowTestimonials, ...bottomRowTestimonials, ...bottomRowTestimonials];
+
+const TestimonialCardItem = ({ item }) => (
+  <div className="group relative flex-shrink-0 w-[300px] sm:w-[350px] rounded-2xl border border-[#EFFC76]/20 bg-[#071307] p-6 hover:border-[#EFFC76]/70 shadow-[0_10px_30px_rgba(0,0,0,0.8)] hover:shadow-[0_0_30px_rgba(239,252,118,0.25)] transition-all duration-300 flex flex-col justify-between cursor-pointer">
+    <div>
+      {/* 5 Stars Rating */}
+      <div className="flex items-center gap-1 mb-4 text-[#EFFC76]">
+        {[...Array(item.rating)].map((_, i) => (
+          <span key={i} className="text-sm">★</span>
+        ))}
+      </div>
+
+      {/* Quote Message */}
+      <p className="text-gray-300 text-xs sm:text-sm font-light italic leading-relaxed mb-6 group-hover:text-white transition-colors">
+        {item.quote}
+      </p>
+    </div>
+
+    {/* Author & Role */}
+    <div className="pt-2">
+      <h4 className="text-white text-sm font-bold leading-tight group-hover:text-[#EFFC76] transition-colors">
+        {item.name}
+      </h4>
+      <p className="text-[#EFFC76] text-[11px] font-mono font-medium mt-0.5">
+        {item.role}
+      </p>
+    </div>
+  </div>
+);
+
 const Testimonial = () => {
-  const { data } = useQuery("/customer-review");
-  const apiReviews = Array.isArray(data?.data)
-    ? data.data
-        .filter((item) => item.status === "approved")
-        .map((item) => ({
-          name: item.client?.name,
-          role: item.client?.designation,
-          company: item.caseStudy?.title,
-          image: item.client?.photo,
-          text: item.review_message,
-          rating: item.rating ?? 5,
-        }))
-    : [];
-
-  const testimonials = apiReviews.length ? apiReviews : fallbackTestimonials;
-
   return (
-    <section className=" -mt-22 py-20 px-4 md:px-8 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16 md:mb-24 relative z-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-[#EFFC76] mb-6"
-          >
-            <div className="w-1.5 h-1.5 rounded-full bg-[#EFFC76] animate-pulse" />
-            Client Testimonials
-          </motion.div>
+    <section className="py-20 relative overflow-hidden text-white select-none">
+      {/* CSS Keyframes for GPU Hardware-Accelerated Continuous Marquee */}
+      <style jsx global>{`
+        @keyframes marqueeRightToLeft {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(-50%, 0, 0);
+          }
+        }
+        @keyframes marqueeLeftToRight {
+          0% {
+            transform: translate3d(-50%, 0, 0);
+          }
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        .animate-marquee-rtl {
+          animation: marqueeRightToLeft 28s linear infinite;
+          will-change: transform;
+        }
+        .animate-marquee-ltr {
+          animation: marqueeLeftToRight 28s linear infinite;
+          will-change: transform;
+        }
+        .animate-marquee-rtl:hover,
+        .animate-marquee-ltr:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
-          <motion.h2
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
-          >
-            What Our Clients Say About{" "}
-            <span className="font-serif italic text-[#EFFC76]">
-              JEVXO's Excellence
-            </span>
-          </motion.h2>
+      {/* Ambient background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#EFFC76]/5 rounded-full blur-[180px] pointer-events-none" />
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto font-light"
-          >
-            Real feedback from enterprise partners, CTOs, and founders scaling with JEVXO.
-          </motion.p>
+      {/* Section Header */}
+      <div className="w-10/12 mx-auto text-center mb-12 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#EFFC76]/30 bg-[#EFFC76]/10 text-[#EFFC76] text-xs font-mono font-bold uppercase tracking-[0.25em] mb-4 shadow-[0_0_15px_rgba(239,252,118,0.2)]"
+        >
+          <span className="w-2 h-2 rounded-full bg-[#EFFC76] animate-pulse" />
+          TESTIMONIALS
+        </motion.div>
 
-          <div className="mt-8">
-            <SmoothButton>Book An Appointment </SmoothButton>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"
+        >
+          What Our Clients Say
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="mt-3 text-gray-400 text-sm sm:text-base font-light max-w-xl mx-auto leading-relaxed"
+        >
+          Don't just take our word for it. Check out what our satisfied clients have to say about our work.
+        </motion.p>
+      </div>
+
+      {/* Full Width Double Marquee Tracks */}
+      <div className="w-full relative z-10 overflow-hidden space-y-6">
+        
+        {/* Left & Right Subtle Fade Overlays */}
+        <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-36 bg-gradient-to-r from-[#050b05] via-[#050b05]/80 to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-36 bg-gradient-to-l from-[#050b05] via-[#050b05]/80 to-transparent z-20 pointer-events-none" />
+
+        {/* TOP ROW: Right to Left (Scrolling Left) */}
+        <div className="flex overflow-hidden">
+          <div className="flex items-center gap-6 w-max animate-marquee-rtl">
+            {infiniteTop.map((item, idx) => (
+              <TestimonialCardItem key={idx} item={item} />
+            ))}
           </div>
         </div>
 
-        <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((item, index) => (
-            <TestimonialCard key={index} {...item} delay={0.2 + index * 0.1} />
-          ))}
-        </div>
-
-        {/* Testimonials Slider for Mobile/Tablet */}
-        <div className="lg:hidden">
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-              },
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            autoplay={{
-              delay: 2000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            loop={true}
-            className="pb-14 [&_.swiper-pagination-bullet]:bg-gray-500 [&_.swiper-pagination-bullet-active]:bg-[#EFFC76] [&_.swiper-pagination-bullet]:w-3 [&_.swiper-pagination-bullet]:h-3"
-            onClick={(swiper) => {
-              swiper.autoplay.stop();
-            }}
-            onTouchMove={(swiper) => {
-              // Ensure it resumes after manual move (handled by disableOnInteraction: false, but explicit start helps if needed)
-            }}
-          >
-            {testimonials.map((item, index) => (
-              <SwiperSlide key={index} className="h-auto mb-8">
-                <TestimonialCard {...item} delay={0} />
-              </SwiperSlide>
+        {/* BOTTOM ROW: Left to Right (Scrolling Right) */}
+        <div className="flex overflow-hidden">
+          <div className="flex items-center gap-6 w-max animate-marquee-ltr">
+            {infiniteBottom.map((item, idx) => (
+              <TestimonialCardItem key={`bot-${idx}`} item={item} />
             ))}
-          </Swiper>
+          </div>
         </div>
 
-        {/* Footer Logos Placeholder (as per design) */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex justify-center gap-8 mt-20 opacity-30 grayscale"
-        ></motion.div>
       </div>
     </section>
   );

@@ -1,192 +1,203 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
 import Link from "next/link";
-import {
-  Twitter,
-  Instagram,
-  Youtube,
-  Linkedin,
-  ArrowRight,
-  ArrowUpRight,
-  MapPin,
-  Mail,
-  Sparkles,
-} from "lucide-react";
-
-const FooterLink = ({ href, children }) => (
-  <Link
-    href={href}
-    className="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors py-1 font-normal text-sm"
-  >
-    <span className="relative overflow-hidden">
-      <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
-        {children}
-      </span>
-      <span className="absolute top-0 left-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-[#EFFC76]">
-        {children}
-      </span>
-    </span>
-  </Link>
-);
+import { motion } from "framer-motion";
+import { FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const containerRef = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end end"],
-  });
+  // Stagger Container Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  };
 
-  const y = useTransform(scrollYProgress, [0, 1], [-40, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 25 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0] },
+    },
+  };
 
   return (
-    <footer
-      ref={containerRef}
-      className="relative z-20 bg-[#050505] pt-24 pb-12 overflow-hidden border-t border-white/5 text-white"
-    >
-      {/* Subtle Ambient Glow */}
-      <div className="absolute top-0 right-1/3 w-[500px] h-[300px] bg-indigo-600/10 blur-[140px] pointer-events-none rounded-full" />
+    <footer className="relative z-20 bg-[#040904] pt-20 pb-12 overflow-hidden border-t border-white/10 text-white select-none">
+      {/* Vivid Background Radial Green Glow */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2 }}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-[#EFFC76]/8 rounded-full blur-[180px] pointer-events-none"
+      />
 
-      <div className="relative z-20 max-w-7xl mx-auto px-6 sm:px-8">
+      {/* 10/12 Container Width */}
+      <div className="w-10/12 mx-auto relative z-10">
 
-
-        {/* 2. Main Navigation Grid */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-16 md:gap-8 mb-24 relative z-10">
+        {/* Top 4-Column Grid Layout with Framer Motion Stagger */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 mb-20 relative z-10"
+        >
           
-          {/* Brand Column */}
-          <div className="max-w-xs">
-            <Link
-              href="/"
-              className="text-3xl font-bold text-white tracking-tight mb-6 inline-flex items-center gap-2 group"
-            >
-              <span>Jevxo</span>
-              <span className="w-2 h-2 rounded-full bg-[#EFFC76] group-hover:scale-125 transition-transform" />
+          {/* Column 1: Brand & Socials (4 Cols) */}
+          <motion.div variants={itemVariants} className="lg:col-span-4">
+            <Link href="/" className="inline-block text-2xl font-bold tracking-tight mb-4 group">
+              <span className="text-white group-hover:text-gray-200 transition-colors">JEV</span>
+              <span className="text-[#EFFC76] group-hover:drop-shadow-[0_0_8px_#EFFC76] transition-all">XO</span>
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed mb-8 font-light">
-              Crafting digital experiences with precision and passion. Based
-              remotely, working globally.
+
+            <p className="text-gray-400 text-xs sm:text-sm font-light leading-relaxed mb-6 max-w-xs">
+              Transforming ideas into digital reality. We are a full-service creative software agency building brands for the future.
             </p>
-            <div className="flex gap-4">
+
+            {/* Social Icon Buttons */}
+            <div className="flex items-center gap-3">
               {[
-                { icon: Twitter, href: "#", name: "Twitter" },
-                { icon: Instagram, href: "#", name: "Instagram" },
-                { icon: Linkedin, href: "#", name: "LinkedIn" },
-                { icon: Youtube, href: "#", name: "YouTube" },
+                { icon: FaXTwitter, href: "#", name: "X (Twitter)" },
+                { icon: FaFacebookF, href: "#", name: "Facebook" },
+                { icon: FaInstagram, href: "#", name: "Instagram" },
+                { icon: FaLinkedinIn, href: "#", name: "LinkedIn" },
               ].map(({ icon: Icon, href, name }, i) => (
-                <a
+                <motion.a
                   key={i}
                   href={href}
                   aria-label={name}
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#EFFC76] hover:bg-white/10 hover:border-white/20 transition-all transform hover:scale-105"
+                  whileHover={{ scale: 1.15, rotate: 4 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-10 h-10 rounded-full bg-[#0d1a0d]/90 border border-[#EFFC76]/20 flex items-center justify-center text-gray-300 hover:text-black hover:bg-[#EFFC76] hover:border-[#EFFC76] transition-all duration-300 shadow-md group"
                 >
-                  <Icon size={18} />
-                </a>
+                  <Icon size={14} className="group-hover:scale-110 transition-transform" />
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Links Group */}
-          <div className="flex flex-wrap gap-12 sm:gap-16 md:gap-20 lg:gap-24">
-            {/* Company Column */}
+          {/* Column 2: Quick Links (2.5 Cols) */}
+          <motion.div variants={itemVariants} className="lg:col-span-2">
+            <h4 className="text-white font-bold text-sm tracking-wider mb-5">
+              Quick Links
+            </h4>
+            <ul className="space-y-3 text-xs sm:text-sm text-gray-400 font-light">
+              {[
+                { name: "Home", href: "/" },
+                { name: "About Us", href: "/about" },
+                { name: "Portfolio", href: "/case-studies" },
+                { name: "Career", href: "/contact" },
+                { name: "Contact", href: "/contact" },
+              ].map((link, idx) => (
+                <li key={idx}>
+                  <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400 }}>
+                    <Link href={link.href} className="hover:text-white transition-colors">
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Column 3: Services (2.5 Cols) */}
+          <motion.div variants={itemVariants} className="lg:col-span-2">
+            <h4 className="text-white font-bold text-sm tracking-wider mb-5">
+              Services
+            </h4>
+            <ul className="space-y-3 text-xs sm:text-sm text-gray-400 font-light">
+              {[
+                { name: "Branding", href: "/services/branding" },
+                { name: "Web Development", href: "/services/custom-website" },
+                { name: "SEO Marketing", href: "/services/seo" },
+                { name: "App Design", href: "/services/mobile-app" },
+              ].map((link, idx) => (
+                <li key={idx}>
+                  <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400 }}>
+                    <Link href={link.href} className="hover:text-white transition-colors">
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Column 4: Newsletter (3.5 Cols) */}
+          <motion.div variants={itemVariants} className="lg:col-span-4">
+            <h4 className="text-white font-bold text-sm tracking-wider mb-5">
+              Newsletter
+            </h4>
+            <p className="text-gray-400 text-xs sm:text-sm font-light mb-4 leading-relaxed">
+              Subscribe to our newsletter for latest updates and news.
+            </p>
+
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full bg-[#091309] border border-white/15 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#EFFC76] transition-colors"
+                required
+              />
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-[#EFFC76] hover:bg-[#dceb5c] text-black font-extrabold text-xs sm:text-sm py-3 px-6 rounded-xl transition-all duration-300 shadow-[0_0_25px_rgba(239,252,118,0.35)]"
+              >
+                Subscribe
+              </motion.button>
+            </form>
+          </motion.div>
+
+        </motion.div>
+
+        {/* Bottom Bar Container with Overlaid Giant Lowercase Watermark */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative pt-8 border-t border-white/10 z-10"
+        >
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400 font-light relative z-10">
             <div>
-              <h4 className="text-white font-medium mb-6 text-base tracking-wide">Company</h4>
-              <div className="flex flex-col gap-2.5">
-                {[
-                  { name: "About Us", href: "/about" },
-                  { name: "Industries", href: "/industries" },
-                  { name: "Partner Roster", href: "/country-sales-partner" },
-                  { name: "Contact", href: "/contact" },
-                ].map((item) => (
-                  <FooterLink key={item.name} href={item.href}>
-                    {item.name}
-                  </FooterLink>
-                ))}
-              </div>
+              &copy; {currentYear} <span className="text-white font-bold">JEVXO</span>. All rights reserved.
             </div>
 
-            {/* Services & Architectures Column */}
-            <div>
-              <h4 className="text-white font-medium mb-6 text-base tracking-wide">Services</h4>
-              <div className="flex flex-col gap-2.5">
-                {[
-                  { name: "Solutions", href: "/solutions" },
-                  { name: "Products & SaaS", href: "/products" },
-                  { name: "Custom Software", href: "/services/custom-website" },
-                  { name: "Mobile Apps", href: "/services/mobile-app" },
-                ].map((item) => (
-                  <FooterLink key={item.name} href={item.href}>
-                    {item.name}
-                  </FooterLink>
-                ))}
-              </div>
-            </div>
-
-            {/* Trust & Legal Column */}
-            <div>
-              <h4 className="text-white font-medium mb-6 text-base tracking-wide">Trust & Legal</h4>
-              <div className="flex flex-col gap-2.5">
-                {[
-                  { name: "Security & Trust", href: "/security" },
-                  { name: "Privacy Policy", href: "/privacy-policy" },
-                  { name: "Terms & Conditions", href: "/terms-and-conditions" },
-                  { name: "Refund Policy", href: "/refund-policy" },
-                ].map((item) => (
-                  <FooterLink key={item.name} href={item.href}>
-                    {item.name}
-                  </FooterLink>
-                ))}
-              </div>
-            </div>
-
-            {/* Newsletter Column */}
-            <div className="max-w-xs min-w-[200px]">
-              <h4 className="text-white font-medium mb-6 text-base tracking-wide">Stay Updated</h4>
-              <div className="relative group">
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  className="w-full bg-transparent border-b border-white/20 py-3 pr-8 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-[#EFFC76] transition-colors rounded-none font-light"
-                />
-                <button
-                  type="button"
-                  aria-label="Subscribe"
-                  className="absolute right-0 top-3 text-gray-400 group-focus-within:text-[#EFFC76] hover:text-[#EFFC76] transition-colors"
-                >
-                  <ArrowUpRight size={18} />
-                </button>
-              </div>
+            <div className="flex items-center gap-6">
+              <Link href="/privacy-policy" className="hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms-and-conditions" className="hover:text-white transition-colors">
+                Terms of Service
+              </Link>
             </div>
           </div>
+        </motion.div>
 
-        </div>
+      </div>
 
-        {/* 3. Bottom Anchor Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pt-10 border-t border-white/10 relative z-10">
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-gray-400 text-xs sm:text-sm font-light">
-            <div className="flex items-center gap-2">
-              <MapPin size={14} className="text-gray-500" /> New York, NY & Dhaka, BD
-            </div>
-            <div className="flex items-center gap-2">
-              <Mail size={14} className="text-gray-500" /> hello@jevxo.com
-            </div>
-          </div>
-
-          <div className="text-xs sm:text-sm text-gray-500 font-light">
-            &copy; {currentYear} <span className="text-gray-300 font-medium">Jevxo</span>. All rights reserved.
-          </div>
-        </div>
-
-        {/* Giant Faded Background Watermark Text */}
-        <div className="absolute -bottom-10 right-0 pointer-events-none select-none mix-blend-overlay opacity-15 overflow-hidden">
-          <h1 className="text-[18vw] font-black text-white/10 leading-none tracking-tighter">
-            JEVXO
-          </h1>
-        </div>
-
+      {/* Giant Lowercase Watermark Text Backdrop with Motion Reveal */}
+      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 pointer-events-none select-none w-full text-center z-0 overflow-hidden">
+        <motion.h1
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-[18vw] sm:text-[22vw] lg:text-[300px] font-black text-white/[0.035] leading-none tracking-tighter lowercase"
+        >
+          jevxo.
+        </motion.h1>
       </div>
     </footer>
   );
