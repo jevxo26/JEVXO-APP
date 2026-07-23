@@ -19,6 +19,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import CosmicBackground from "@/components/Home/CosmicBackground";
+import AppointmentModal from "@/components/Home/AppointmentModal";
 import { solutionsData } from "../page";
 
 // Animation Variants
@@ -56,99 +57,101 @@ const cardHover = {
 const SolutionDetailPage = () => {
   const params = useParams();
   const slug = params?.slug;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const solution = solutionsData.find((s) => s.id === slug) || solutionsData[0];
 
   return (
-    <div className="min-h-screen pt-28 pb-24 relative overflow-x-hidden text-white bg-[#050505]">
-      {/* Background Particle Mesh */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <CosmicBackground />
-      </div>
+    <>
+      <div className="min-h-screen pt-28 pb-36 relative overflow-x-hidden text-white bg-[#050505] select-none">
+        {/* Background Particle Mesh */}
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <CosmicBackground />
+        </div>
 
-      {/* Glow Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#EFFC76]/5 rounded-full blur-[140px] pointer-events-none" />
+        {/* Glow Orbs */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#EFFC76]/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 space-y-20 md:space-y-28">
-        
-        {/* Top Back Navigation */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Link
-            href="/solutions"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-gray-300 hover:text-[#EFFC76] transition-colors bg-white/5 border border-white/10 px-4 py-2 rounded-full backdrop-blur-md hover:border-[#EFFC76]/40"
-          >
-            <ArrowLeft size={14} />
-            <span>Back to All 6 Solutions</span>
-          </Link>
-        </motion.div>
-
-        {/* 1. HERO SECTION WITH ANIMATIONS */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Text Column */}
+        <div className="relative z-10 w-10/12 mx-auto space-y-20 md:space-y-28">
+          
+          {/* Top Back Navigation */}
           <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="lg:col-span-7 space-y-6"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            {/* Category Pill */}
-            <motion.div variants={fadeIn} custom={0}>
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#EFFC76]/30 text-xs text-[#EFFC76] font-bold uppercase tracking-wider backdrop-blur-md">
-                <Sparkles size={14} />
-                <span>{solution.category} SOLUTION</span>
-              </span>
-            </motion.div>
-
-            {/* Title */}
-            <motion.h1
-              variants={fadeIn}
-              custom={1}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15]"
+            <Link
+              href="/main/solutions"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-gray-300 hover:text-[#EFFC76] transition-colors bg-white/5 border border-white/10 px-4 py-2 rounded-full backdrop-blur-md hover:border-[#EFFC76]/40"
             >
-              {solution.title}
-            </motion.h1>
-
-            {/* Description */}
-            <motion.p
-              variants={fadeIn}
-              custom={2}
-              className="text-gray-300 text-lg sm:text-xl font-light leading-relaxed max-w-2xl"
-            >
-              {solution.fullDescription}
-            </motion.p>
-
-            {/* Impact Badges */}
-            <motion.div variants={fadeIn} custom={3} className="flex flex-wrap gap-4 pt-2">
-              {solution.stats.map((stat, idx) => (
-                <div
-                  key={idx}
-                  className="bg-[#0e0e12] border border-white/10 rounded-2xl px-5 py-3 flex flex-col justify-center backdrop-blur-md hover:border-[#EFFC76]/40 transition-colors"
-                >
-                  <span className="text-2xl font-extrabold text-[#EFFC76] tracking-tight">
-                    {stat.value}
-                  </span>
-                  <span className="text-xs text-gray-400 font-medium">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Action Button */}
-            <motion.div variants={fadeIn} custom={4} className="pt-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-3 bg-[#EFFC76] text-black font-bold text-sm uppercase tracking-wider px-8 py-4 rounded-full hover:bg-[#EFFC76]/90 transition-all shadow-[0_10px_30px_rgba(239,252,118,0.2)] group"
-              >
-                <span>Book Solution Architecture Call</span>
-                <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </Link>
-            </motion.div>
+              <ArrowLeft size={14} />
+              <span>Back to All 6 Solutions</span>
+            </Link>
           </motion.div>
+
+          {/* 1. HERO SECTION WITH ANIMATIONS */}
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Text Column */}
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              className="lg:col-span-7 space-y-6"
+            >
+              {/* Category Pill */}
+              <motion.div variants={fadeIn} custom={0}>
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#EFFC76]/30 text-xs text-[#EFFC76] font-bold uppercase tracking-wider backdrop-blur-md">
+                  <Sparkles size={14} />
+                  <span>{solution.category} SOLUTION</span>
+                </span>
+              </motion.div>
+
+              {/* Title */}
+              <motion.h1
+                variants={fadeIn}
+                custom={1}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15]"
+              >
+                {solution.title}
+              </motion.h1>
+
+              {/* Description */}
+              <motion.p
+                variants={fadeIn}
+                custom={2}
+                className="text-gray-300 text-lg sm:text-xl font-light leading-relaxed max-w-2xl"
+              >
+                {solution.fullDescription}
+              </motion.p>
+
+              {/* Impact Badges */}
+              <motion.div variants={fadeIn} custom={3} className="flex flex-wrap gap-4 pt-2">
+                {solution.stats.map((stat, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-[#0e0e12] border border-white/10 rounded-2xl px-5 py-3 flex flex-col justify-center backdrop-blur-md hover:border-[#EFFC76]/40 transition-colors"
+                  >
+                    <span className="text-2xl font-extrabold text-[#EFFC76] tracking-tight">
+                      {stat.value}
+                    </span>
+                    <span className="text-xs text-gray-400 font-medium">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </motion.div>
+
+              {/* Action Button */}
+              <motion.div variants={fadeIn} custom={4} className="pt-4">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="inline-flex items-center gap-3 bg-[#EFFC76] text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full hover:bg-[#f3ff8c] transition-all shadow-[0_0_25px_rgba(239,252,118,0.5)] group"
+                >
+                  <span>Book Solution Architecture Call</span>
+                  <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform stroke-[2.5]" />
+                </button>
+              </motion.div>
+            </motion.div>
 
           {/* Right Image Banner Container */}
           <motion.div
@@ -310,20 +313,28 @@ const SolutionDetailPage = () => {
               Connect with our enterprise solution architects today for a technical roadmap call and custom proposal.
             </p>
             <div className="pt-2">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-3 bg-white text-black font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full hover:bg-gray-100 transition-colors shadow-lg group"
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center gap-3 bg-[#EFFC76] text-black font-extrabold text-xs uppercase tracking-wider px-8 py-4 rounded-full hover:bg-[#f3ff8c] transition-all shadow-[0_0_25px_rgba(239,252,118,0.5)] group"
               >
                 <span>BOOK FREE CONSULTATION</span>
-                <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </Link>
+                <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform stroke-[2.5]" />
+              </button>
             </div>
           </div>
         </motion.section>
 
       </div>
-    </div>
+      </div>
+
+      {/* Appointment Modal */}
+      <AppointmentModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 };
 
 export default SolutionDetailPage;
+

@@ -6,11 +6,11 @@ import { motion } from "framer-motion";
 
 const FaqPage = () => {
   return (
-    <div className="min-h-screen mt-20 relative overflow-x-hidden pb-30">
+    <div className="min-h-screen mt-20 relative overflow-x-hidden pb-36 select-none">
       <div className="fixed inset-0 z-0 pointer-events-none">
         <CosmicBackground />
       </div>
-      <div className="relative mt-20 max-w-[95%] mx-auto space-y-10">
+      <div className="relative mt-20 w-10/12 mx-auto space-y-10">
         <div className="flex justify-center items-center">
           <motion.div
             className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-md border border-white/10 px-1.5 py-1.5 pr-4 rounded-full mb-10"

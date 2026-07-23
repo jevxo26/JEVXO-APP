@@ -109,13 +109,13 @@ const processSteps = [
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen pt-28 pb-20 relative overflow-x-hidden text-white bg-[#050505]">
+    <div className="min-h-screen pt-28 pb-36 relative overflow-x-hidden text-white bg-[#050505] select-none">
       {/* Background Cosmic Particle Grid */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <CosmicBackground />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 space-y-20 md:space-y-28">
+      <div className="relative z-10 w-10/12 mx-auto space-y-20 md:space-y-28">
         
         {/* ================= 1. HERO SECTION ================= */}
         <section className="text-center pt-6 relative z-20">

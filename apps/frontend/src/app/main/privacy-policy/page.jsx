@@ -4,7 +4,7 @@ import CosmicBackground from "@/components/Home/CosmicBackground";
 
 const page = () => {
   return (
-    <div className="min-h-screen relative overflow-x-hidden pb-30 pt-20">
+    <div className="min-h-screen relative overflow-x-hidden pb-36 pt-20 select-none">
       <div className="fixed inset-0 z-0 pointer-events-none">
         <CosmicBackground />
       </div>

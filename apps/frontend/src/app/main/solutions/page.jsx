@@ -175,13 +175,13 @@ const itemVariants = {
 
 const SolutionsPage = () => {
   return (
-    <div className="min-h-screen pt-28 pb-20 relative overflow-x-hidden text-white bg-[#050505]">
+    <div className="min-h-screen pt-28 pb-36 relative overflow-x-hidden text-white bg-[#050505] select-none">
       {/* Cosmic Background Effect */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <CosmicBackground />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 space-y-16">
+      <div className="relative z-10 w-10/12 mx-auto space-y-16">
         
         {/* Header */}
         <section className="text-center max-w-4xl mx-auto pt-6 relative z-20">
@@ -288,7 +288,7 @@ const SolutionsPage = () => {
                 </div>
 
                 <Link
-                  href={`/solutions/${sol.id}`}
+                  href={`/main/solutions/${sol.id}`}
                   className="inline-flex items-center gap-2 text-xs font-semibold text-white group-hover:text-[#EFFC76] transition-colors"
                 >
                   <span>Explore</span>
@@ -304,5 +304,6 @@ const SolutionsPage = () => {
     </div>
   );
 };
+
 
 export default SolutionsPage;
