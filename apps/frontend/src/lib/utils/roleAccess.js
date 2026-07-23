@@ -93,6 +93,22 @@ const rolePermissions = {
       '/admin/orders',
     ],
   },
+  partner: {
+    // Partner role access
+    allowedRoutes: [
+      '/',
+      '/console',
+      '/console/partner',
+      '/console/partner-management',
+      '/admin/partner',
+      '/admin/partner-management',
+      '/console/projects',
+      '/console/orders',
+      '/console/documents',
+      '/console/reports',
+      '/console/settings',
+    ],
+  },
 };
 
 /**

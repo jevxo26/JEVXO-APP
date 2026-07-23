@@ -34,6 +34,8 @@ import {
 
 export const mainNavItems = [
   { icon: LayoutDashboard, label: "Dashboard", id: "Dashboard", href: "/console" },
+  { icon: Sparkles, label: "Partner Panel", id: "Partner Panel", href: "/console/partner" },
+  { icon: ShieldCheck, label: "Partner Management", id: "Partner Management", href: "/console/partner-management" },
   { icon: Clock, label: "Attendance", id: "Attendance", href: "/console/attendance" },
   { icon: Calendar, label: "Schedule", id: "Schedule", href: "/console/schedule" },
   { icon: Folder, label: "Projects", id: "Projects", href: "/console/projects" },

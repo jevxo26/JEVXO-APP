@@ -379,7 +379,7 @@ const Navbar = () => {
                           className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#EFFC76]/15 border border-transparent hover:border-[#EFFC76]/40 text-xs font-mono font-bold text-white transition-all group"
                         >
                           <LayoutDashboard size={16} className="text-[#EFFC76] group-hover:scale-110 transition-transform" />
-                          <span>Console Dashboard</span>
+                          <span>Main Dashboard</span>
                         </Link>
 
                         <Link

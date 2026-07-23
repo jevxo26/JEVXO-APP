@@ -24,7 +24,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 
-const Header = ({ title = "Squadlog", subtitle, onMenuClick }) => {
+const Header = ({ title = "JEVXO Dashboard", subtitle, onMenuClick }) => {
   const { user, logout } = useAuth();
   const router = useRouter();
   const defaultSubtitle =
@@ -66,7 +66,7 @@ const Header = ({ title = "Squadlog", subtitle, onMenuClick }) => {
             <h1 className="text-2xl lg:text-3xl font-bold text-white mb-1 tracking-tight flex items-center gap-3">
               {title}
               <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#EFFC76]/10 border border-[#EFFC76]/20 text-[10px] font-bold text-[#EFFC76] tracking-widest uppercase">
-                Console
+                Dashboard
               </span>
             </h1>
             <p className="text-white/50 text-sm hidden sm:block font-light tracking-wide">

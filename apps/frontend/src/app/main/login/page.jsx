@@ -158,7 +158,7 @@ export default function LoginPage() {
             </div>
             <div className="flex flex-col text-left">
               <span className="text-2xl font-mono font-black tracking-wider text-white">
-                JEVXO <span className="text-[#EFFC76] text-xs tracking-widest font-bold uppercase ml-1.5 px-2.5 py-0.5 rounded-full bg-[#EFFC76]/10 border border-[#EFFC76]/40">Console v3.4</span>
+                JEVXO <span className="text-[#EFFC76] text-xs tracking-widest font-bold uppercase ml-1.5 px-2.5 py-0.5 rounded-full bg-[#EFFC76]/10 border border-[#EFFC76]/40">Dashboard v3.4</span>
               </span>
               <span className="text-[11px] font-mono text-gray-400">Enterprise Cloud Infrastructure & AI Automation</span>
             </div>
@@ -289,7 +289,7 @@ export default function LoginPage() {
                       <Terminal size={12} />
                       <span>Commander Portal</span>
                     </div>
-                    <h2 className="text-2xl font-black text-white tracking-tight">Sign In to Console</h2>
+                    <h2 className="text-2xl font-black text-white tracking-tight">Sign In to Dashboard</h2>
                     <p className="text-xs text-gray-400 font-mono mt-1">
                       Enter your administrative credentials to unlock the dashboard
                     </p>

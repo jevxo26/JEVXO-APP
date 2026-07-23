@@ -34,7 +34,7 @@ import { MeetingModule } from './meeting/meeting.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { CalendarModule } from './calendar/calendar.module';
 import { InboxModule } from './inbox/inbox.module';
-
+import { PartnerModule } from './partner/partner.module';
 
 @Module({
   imports: [
@@ -98,6 +98,7 @@ import { InboxModule } from './inbox/inbox.module';
     DashboardModule,
     CalendarModule,
     InboxModule,
+    PartnerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
